@@ -8,8 +8,8 @@
 <style>
 /* Layout: one column "expedition log" — game cabinet on top, chest + collection + save ledger below. Single night-desert look by choice. */
 :root{
-  --night:#04182a; --night-2:#082438; --panel:#0e3450; --line:#1d5374;
-  --sand:#ffa25f; --sand-deep:#c8642a; --faience:#3fe0d0; --ink:#effcff; --muted:#9cc6d6;
+  --night:#06182a; --night-2:#0a2238; --panel:#123450; --line:#24547a;
+  --sand:#7ff3ff; --sand-deep:#1a8ab8; --faience:#ffd27a; --ink:#f4f6fc; --muted:#a8b0cc;
   --danger:#ff6b6b;
   --r-common:#b9bcc9; --r-uncommon:#6fd36a; --r-rare:#4aa8ff; --r-epic:#b77bff; --r-legendary:#ffb23f; --r-mythic:#ff5ea8;
   --display:"Pixelify Sans", "Courier New", monospace;
@@ -20,7 +20,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--night);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;
-  background-image:radial-gradient(circle at 15% -10%, #0f5a7a 0, transparent 45%), radial-gradient(circle at 95% 5%, #0f4a5a 0, transparent 40%);
+  background-image:radial-gradient(circle at 15% -10%, #1a2a5a 0, transparent 45%), radial-gradient(circle at 95% 5%, #3a1a4a 0, transparent 40%);
   background-attachment:fixed}
 .wrap{max-width:1040px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
 h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;letter-spacing:.01em}
@@ -34,12 +34,12 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .brand span{font-family:var(--display);color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
 .purse{display:flex;gap:10px;flex-wrap:wrap}
 .chip{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--display);font-size:16px;font-variant-numeric:tabular-nums}
-.coin-ic{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3b0,#f2b33d 55%,#a8701c);box-shadow:0 0 0 2px #7a4e12 inset}
+.coin-ic{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3b0,#ffc83a 55%,#a87010);box-shadow:0 0 0 2px #8a5a10 inset}
 .chip small{font-family:var(--body);color:var(--muted);font-size:12px}
 
 /* account banner */
 .acct{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:20px 28px;align-items:center;padding:22px;border-radius:16px;
-  background:linear-gradient(120deg,#0f4a6a,#0a3050 55%,#0f5a5a);border:2px solid var(--sand);box-shadow:0 0 0 4px rgba(255,162,95,.15),0 0 28px rgba(255,162,95,.22),0 16px 36px rgba(0,0,0,.35)}
+  background:linear-gradient(120deg,#1a2a5a,#10132a 55%,#3a1a4a);border:2px solid var(--sand);box-shadow:0 0 0 4px rgba(255,162,95,.15),0 0 28px rgba(255,162,95,.22),0 16px 36px rgba(0,0,0,.35)}
 .acct h2{font-size:clamp(26px,4.4vw,40px);color:var(--sand);line-height:1.05}
 .acct-copy{display:flex;flex-direction:column;gap:10px;min-width:0}
 .acct-copy p{margin:0;font-size:17px;max-width:46ch}
@@ -55,7 +55,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media (max-width:760px){.acct{grid-template-columns:minmax(0,1fr)}.acct.signed{grid-template-columns:minmax(0,1fr)}}
 
 /* end-of-run sign-up prompt */
-.over-cta{position:absolute;inset:0;z-index:2;display:grid;place-items:center;padding:12px;background:rgba(12,13,36,.94)}
+.over-cta{position:absolute;inset:0;z-index:2;display:grid;place-items:center;padding:12px;background:rgba(12,16,12,.94)}
 .oc-card{max-width:520px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
 .oc-card h3{font-size:clamp(20px,3vw,28px);color:#ff9a8a}
 .oc-card h3 span{color:var(--ink)}
@@ -92,7 +92,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 
 /* full-screen chest opening */
 .chest-full{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;overflow:hidden;
-  background:radial-gradient(circle at 50% 45%, #2c2766 0, #0b0b20 75%);
+  background:radial-gradient(circle at 50% 45%, #1a2050 0, #05060e 75%);
   padding:max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
 .cf-rays{position:absolute;left:50%;top:44%;width:160vmax;height:160vmax;margin:-80vmax 0 0 -80vmax;opacity:0;transition:none;
   background:repeating-conic-gradient(from 0deg, var(--cf, #ffd34d) 0deg 7deg, transparent 7deg 22deg);
@@ -101,17 +101,12 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .chest-full[data-tier="5"].revealed .cf-rays{background:repeating-conic-gradient(from 0deg, #ff4f6b 0 6deg, transparent 6deg 15deg, #ffd34d 15deg 21deg, transparent 21deg 30deg, #5fe03a 30deg 36deg, transparent 36deg 45deg, #2de2e6 45deg 51deg, transparent 51deg 60deg, #b77bff 60deg 66deg, transparent 66deg 75deg)}
 .cf-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 .cf-inner{z-index:3}
-.cf-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:4}
-.cf-flash.go{animation:flash .6s ease-out}
-.cf-flash.go2{animation:flash2 1.1s ease-out}
 @keyframes flash{0%{opacity:var(--flash,.8)}100%{opacity:0}}
 @keyframes flash2{0%{opacity:1}20%{opacity:0}35%{opacity:.9}100%{opacity:0}}
 .chest-full{transition:background-color .6s}
 .chest-full.dim{background:#03020a}
 .chest-full .cf-chest{transition:filter .5s}
 .chest-full.glowing .cf-chest{filter:drop-shadow(0 0 var(--glowpx,12px) var(--cf)) drop-shadow(0 0 calc(var(--glowpx,12px) * 2) var(--cf))}
-.chest-full[data-tier="5"].glowing .cf-chest{animation:shake var(--shk,.12s) linear infinite, rainbow 1s linear infinite}
-@keyframes rainbow{to{filter:hue-rotate(360deg) drop-shadow(0 0 24px #ff4fa3)}}
 .chest-full.shaking .cf-chest{animation-duration:var(--shk,.12s)}
 .chest-full.quake .cf-inner{animation:quake .6s}
 @keyframes quake{0%,100%{transform:none}15%{transform:translate(-8px,4px)}30%{transform:translate(7px,-5px)}45%{transform:translate(-6px,-3px)}60%{transform:translate(5px,4px)}75%{transform:translate(-3px,2px)}}
@@ -154,8 +149,8 @@ body.fs .screen{flex:1;border-radius:0;display:block;position:relative}
 body.fs canvas#game{width:100%;height:100%}
 body.fs .controls{display:none}
 body.fs .fs-exit{display:block;
-  font-family:var(--display);font-size:15px;color:var(--ink);background:rgba(18,12,42,.7);border:1px solid var(--line);border-radius:999px;padding:7px 20px}
-body.fs .over-cta{position:absolute;left:0;right:0;top:auto;bottom:calc(56px + env(safe-area-inset-bottom, 0px));background:rgba(18,12,42,.92);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  font-family:var(--display);font-size:15px;color:var(--ink);background:rgba(12,16,12,.7);border:1px solid var(--line);border-radius:999px;padding:7px 20px}
+body.fs .over-cta{position:absolute;left:0;right:0;top:auto;bottom:calc(56px + env(safe-area-inset-bottom, 0px));background:rgba(12,16,12,.92);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 body.fs .rotate{z-index:70}
 
 /* sound buttons */
@@ -164,7 +159,7 @@ body.fs .rotate{z-index:70}
 .snd-btn[aria-pressed="false"]{color:var(--muted);background:transparent;text-decoration:line-through}
 .fs-bar{display:none}
 body.fs .fs-bar{display:flex;gap:8px;align-items:center;position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom, 0px))}
-body.fs .fs-bar .snd-btn{background:rgba(18,12,42,.7);padding:7px 12px}
+body.fs .fs-bar .snd-btn{background:rgba(12,16,12,.7);padding:7px 12px}
 
 /* test swim mode */
 .test-bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:12px 16px;border-radius:12px;background:repeating-linear-gradient(45deg,#2a2210,#2a2210 12px,#1f1a0c 12px,#1f1a0c 24px);border:2px dashed #ffd34d;color:var(--ink);font-size:14px}
@@ -190,8 +185,8 @@ body.kraken.fs .cabinet{z-index:45}
 @media (max-width:820px){.lbgrid{grid-template-columns:minmax(0,1fr)}}
 .lb-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
 .lb{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:none}
-.lb li{display:grid;grid-template-columns:30px 72px minmax(0,1fr) auto;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:#171940;border:1px solid #2a2d62}
-.lb li.me{border-color:var(--sand);background:#2a2650}
+.lb li{display:grid;grid-template-columns:30px 72px minmax(0,1fr) auto;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:#1a1e1a;border:1px solid #2e3a2c}
+.lb li.me{border-color:var(--sand);background:#2a3628}
 .lb .rk{font-family:var(--display);font-size:18px;color:var(--muted);text-align:center}
 .lb li:nth-child(1) .rk{color:#ffd34d} .lb li:nth-child(2) .rk{color:#d6dbe6} .lb li:nth-child(3) .rk{color:#e09a5a}
 .lb canvas{width:72px;height:40px}
@@ -202,19 +197,19 @@ body.kraken.fs .cabinet{z-index:45}
 .lb .empty{display:block;color:var(--muted);text-align:center;padding:18px}
 .lb-you{font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .lb-you b{color:var(--ink)}
-.best-big{display:flex;flex-direction:column;gap:2px;padding:14px;border-radius:12px;background:#171940;border:1px solid var(--line)}
+.best-big{display:flex;flex-direction:column;gap:2px;padding:14px;border-radius:12px;background:#1a1e1a;border:1px solid var(--line)}
 .best-big b{font-family:var(--display);font-size:clamp(34px,6vw,48px);color:var(--faience);line-height:1.1;font-variant-numeric:tabular-nums}
 .recs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
-.recs div{padding:10px 12px;border-radius:10px;background:#171940;border:1px solid #2a2d62}
+.recs div{padding:10px 12px;border-radius:10px;background:#1a1e1a;border:1px solid #2e3a2c}
 .recs dt{font-size:12px;color:var(--muted)} .recs dd{margin:0;font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums}
 .namebox{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted)}
 .namebox input{width:11em}
 .acct.signed{grid-template-columns:minmax(0,1fr)}
 
 /* cabinet */
-.cabinet{background:linear-gradient(#0e3a58,#06223a);border:2px solid var(--line);border-radius:14px;padding:10px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.cabinet{background:linear-gradient(#10132a,#05060e);border:2px solid var(--line);border-radius:14px;padding:10px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
 .screen{position:relative;border-radius:8px;overflow:hidden;background:#0c0d24}
-canvas#game{display:block;width:100%;height:auto;aspect-ratio:8/3;image-rendering:pixelated;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+canvas#game{display:block;width:100%;height:auto;aspect-ratio:2/1;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 .controls{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 4px 2px}
 .keys{color:var(--muted);font-size:13px}
 kbd{font-family:var(--display);background:var(--night);border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;color:var(--ink);font-size:12px}
@@ -231,12 +226,13 @@ kbd{font-family:var(--display);background:var(--night);border:1px solid var(--li
 .btn{border:0;border-radius:10px;padding:11px 18px;font-family:var(--display);font-size:16px;font-weight:600;background:var(--sand);color:#2a1006;border-bottom:4px solid var(--sand-deep)}
 .btn:hover{filter:brightness(1.06)}
 .btn:active{transform:translateY(2px);border-bottom-width:2px}
-.btn[disabled]{background:#4a4c78;color:#9a9cc4;border-bottom-color:#35375e;cursor:not-allowed;filter:none;transform:none}
+.btn[disabled]{background:#3a4a36;color:#8a9a86;border-bottom-color:#2a3a2c;cursor:not-allowed;filter:none;transform:none}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);border-bottom:3px solid var(--line)}
 .btn.small{padding:7px 12px;font-size:14px}
+.btn.epic-btn{background:#9a5ae0;color:#fff;border-bottom-color:#5a2a9a}
 
 /* chest */
-.chest-stage{position:relative;display:grid;place-items:center;min-height:210px;border-radius:12px;background:radial-gradient(circle at 50% 70%, #3a3170 0, #1b1d44 70%);overflow:hidden}
+.chest-stage{position:relative;display:grid;place-items:center;min-height:210px;border-radius:12px;background:radial-gradient(circle at 50% 70%, #1a2a5a 0, #05060e 70%);overflow:hidden}
 .chest-stage canvas{width:150px;height:150px}
 .chest-stage.shake canvas#chestCv{animation:shake .14s linear infinite}
 @keyframes shake{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(-3px,1px) rotate(-3deg)}50%{transform:translate(2px,-1px) rotate(2deg)}75%{transform:translate(-1px,2px) rotate(-1deg)}100%{transform:translate(0,0)}}
@@ -248,7 +244,7 @@ kbd{font-family:var(--display);background:var(--night);border:1px solid var(--li
 /* odds table */
 .odds{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
 .odds th{text-align:left;font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:0 6px 6px;border-bottom:1px solid var(--line)}
-.odds td{padding:6px;border-bottom:1px solid #2a2d62}
+.odds td{padding:6px;border-bottom:1px solid #2e3a2c}
 .odds td:first-child{font-family:var(--display);font-size:15px}
 .odds tr:last-child td{border-bottom:0}
 .tablewrap{overflow-x:auto}
@@ -259,15 +255,15 @@ kbd{font-family:var(--display);background:var(--night);border:1px solid var(--li
 .filters button{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:4px 11px;font-size:13px}
 .filters button[aria-pressed="true"]{background:var(--panel);color:var(--ink);border-color:var(--muted)}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
-.card{position:relative;background:#171940;border:1px solid var(--line);border-top:3px solid var(--rc);border-radius:10px;padding:8px 6px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink);text-align:center;min-width:0}
+.card{position:relative;background:#1a1e1a;border:1px solid var(--line);border-top:3px solid var(--rc);border-radius:10px;padding:8px 6px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink);text-align:center;min-width:0}
 .card canvas{width:100%;max-width:92px;height:auto;aspect-ratio:168/96}
 .card .cn{font-size:12px;line-height:1.2;font-weight:700;min-height:2.4em;display:flex;align-items:center}
 .card .cr{font-family:var(--display);font-size:11px;color:var(--rc);letter-spacing:.06em;text-transform:uppercase}
-.card.locked .cn{color:#6d6f9e}
-.card.sel{outline:2px solid var(--sand);outline-offset:1px;background:#24275a}
+.card.locked .cn{color:#6a7a66}
+.card.sel{outline:2px solid var(--sand);outline-offset:1px;background:#2a342a}
 .card .cnt{position:absolute;top:4px;right:6px;font-family:var(--display);font-size:11px;color:var(--muted)}
-.card .num{position:absolute;top:4px;left:6px;font-family:var(--display);font-size:10px;color:#5f629a}
-button.card:hover:not(.locked){background:#202354}
+.card .num{position:absolute;top:4px;left:6px;font-family:var(--display);font-size:10px;color:#5a6a56}
+button.card:hover:not(.locked){background:#263026}
 button.card.locked{cursor:default}
 
 /* save ledger */
@@ -321,18 +317,18 @@ window.FIREBASE_CONFIG = {
 </head><body>
 <div class="wrap">
   <header class="top">
-    <div class="brand"><h1 id="brandTitle">Fishy Swimmer</h1><span>Deep blue · endless swim</span></div>
+    <div class="brand"><h1 id="brandTitle">Fishy Swimmer 2.0</h1><span>Tap to swim · reef to abyss</span></div>
     <div class="purse">
       <div class="chip" title="Coins to spend"><span class="coin-ic"></span><span id="hudCoins">0</span><small>coins</small></div>
-      <div class="chip" title="Fish unlocked"><span id="hudOwned">1</span><small id="hudTotal">/ 100 found</small></div>
-      <div class="chip" title="Best run"><small>Best</small><span id="hudBest">0 m</span></div>
+      <div class="chip" title="Fish unlocked"><span id="hudOwned">1</span><small id="hudTotal">/ 200 fish</small></div>
+      <div class="chip" title="Best swim"><small>Best</small><span id="hudBest">0 km</span></div>
     </div>
   </header>
 
-  <div class="test-bar" id="testBar" hidden><b>Test Swim mode</b><span>Every fish is unlocked to try. Coins, chests, best scores and the leaderboard are paused.</span><button class="btn small" id="testOff" type="button">Exit test mode</button></div>
+  <div class="test-bar" id="testBar" hidden><b>Test swim mode</b><span>Every fish is unlocked to try. Coins, chests, best scores and the leaderboard are paused.</span><button class="btn small" id="testOff" type="button">Exit test mode</button></div>
   <section class="acct" id="acct" aria-labelledby="acctH"><button class="sheet-x" id="sheetClose" type="button" aria-label="Close">✕</button>
     <div class="acct-copy">
-      <h2 id="acctH">Save your aquarium</h2>
+      <h2 id="acctH">Save your fish tank</h2>
       <p id="acctLead">Sign up free to save your progress, keep your coins and save your fish. Then play on any device.</p>
       <div class="status"><span class="dot" id="saveDot"></span><span id="saveText">Checking for your account…</span></div>
     </div>
@@ -358,15 +354,15 @@ window.FIREBASE_CONFIG = {
     <div class="screen"><div class="fs-bar"><button class="fs-exit" id="fsExit" type="button">Exit</button><button class="snd-btn" data-snd="sfx" type="button" aria-pressed="true">Sound: On</button></div><div class="over-cta" id="overCta" hidden>
       <div class="oc-card">
         <h3>Ouch! <span id="ocSum"></span></h3>
-        <p>You're not signed in, so your coins and fish are only saved on this device. Sign up to save your progress, keep your coins, save your fish and get on today's leaderboard.</p>
+        <p>You're not signed in, so your coins and fish are only saved on this device. Sign up to save your progress, keep your coins and get on today's leaderboard.</p>
         <div class="row oc-btns"><button class="btn big" id="ocSignup" type="button">Sign up to save</button><button class="btn ghost" id="ocLogin" type="button">Log in</button></div>
         <button class="oc-again" id="ocAgain" type="button">Play again without saving</button>
       </div>
-    </div><canvas id="game" width="960" height="360" aria-label="Fishy Swimmer game screen. Press space or tap to start."></canvas></div>
+    </div><canvas id="game" width="960" height="360" aria-label="Fishy Swimmer game screen. Tap, click or press space to swim up."></canvas></div>
     <div class="controls">
       <div class="runner-now"><canvas id="nowCv" width="112" height="64"></canvas><div>Swimming as <b id="nowName">—</b><br><span id="nowPerk"></span></div></div>
-      <div class="keys"><kbd>Space</kbd>, <kbd>↑</kbd> or click to jump (hold for higher) · <kbd>P</kbd> pause</div>
-      <div class="tap-hint">Tap the game to jump. Hold for a higher jump.</div>
+      <div class="keys">Click or press <kbd>Space</kbd> to swim up · <kbd>P</kbd> pause</div>
+      <div class="tap-hint">Tap anywhere on the game to swim up. Stop tapping and you sink.</div>
       <div class="snd"><button class="snd-btn" data-snd="sfx" type="button" aria-pressed="true">Sound: On</button></div>
     </div>
   </section>
@@ -380,9 +376,9 @@ window.FIREBASE_CONFIG = {
     </section>
     <section class="panel" aria-labelledby="recH">
       <h2 id="recH">Your records</h2>
-      <div class="best-big"><span class="sub">All-time best</span><b id="recBest">0 m</b></div>
+      <div class="best-big"><span class="sub">All-time best</span><b id="recBest">0 km</b></div>
       <dl class="recs">
-        <div><dt>Furthest round</dt><dd id="recRound">—</dd></div>
+        <div><dt>Furthest zone</dt><dd id="recRound">—</dd></div>
         <div><dt>Runs played</dt><dd id="recRuns">0</dd></div>
         <div><dt>Coins earned, all time</dt><dd id="recLife">0</dd></div>
         <div><dt>Chests opened</dt><dd id="recChests">0</dd></div>
@@ -390,26 +386,26 @@ window.FIREBASE_CONFIG = {
     </section>
   </div>
 
-  <div class="grid2">
+  <div>
     <section class="panel" aria-labelledby="chestH">
-      <h2 id="chestH">Treasure Chest</h2>
-      <p class="sub">Save up 100 coins and crack open a chest for a random fish. Duplicates pay back coins.</p>
+      <h2 id="chestH">Treasure Chests</h2>
+      <p class="sub">The Basic Chest (500 coins) has normal odds. The Epic Chest (1,000 coins) is much more likely to give a Rare, Epic, Legendary or Mythic ship. Mythic ships are a 3% chance in the Basic Chest. Duplicates pay back coins.</p>
       <div class="chest-stage" id="chestStage">
         <canvas id="chestCv" width="300" height="300"></canvas>
       </div>
       <div class="progress" aria-hidden="true"><i id="chestBar"></i></div>
       <div class="chest-row">
-        <button class="btn" id="openChest" type="button">Open chest · 100</button>
+        <button class="btn" id="openChest" type="button">Basic Chest · 500</button><button class="btn epic-btn" id="openEpic" type="button">Epic Chest · 1,000</button>
         <span class="sub" id="chestHint"></span>
       </div>
     </section>
 
-    <section class="panel" aria-labelledby="oddsH">
+    <section class="panel" aria-labelledby="oddsH" style="display:none">
       <h2 id="oddsH">Rarity &amp; drop odds</h2>
-      <p class="sub">Rarity only changes how a fish looks. Every fish earns coins the same way.</p>
+      <p class="sub">Rarity changes how a fish looks. Every fish swims the same way.</p>
       <div class="tablewrap">
         <table class="odds">
-          <thead><tr><th>Rarity</th><th>Fish</th><th>Chest odds</th><th>Dupe refund</th><th>Found</th></tr></thead>
+          <thead><tr><th>Rarity</th><th>Fish</th><th>Basic chest</th><th>Epic chest</th><th>Dupe refund</th><th>Found</th></tr></thead>
           <tbody id="oddsBody"></tbody>
         </table>
       </div>
@@ -418,19 +414,19 @@ window.FIREBASE_CONFIG = {
 
   <section class="panel" aria-labelledby="collH">
     <div class="coll-head">
-      <div><h2 id="collH">Collection</h2><p class="sub">Tap a fish you own to swim with it.</p></div>
+      <div><h2 id="collH">Fish Tank</h2><p class="sub">Tap a fish you own to swim with it.</p></div>
       <div class="filters" id="filters" role="group" aria-label="Filter by rarity"></div>
     </div>
     <div class="cards" id="cards"></div>
   </section>
 
-  <section class="panel" aria-labelledby="saveH">
+  <section class="panel" aria-labelledby="saveH" style="display:none">
     <h2 id="saveH">Player &amp; saves</h2>
     <div class="save-grid">
       <div class="box">
         <h3>Play without an account</h3>
         <div id="localBox">
-          <p class="sub" style="margin-bottom:8px">Profiles saved on this device only. Each one keeps its own coins and characters.</p>
+          <p class="sub" style="margin-bottom:8px">Profiles saved on this device only. Each one keeps its own coins and fish.</p>
           <div class="row"><select id="profileSel" aria-label="Choose player"></select><button class="btn ghost small" id="delProfile" type="button">Delete</button></div>
           <div class="confirm" id="delConfirm" hidden><span id="delText"></span><button class="btn small" id="delYes" type="button">Delete</button><button class="btn ghost small" id="delNo" type="button">Keep</button></div>
           <div class="row" style="margin-top:8px"><input type="text" id="newProfile" maxlength="20" placeholder="New player name" aria-label="New player name"><button class="btn small" id="addProfile" type="button">Add player</button></div>
@@ -448,12 +444,11 @@ window.FIREBASE_CONFIG = {
     </div>
   </section>
 </div>
-<div class="rotate" id="rotate" aria-live="polite"><div class="phone" aria-hidden="true"></div><h2>Turn your phone upright</h2><p>Fishy Swimmer plays in portrait mode only.</p></div>
+<div class="rotate" id="rotate" aria-live="polite"><div class="phone" aria-hidden="true"></div><h2>Turn your phone upright</h2><p>Fishy Swimmer plays upright on phones.</p></div>
 <div class="chest-full" id="chestFull" hidden role="dialog" aria-modal="true" aria-labelledby="cfName">
   <div class="cf-rays" aria-hidden="true"></div>
   <canvas class="cf-fx" id="cfFx" aria-hidden="true"></canvas>
-  <div class="cf-flash" id="cfFlash" aria-hidden="true"></div>
-  <div class="cf-inner">
+    <div class="cf-inner">
     <canvas class="cf-char" id="cfChar" width="400" height="400" aria-hidden="true"></canvas>
     <canvas class="cf-chest" id="cfChest" width="300" height="300" aria-hidden="true"></canvas>
     <div class="cf-hint" id="cfHint">Opening…</div>
@@ -461,7 +456,7 @@ window.FIREBASE_CONFIG = {
       <span class="cf-tier" id="cfTier"></span>
       <div class="cf-name" id="cfName"></div>
       <div class="cf-note" id="cfNote"></div>
-      <div class="cf-btns"><button class="btn big" id="cfRun" type="button">Swim with this one</button><button class="btn ghost" id="cfAgain" type="button">Open another · 100</button><button class="btn ghost" id="cfClose" type="button">Close</button></div>
+      <div class="cf-btns"><button class="btn big" id="cfRun" type="button">Swim with this fish</button><button class="btn ghost" id="cfAgain" type="button">Open another</button><button class="btn ghost" id="cfClose" type="button">Close</button></div>
     </div>
   </div>
 </div>
@@ -470,7 +465,6 @@ window.FIREBASE_CONFIG = {
 <script>
 (() => {
 "use strict";
-/* ============================== CHARACTERS ============================== */
 const TIERS = [
   {key:"common",    name:"Common",    color:"#b9bcc9", weight:48,  refund:50},
   {key:"uncommon",  name:"Uncommon",  color:"#6fd36a", weight:25,  refund:75},
@@ -864,6 +858,30 @@ function drawChar(ctx, c, o){
   ctx.restore();
 }
 
+const THEMES = {
+  "Ember Leviathan":      { world:"Volcanic Vents",        smoke:["#ff8a3d","#ffb000","#ff5a1a"], spark:"#ffd34d", bubbles:true },
+  "Lantern of the Abyss": { world:"Bioluminescent Abyss",  smoke:["#2de2e6","#7ff3ff","#ff4fa3"], spark:null, bubbles:true },
+  "Golden Emperor Koi":   { world:"Sunken Gold City",      smoke:["#ffd34d","#fff3b0","#f2a33a"], spark:"#ffffff", bubbles:true },
+  "Glacier Sailfish":     { world:"Under the Ice",         smoke:["#e8f6ff","#b8e4ff","#ffffff"], spark:"#ffffff", bubbles:true },
+  "THE CREATOR":          { world:"Champion's Arena",      smoke:["#4a8cff","#9fc4ff","#ffd34d"], spark:"#ffffff", bubbles:true },
+  "Verdant Sea Dragon":   { world:"Kelp Cathedral",        smoke:["#9fff7a","#5fe03a","#d8ffb0"], spark:null, bubbles:true },
+  "Ghost Manta":          { world:"Shipwreck Graveyard",   smoke:["#dfe8ff","#9aa8ff","#c8d0ff"], spark:null, bubbles:true },
+  "Lunar Moonfish":       { world:"Moonlit Lagoon",        smoke:["#e8e0ff","#c8c0ff","#ffffff"], spark:"#ffffff", bubbles:true },
+};
+const themeFor = c => THEMES[c.name] || null;
+
+/* ---------- what the 2.0 swim engine needs from the fish ---------- */
+const CHESTS = { basic:{name:"Basic Crate", cost:500, w:[48,25,14,7,3,3]}, epic:{name:"Epic Crate", cost:1000, w:[7,27,32,18,9,7]} };
+const rgba = (hex, a) => { const [r, g, b] = hexRGB(hex); return `rgba(${r},${g},${b},${a})`; };
+// every fish leaves a trail of bubbles; Mythic fish blow bubbles in their own world's colors
+CHARS.forEach(c => { const th = themeFor(c); c.trail = "bubble"; c.t1 = th ? th.smoke[0] : "#e8fbff"; c.t2 = th ? th.smoke[1] : shade(c.main, .5); });
+const TRAIL_NAME = {bubble: "Bubble trail"};
+// the fish, centered on (0,0) and facing right, about as long as a ship was
+function paintShip(ctx, c, o){
+  const spec = BODIES[c.body], H = spec.rows.length, k = 2.3*0.85;
+  drawChar(ctx, c, {x:0, y:(H/2 + 2)*k, s:2.3, t: (o && o.t != null) ? o.t : (typeof game !== "undefined" ? game.t : 0), pose:"run", sil: o && o.sil, glow: false});
+}
+
 /* ============================== STATE & SAVES ============================== */
 const newState = () => ({v:1, name:"", coins:0, lifetimeCoins:0, best:0, bestRound:0, runs:0, chests:0, owned:{"0":1}, selected:0, items:{life:0, zap:0, boost:0}, updatedAt:0});
 function cleanName(n){ return typeof n === "string" ? n.replace(/[^A-Za-z0-9 _.\-']/g,"").replace(/\s+/g," ").trim().slice(0,16) : ""; }
@@ -953,10 +971,10 @@ function setSaveStatus(kind){
 function renderHUD(){
   $("hudCoins").textContent = fmt(state.coins);
   $("hudOwned").textContent = ownedCount();
-  $("hudTotal").textContent = "/ " + CHARS.length + " found";
+  $("hudTotal").textContent = "/ " + CHARS.length + " fish";
   $("hudBest").textContent = fmt(state.best) + " m";
   $("recBest").textContent = fmt(state.best) + " m";
-  $("recRound").textContent = state.bestRound ? "Round " + state.bestRound : "—";
+  $("recRound").textContent = state.bestRound ? planetFor(state.bestRound).name : "—";
   $("recRuns").textContent = fmt(state.runs);
   $("recLife").textContent = fmt(state.lifetimeCoins);
   $("recChests").textContent = fmt(state.chests);
@@ -964,13 +982,14 @@ function renderHUD(){
   $("nowName").textContent = c.name; $("nowName").classList.toggle("creator", isCreator(c));
   $("nowName").style.color = TIERS[c.tier].color;
   $("nowPerk").textContent = TIERS[c.tier].name + (themeFor(c) ? " · " + themeFor(c).world : "");
-  $("chestBar").style.width = Math.min(100, state.coins) + "%";
-  const can = state.coins >= 100 && !chestBusy;
+  $("chestBar").style.width = Math.min(100, state.coins/CHESTS.epic.cost*100) + "%";
+  const can = state.coins >= CHESTS.basic.cost && !chestBusy;
+  $("openEpic").disabled = !(state.coins >= CHESTS.epic.cost && !chestBusy);
   $("openChest").disabled = !can;
-  $("chestHint").textContent = state.coins >= 100 ? (Math.floor(state.coins/100) + " chest" + (state.coins>=200?"s":"") + " ready") : (100 - state.coins) + " more coins to go";
+  $("chestHint").textContent = state.coins >= CHESTS.epic.cost ? "Epic Chest ready!" : state.coins >= CHESTS.basic.cost ? "Basic Chest ready · " + fmt(CHESTS.epic.cost - state.coins) + " more for an Epic Chest" : fmt(CHESTS.basic.cost - state.coins) + " more coins for a Basic Chest";
 }
 function renderOdds(){
-  $("oddsBody").innerHTML = TIERS.map((t,i)=>`<tr><td style="color:${t.color}">${t.name}</td><td>${tierCounts[i]}</td><td>${pct(t.weight)}</td><td>+${t.refund}</td><td>${tierFound(i)} / ${tierCounts[i]}</td></tr>`).join("");
+  $("oddsBody").innerHTML = TIERS.map((t,i)=>`<tr><td style="color:${t.color}">${t.name}</td><td>${tierCounts[i]}</td><td>${i < 6 ? pct(CHESTS.basic.w[i]) : "—"}</td><td>${i < 6 ? pct(CHESTS.epic.w[i]) : "—"}</td><td>+${t.refund}</td><td>${tierFound(i)} / ${tierCounts[i]}</td></tr>`).join("");
 }
 let filter = -1;
 function renderFilters(){
@@ -987,7 +1006,7 @@ function renderCards(){
     const b = document.createElement("button"); b.type = "button";
     b.className = "card" + (own ? "" : " locked") + ((TEST.on ? TEST.car : state.selected) === c.id ? " sel" : "");
     b.style.setProperty("--rc", t.color);
-    b.setAttribute("aria-label", own ? `${c.name}, ${t.name}${state.selected===c.id?", driving now":""}` : `Locked ${t.name} fish`);
+    b.setAttribute("aria-label", own ? `${c.name}, ${t.name}${state.selected===c.id?", swimming now":""}` : `Locked ${t.name} fish`);
     const cv = document.createElement("canvas"); cv.width = 168; cv.height = 96;
     const num = document.createElement("span"); num.className = "num"; num.textContent = carNo(c);
     const nm = document.createElement("span"); nm.className = "cn"; nm.textContent = own ? c.name : "???"; if (own && isCreator(c)) nm.classList.add("creator");
@@ -1004,9 +1023,10 @@ function renderCards(){
 function renderNow(){ const cv=$("nowCv"), ctx=setupCanvas(cv); ctx.clearRect(0,0,112,64); drawChar(ctx, curCar(), {x:56,y:56,s:2.9,t:performance.now()/1000}); }
 function renderAll(){ renderHUD(); renderOdds(); renderFilters(); renderCards(); renderNow(); renderAccount(); renderCode(); }
 
-/* ---------- Test Swim mode (secret) ----------
+/* ---------- Test Run mode (secret) ----------
    Tap the "Fishy Swimmer" title 7 times fast, or type "testswim" on a keyboard.
-   Lets you drive any car. Nothing in test mode touches real progress: no coins, no chests,
+   In test mode, type "kraken", "whirlpool" or "nextzone".
+   Lets you swim with any fish. Nothing in test mode touches real progress: no coins, no chests,
    no best score, no leaderboard. It switches off when the page reloads. */
 const TEST = { on:false, car:0 };
 const curCar = () => TEST.on ? CHARS[TEST.car] : CHARS[state.selected];
@@ -1015,21 +1035,22 @@ function setTest(on){
   TEST.on = on; TEST.car = state.selected;
   $("testBar").hidden = !on;
   document.body.classList.toggle("testing", on);
-  renderAll(); toast(on ? "Test Swim mode on: every fish unlocked" : "Test Swim mode off");
+  renderAll(); toast(on ? "Test swim mode on: every fish unlocked" : "Test swim mode off");
 }
 { let taps = [];
   $("brandTitle").addEventListener("click", () => { const now = Date.now(); taps = taps.filter(t => now - t < 2500); taps.push(now); if (taps.length >= 7){ taps = []; setTest(!TEST.on); } });
   let typed = "";
-  document.addEventListener("keydown", e => { if (e.key.length !== 1 || /INPUT|TEXTAREA/.test(e.target.tagName)) return; typed = (typed + e.key.toLowerCase()).slice(-8);
+  document.addEventListener("keydown", e => { if (e.key.length !== 1 || /INPUT|TEXTAREA/.test(e.target.tagName)) return; typed = (typed + e.key.toLowerCase()).slice(-12);
     if (typed.endsWith("testswim")){ typed = ""; setTest(!TEST.on); }
-    else if (TEST.on && typed.endsWith("whirlpool")){ typed = ""; TEST.whirl = true; if (game.state === "running") game.whirlAt = game.dist + 10; toast("The water is starting to spin…"); }
-    else if (TEST.on && typed.endsWith("kraken")){ typed = ""; TEST.kraken = true; if (game.state === "running") game.monsterAt = game.dist + 20; toast("The kraken stirs… start swimming"); } });
+    else if (TEST.on && typed.endsWith("kraken")){ typed = ""; TEST.hole = true; if (game.state === "running") game.monsterAt = game.dist + 15; toast("Something huge is stirring below…"); }
+    else if (TEST.on && typed.endsWith("whirlpool")){ typed = ""; TEST.worm = true; if (game.state === "running") game.wormAt = game.dist + 10; toast("The water is starting to swirl…"); }
+    else if (TEST.on && typed.endsWith("nextzone")){ typed = ""; if (game.state === "running") game.roundDist = ROUND_LEN(game.round) - 1; else toast("Start a swim, then type nextzone"); } });
 }
 function selectChar(id){
-  if (TEST.on){ TEST.car = id; renderHUD(); renderCards(); renderNow(); toast("Test swimming as the " + CHARS[id].name); return; }
+  if (TEST.on){ TEST.car = id; renderHUD(); renderCards(); renderNow(); toast("Test swimming as " + CHARS[id].name); return; }
   if (!state.owned[id] || state.selected === id) return;
   state.selected = id; Saves.save(); renderHUD(); renderCards(); renderNow();
-  toast("Now swimming as the " + CHARS[id].name);
+  toast("Now swimming as " + CHARS[id].name + (game.state === "running" ? " (next swim)" : ""));
 }
 $("filters").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; filter = +b.dataset.f; renderFilters(); renderCards(); });
 
@@ -1130,32 +1151,44 @@ const Sound = (() => {
   const ok = () => ac && prefs.sfx;
   const LT = {}; const lim = (k, s) => { const n = ac.currentTime; if (LT[k] && n - LT[k] < s) return false; LT[k] = n; return true; };
   const fx = {
+    // launch: a low rumble that rises
+    start(){ if (!ok()) return; noise(.7, {vol:.18, lp:400}); tone(60, .8, {type:"sawtooth", vol:.08, slide:180, cutoff:600, attack:.08}); },
+    // each tap of the thrusters: a short soft whoosh
+    thrust(){ if (!ok() || !lim("thrust", .05)) return; const t0 = ac.currentTime, s2 = ac.createBufferSource(); s2.buffer = noiseBuf; const f = ac.createBiquadFilter(); f.type = "bandpass"; f.Q.value = 1.2;
+      f.frequency.setValueAtTime(380, t0); f.frequency.exponentialRampToValueAtTime(900, t0 + .12); const g = ac.createGain(); g.gain.setValueAtTime(.001, t0); g.gain.linearRampToValueAtTime(.16, t0 + .02); g.gain.exponentialRampToValueAtTime(.001, t0 + .2);
+      s2.connect(f); f.connect(g); g.connect(sfxBus); s2.start(t0); s2.stop(t0 + .22); },
+    // the crate spinner: a light click each time a ship passes the marker
     tick(){ if (!ok() || !lim("tick", .025)) return; tone(1500, .025, {type:"square", vol:.035, cutoff:3500}); },
-    win(tier){ if (!ok()) return; const n = [2, 2, 3, 3, 4, 5][tier || 0]; [523, 659, 784, 1047, 1319, 1568].slice(0, n).forEach((f, i) => tone(f, .3, {type:"triangle", vol:.08, at:i*.09})); if (tier >= 5) tone(131, 1.2, {type:"sine", vol:.12, at:.1}); },
+    // the spinner stops: a chime that gets grander with rarity
+    win(tier){ if (!ok()) return; const n = [2, 2, 3, 3, 4, 5, 6][tier || 0]; [523, 659, 784, 1047, 1319, 1568].slice(0, n).forEach((f, i) => tone(f, .3, {type:"triangle", vol:.08, at:i*.09}));
+      if (tier >= 5) tone(131, 1.2, {type:"sine", vol:.12, at:.1}); },
+    // buying in the shop
     buy(){ if (!ok()) return; tone(1568, .08, {type:"square", vol:.05, cutoff:4000}); tone(2093, .3, {type:"triangle", vol:.08, at:.07}); },
+    // power-ups switching on
     equip(){ if (!ok()) return; tone(400, .18, {type:"sawtooth", vol:.06, slide:1400, cutoff:3000}); },
     boost(){ if (!ok()) return; noise(.9, {vol:.25, lp:1800}); tone(90, .9, {type:"sawtooth", vol:.1, slide:320, cutoff:900, attack:.05}); },
     smash(){ if (!ok() || !lim("smash", .06)) return; noise(.25, {vol:.25, lp:1000}); tone(70, .2, {type:"sine", vol:.2, slide:40}); },
     revive(){ if (!ok()) return; [392, 523, 659, 784].forEach((f, i) => tone(f, .22, {type:"triangle", vol:.09, at:i*.07})); },
-    laser(){ if (!ok()) return; tone(1800, .14, {type:"sawtooth", vol:.06, slide:300, cutoff:6000}); noise(.2, {vol:.15, at:.03, lp:2400}); },
+    // the wormhole: a soft rising whir when it opens, a long swirling whoosh going through
     worm(){ if (!ok()) return; tone(220, 1.4, {type:"sine", vol:.08, slide:660, attack:.3}); tone(330, 1.4, {type:"sine", vol:.05, slide:990, attack:.4}); },
     warp(){ if (!ok()) return; noise(2.4, {vol:.18, lp:2200}); tone(110, 2.4, {type:"sine", vol:.1, slide:880, attack:.2}); tone(1760, 2.2, {type:"sine", vol:.04, slide:220, at:.2}); },
-    // bubbly "bloop" when the fish swims up
-    jump(){ if (!ok()) return; tone(260, .14, {type:"sine", vol:.32, slide:780}); tone(520, .08, {type:"sine", vol:.12, at:.07, slide:1100}); [.12,.17,.21].forEach((d,i) => tone(900 + i*260, .05, {type:"sine", vol:.08, at:d, slide:1400 + i*300})); },
-    // watery plink with a fizz of bubbles for coins
-    coin(){ if (!ok()) return; tone(1500, .1, {type:"sine", vol:.18, slide:1900}); tone(2250, .18, {type:"sine", vol:.1, at:.05}); for (let i = 0; i < 4; i++) tone(1200 + Math.random()*1400, .04, {type:"sine", vol:.05, at:.08 + i*.035, slide:2600}); },
-    round(){ if (!ok()) return; [523, 659, 784, 1047].forEach((f, i) => tone(f, .18, {type:"square", vol:.14, at:i*.08, cutoff:3000})); },
-    // muffled underwater splash-thud
-    crash(){ if (!ok()) return; noise(.6, {vol:.45, lp:700}); tone(110, .4, {type:"sine", vol:.5, slide:40}); for (let i = 0; i < 6; i++) tone(500 + Math.random()*900, .06, {type:"sine", vol:.06, at:.05 + i*.05, slide:1600}); },
-    // the kraken: rumble, eye opening, tentacle swooshes, then the CHOMP
-    monster(){ if (!ok()) return;
-      noise(3.4, {vol:.35, lp:180}); tone(48, 3.2, {type:"sawtooth", vol:.18, cutoff:220, attack:.8}); tone(51, 3.2, {type:"sawtooth", vol:.14, cutoff:220, attack:.8});
-      tone(90, 1, {type:"sine", vol:.3, at:.6, slide:60});
-      [1.3,1.8,2.2].forEach(d => { const t0 = ac.currentTime + d, s2 = ac.createBufferSource(); s2.buffer = noiseBuf; const f = ac.createBiquadFilter(); f.type = "bandpass"; f.Q.value = 2;
-        f.frequency.setValueAtTime(300, t0); f.frequency.exponentialRampToValueAtTime(1800, t0 + .4); const g = ac.createGain(); g.gain.setValueAtTime(.001, t0); g.gain.linearRampToValueAtTime(.3, t0 + .15); g.gain.exponentialRampToValueAtTime(.001, t0 + .45);
-        s2.connect(f); f.connect(g); g.connect(sfxBus); s2.start(t0); s2.stop(t0 + .5); });
-      noise(.9, {vol:.7, at:3.15, lp:900}); tone(70, 1.2, {type:"sawtooth", vol:.35, at:3.1, slide:30, cutoff:600}); tone(40, 1.4, {type:"sine", vol:.7, at:3.15, slide:25});
-    },
+    // a button press: a soft pop
+    click(){ if (!ok()) return; tone(520, .05, {type:"sine", vol:.1, slide:780}); },
+    // a coin: a little sparkle
+    coin(){ if (!ok() || !lim("coin", .03)) return; tone(1320 + Math.random()*80, .06, {type:"triangle", vol:.07}); tone(1980, .08, {type:"sine", vol:.05, at:.04}); },
+    // a new planet: a bright rising chime
+    planet(){ if (!ok()) return; [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .28, {type:"triangle", vol:.08, at:i*.08})); tone(262, .9, {type:"sine", vol:.08, at:.1}); },
+    // a comet coming: two quick soft beeps
+    comet(){ if (!ok() || !lim("comet", .3)) return; [0, .12].forEach(d => tone(1760, .07, {type:"sine", vol:.06, at:d})); },
+    // the flying car's hood laser: a sharp zap and a pop
+    // the kickflip: a quick rising whoosh and a click as it lands
+    flip(){ if (!ok()) return; tone(300, .35, {type:"triangle", vol:.08, slide:1200}); noise(.25, {vol:.1, lp:2400}); tone(900, .06, {type:"square", vol:.04, at:.72, cutoff:3000}); },
+    laser(){ if (!ok()) return; tone(1800, .16, {type:"sawtooth", vol:.06, slide:400, cutoff:6000}); tone(2600, .1, {type:"square", vol:.03, cutoff:5000}); noise(.3, {vol:.2, at:.05, lp:1400}); tone(90, .3, {type:"sine", vol:.3, at:.05, slide:40}); },
+    // crash: a boom and falling debris
+    crash(){ if (!ok()) return; noise(.7, {vol:.45, lp:900}); tone(80, .6, {type:"sine", vol:.5, slide:30}); for (let i = 0; i < 6; i++) tone(1500 + Math.random()*2000, .07, {type:"triangle", vol:.04, at:.1 + i*.06}); },
+    // the black hole: a deep rumble that bends downward, and a long fading whoosh
+    blackHole(){ if (!ok()) return; tone(55, 3.6, {type:"sawtooth", vol:.16, slide:22, cutoff:220, attack:.6}); noise(3.4, {vol:.22, lp:260});
+      tone(880, 2.6, {type:"sine", vol:.06, at:.6, slide:90}); tone(660, 2.6, {type:"sine", vol:.05, at:.9, slide:70}); },
     // chest suspense: rattles speed up; rarer pulls add a riser, a heartbeat and a drumroll
     shake(dur, tier){ if (!ok()) return;
       let t = 0, gap = .16; while (t < dur - .05){ noise(.05, {vol:.2 + tier*.02, at:t, hp:1800}); tone(170 + Math.random()*40, .05, {type:"square", vol:.05, at:t + .02, cutoff:800}); t += gap; gap = Math.max(.05, gap * (tier >= 3 ? .9 : .97)); }
@@ -1188,7 +1221,7 @@ const Sound = (() => {
   const unlock = () => wake();
   ["pointerdown","touchend","keydown"].forEach(ev => document.addEventListener(ev, unlock, {passive:true}));
   const noop = () => {};
-  return Object.assign(fx, { prefs, wake, setSfx, musicStart: noop, musicStop: noop, duck: noop, setRound: noop });
+  return Object.assign(fx, { prefs, wake, setSfx });
 })();
 function renderSoundButtons(){
   document.querySelectorAll("[data-snd]").forEach(b => {
@@ -1204,12 +1237,11 @@ document.addEventListener("click", e => {
   if (Sound.prefs.sfx) Sound.click();
   b.blur();
 });
-
 /* ============================== TREASURE CHEST ============================== */
 let chestBusy = false, lastPull = null;
 const chestCtx = setupCanvas($("chestCv"));
-// a pirate's treasure chest: dark planks, iron bands, rivets, a skull and crossbones, and treasure inside
-function drawChest(open, t, ctx = chestCtx){
+// a pirate treasure chest
+function drawChest(open, t, ctx = chestCtx, forceEpic){
   ctx.clearRect(0,0,300,300);
   ctx.save(); ctx.translate(150,172); ctx.scale(6,6);
   const P=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(x,y,w,h)};
@@ -1242,12 +1274,11 @@ function drawChest(open, t, ctx = chestCtx){
   ctx.restore();
   if (!open){ ctx.fillStyle = "rgba(255,224,138,"+(.25+.2*Math.sin(t*3))+")"; [[74,76],[228,98],[204,56]].forEach(([x,y],i)=>{const s=4+2*Math.sin(t*4+i);ctx.fillRect(x-s/2,y-s/2,s,s)}); }
 }
-const CHESTS = { basic:{name:"Basic Crate", cost:500, w:[48,25,14,7,3,3]}, epic:{name:"Epic Crate", cost:1000, w:[7,27,32,18,9,7]} };
+let chestKind = "basic";
 function rollChar(kind){
-  const w = (CHESTS[kind] || CHESTS.basic).w;
-  let r = Math.random() * 100, tier = 0;
+  const w = CHESTS[kind || "basic"].w; let r = Math.random() * 100, tier = 0;
   for (let i=0;i<w.length;i++){ if (r < w[i]){ tier=i; break; } r -= w[i]; tier = i; }
-  const pool = CHARS.filter(c=>c.tier===tier);
+  const pool = CHARS.filter(c=>c.tier===Math.min(tier, 6) && !c.starter);
   return pool[Math.floor(Math.random()*pool.length)];
 }
 const cfChestCtx = setupCanvas($("cfChest")), cfCharCtx = setupCanvas($("cfChar"));
@@ -1260,13 +1291,14 @@ const CHEST_FX = [
   {dur:1.9, rayop:.28, rayspd:10, glow:18, flash:.6,  conf:100, coins:0,  hints:[[.4,"Something's glowing…"],[.75,"It's getting stronger!"]]},
   {dur:2.4, rayop:.34, rayspd:7,  glow:26, flash:.85, conf:160, coins:40, hints:[[.3,"Something's glowing…"],[.6,"It's getting stronger!"],[.85,"Here it comes…"]]},
   {dur:3.2, rayop:.42, rayspd:4,  glow:34, flash:1,   conf:260, coins:70, hints:[[.25,"Something's glowing…"],[.5,"The ground is shaking…"],[.75,"This is no ordinary chest…"],[.92,"!!!"]]},
+  {dur:4.2, rayop:.5,  rayspd:3,  glow:44, flash:1,   conf:400, coins:120, hints:[[.2,"Something's glowing…"],[.4,"The ground is shaking…"],[.6,"This is no ordinary chest…"],[.8,"WHAT IS THAT?!"],[.93,"!!!!!"]]},
 ];
 const cfFx = $("cfFx"), cfFxCtx = cfFx.getContext("2d");
 let cfParts = [], cfTimers = [];
 function cfSize(){ const d = Math.min(devicePixelRatio || 1, 2); cfFx.width = innerWidth * d; cfFx.height = innerHeight * d; cfFxCtx.setTransform(d,0,0,d,0,0); }
 function cfBurst(tier){
   const fx = CHEST_FX[tier], r = $("cfChest").getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height*.45;
-  const cols = [["#ffffff"],["#6fd36a","#c8f5c0","#ffffff"],["#4aa8ff","#bfe2ff","#ffffff"],["#b77bff","#ff8ad8","#ffffff"],["#ffb23f","#ffd34d","#fff3b0","#ffffff"],["#ff4f6b","#ffd34d","#5fe03a","#2de2e6","#b77bff","#ffffff"]][tier];
+  const cols = [["#ffffff"],["#6fd36a","#c8f5c0","#ffffff"],["#4aa8ff","#bfe2ff","#ffffff"],["#b77bff","#ff8ad8","#ffffff"],["#ffb23f","#ffd34d","#fff3b0","#ffffff"],["#ff4f6b","#ffd34d","#5fe03a","#2de2e6","#b77bff","#ffffff"],["#ff3ad8","#ffd34d","#2de2e6","#ffffff","#b77bff","#5fe03a"]][tier];
   for (let i = 0; i < fx.conf; i++){ const a = Math.random()*Math.PI*2, sp = 200 + Math.random()*(300 + tier*120);
     cfParts.push({k:"c", x:cx, y:cy, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp - 200, r:Math.random()*6, vr:(Math.random()-.5)*12, w:5 + Math.random()*5, h:3 + Math.random()*4, col:cols[i % cols.length], life:2.4 + Math.random()*1.2}); }
   for (let i = 0; i < fx.coins; i++) cfParts.push({k:"o", x:Math.random()*innerWidth, y:-20 - Math.random()*innerHeight*.8, vx:(Math.random()-.5)*40, vy:120 + Math.random()*160, r:0, vr:4 + Math.random()*6, life:5});
@@ -1275,17 +1307,18 @@ function cfDraw(dt){
   const W = innerWidth, H = innerHeight; cfFxCtx.clearRect(0, 0, W, H);
   cfParts.forEach(p => { p.life -= dt; p.vy += (p.k === "o" ? 160 : 520)*dt; p.vx *= .99; p.x += p.vx*dt; p.y += p.vy*dt; p.r += p.vr*dt;
     cfFxCtx.save(); cfFxCtx.globalAlpha = Math.min(1, p.life); cfFxCtx.translate(p.x, p.y);
-    if (p.k === "o"){ const w = Math.abs(Math.cos(p.r))*8 + 1; cfFxCtx.fillStyle = "#a8701c"; cfFxCtx.beginPath(); cfFxCtx.ellipse(0,0,w+1,9,0,0,Math.PI*2); cfFxCtx.fill(); cfFxCtx.fillStyle = "#ffd34d"; cfFxCtx.beginPath(); cfFxCtx.ellipse(0,0,w,8,0,0,Math.PI*2); cfFxCtx.fill(); }
+    if (p.k === "o"){ cfFxCtx.fillStyle = "#ffd34d"; cfFxCtx.beginPath(); for (let i = 0; i < 10; i++){ const a = i*Math.PI/5 - Math.PI/2, r = i % 2 ? 3.5 : 8; cfFxCtx.lineTo(Math.cos(a)*r, Math.sin(a)*r); } cfFxCtx.closePath(); cfFxCtx.fill(); }
     else { cfFxCtx.rotate(p.r); cfFxCtx.fillStyle = p.col; cfFxCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h * Math.abs(Math.cos(p.r*1.3)) + 1); }
     cfFxCtx.restore(); });
   cfParts = cfParts.filter(p => p.life > 0 && p.y < H + 40);
 }
-function openChest(){
-  if (TEST.on){ toast("Chests are paused in Test Swim mode"); return; }
-  if (chestBusy || state.coins < 100) return;
-  Sound.wake();
-  chestBusy = true; state.coins -= 100; state.chests++;
-  const c = rollChar(), isNew = !state.owned[c.id], t = TIERS[c.tier];
+function openChest(kind){
+  kind = kind === "epic" ? "epic" : "basic"; const cost = CHESTS[kind].cost;
+  if (TEST.on){ toast("Chests are paused in test mode"); return; }
+  if (chestBusy || state.coins < cost) return;
+  Sound.wake(); chestKind = kind;
+  chestBusy = true; state.coins -= cost; state.chests++;
+  const c = rollChar(kind), isNew = !state.owned[c.id], t = TIERS[c.tier];
   state.owned[c.id] = (state.owned[c.id]||0) + 1;
   if (!isNew) state.coins += t.refund;
   Saves.save(true); renderHUD();
@@ -1294,7 +1327,7 @@ function openChest(){
   const el = $("chestFull"), fx = CHEST_FX[c.tier];
   cfTimers.forEach(clearTimeout); cfTimers = []; cfParts = []; cfSize();
   el.hidden = false; el.classList.remove("revealed","glowing","quake","dim"); el.classList.add("shaking");
-  el.dataset.tier = c.tier;
+  el.dataset.tier = Math.min(c.tier, 5);
   el.style.setProperty("--cf", t.color); el.style.setProperty("--rayop", fx.rayop); el.style.setProperty("--rayspd", fx.rayspd + "s");
   el.style.setProperty("--glowpx", fx.glow + "px"); el.style.setProperty("--flash", fx.flash); el.style.setProperty("--shk", ".16s");
   $("cfHint").textContent = "Opening…";
@@ -1310,15 +1343,14 @@ function openChest(){
   later(fx.dur, () => {
     $("cfTier").textContent = t.name; $("cfTier").style.color = t.color;
     $("cfName").textContent = c.name; $("cfName").style.color = c.tier >= 3 ? t.color : "var(--ink)"; $("cfName").classList.toggle("creator", isCreator(c));
-    $("cfNote").textContent = (themeFor(c) ? `Unlocks the ${themeFor(c).world} world · ` : "") + (isNew ? `New fish! ${carNo(c)} of ${CHARS.length}` : `You already had this one · +${t.refund} coins back`);
+    $("cfNote").textContent = (themeFor(c) ? `` : "") + TRAIL_NAME[c.trail] + " · " + (isNew ? `New fish! ${carNo(c)} of ${CHARS.length}` : `You already had this one · +${t.refund} coins back`);
     el.classList.remove("shaking","dim"); el.classList.add("revealed"); cfRevealed = true; Sound.reveal(c.tier);
-    if (fx.flash){ const f = $("cfFlash"); f.classList.remove("go","go2"); void f.offsetWidth; f.classList.add(c.tier >= 5 ? "go2" : "go"); }
     if (c.tier >= 4){ el.classList.remove("quake"); void el.offsetWidth; el.classList.add("quake"); }
-    if (c.tier >= 5) $("cfTier").textContent = "Mythic!";
+    if (c.tier >= 5) $("cfTier").textContent = c.tier >= 6 ? "ULTRA MYTHIC!!" : "Mythic!";
     cfBurst(c.tier);
     $("cfRun").hidden = state.selected === c.id;
-    $("cfAgain").hidden = state.coins < 100;
-    $("cfAgain").textContent = "Open another · 100";
+    $("cfAgain").hidden = state.coins < CHESTS[chestKind].cost;
+    $("cfAgain").textContent = "Open another " + CHESTS[chestKind].name + " · " + fmt(CHESTS[chestKind].cost);
     chestBusy = false;
     renderAll();
     setTimeout(() => ($("cfRun").hidden ? $("cfClose") : $("cfRun")).focus({preventScroll:true}), 400);
@@ -1329,100 +1361,182 @@ function closeChest(){
   cfOpen = false; $("chestFull").hidden = true; $("chestFull").classList.remove("revealed","shaking","glowing","quake","dim"); cfParts = []; cfTimers.forEach(clearTimeout);
   document.body.style.overflow = "";
 }
-$("openChest").addEventListener("click", openChest);
+$("openChest").addEventListener("click", () => openChest("basic"));
+$("openEpic").addEventListener("click", () => openChest("epic"));
 $("testOff").addEventListener("click", () => setTest(false));
 $("cfClose").addEventListener("click", closeChest);
-$("cfAgain").addEventListener("click", () => { cfOpen = false; openChest(); });
+$("cfAgain").addEventListener("click", () => { cfOpen = false; openChest(chestKind); });
 $("cfRun").addEventListener("click", () => { if (lastPull) selectChar(lastPull.id); closeChest(); });
-
-/* ============================== GAME ============================== */
+/* ============================== GAME ==============================
+   Tap to swim up and keep your fish afloat; let go and you sink toward the sea floor.
+   Dodge jellyfish, sharks, octopuses and old shipwreck junk. Swim far enough and you reach the next zone:
+   Coral Reef, Kelp Forest, Sunny Shallows, Shipwreck Bay, Open Ocean, Jellyfish Fields, Volcano Vents, Deep Trench, The Abyss. */
 document.body.classList.add("app", "fs");             // one full-screen app: the game, its menus, and pop-ups
-const cv = $("game"), ctx = setupCanvas(cv);
-// The view is 240 game-pixels tall. Wide screens see 640 across; phones see a closer 400-wide view so everything is bigger.
-let GW = 640, SCALE = 1;
-let GH = 240, GROUND = 204, PX = 92;
+const cv = $("game"); let ctx = setupCanvas(cv);
+let GW = 680, GH = 340, SCALE = 1, PX = 160, GROUND = 312, OFX = 0, OFY = 0;
+const SS = 1.15;                               // ship drawing scale
 const isPhone = () => matchMedia("(pointer:coarse)").matches && Math.min(innerWidth, innerHeight) < 700;
+const isFS = () => document.body.classList.contains("fs");
 function sizeGame(){
-  // the game always fills the whole window, like an app. The swim lane stays the same; taller screens see more
-  // water above and more sea floor below.
+  // the game always fills the whole window, like an app. Tall screens (phones) get a compact play box with the
+  // scene stretching above and below it; wide screens get a wide play field.
   const w = cv.parentElement.clientWidth || innerWidth, h = cv.parentElement.clientHeight || innerHeight, dpr = Math.min(window.devicePixelRatio || 1, 2);
-  if (w/h < 1.05){ GW = 370; PX = 60; }
-  else { GW = Math.max(640, Math.round(240*w/h)); PX = 92; }
-  GH = Math.max(240, Math.round(GW*h/w)); GROUND = Math.max(204, Math.round(GH*.6));
+  if (w/h < 1.05){ GW = 340; GH = Math.min(380, Math.max(320, Math.round(GW*h/w))); }
+  else { GH = 360; GW = Math.max(560, Math.min(1000, Math.round(GH*w/h))); }
   cv.style.aspectRatio = "auto";
   const pw = Math.round(w*dpr), ph = Math.round(h*dpr);
   if (cv.width !== pw || cv.height !== ph){ cv.width = pw; cv.height = ph; ctx.imageSmoothingEnabled = false; }
-  SCALE = cv.width/GW;
+  SCALE = Math.min(cv.width/GW, cv.height/GH); OFX = Math.round((cv.width - GW*SCALE)/2); OFY = Math.round((cv.height - GH*SCALE)*.42);
+  PX = Math.round(Math.min(170, GW*.24)); GROUND = GH - 26;
 }
-sizeGame();
-window.addEventListener("resize", sizeGame);
+window.addEventListener("resize", () => { const k = game.py/GH; sizeGame(); game.py = k*GH; });
 function enterFS(){   // on phones, ask the browser to hide its bars too
   if (!isPhone() || document.fullscreenElement) return;
   try { const de = document.documentElement; (de.requestFullscreen || de.webkitRequestFullscreen)?.call(de).catch?.(() => {}); } catch {}
 }
-function exitFS(){ if (game.state === "running"){ game.paused = true; Sound.duck(true); } }
+function exitFS(){ if (game.state === "running") game.paused = true; }
 $("fsExit").addEventListener("click", exitFS);
 window.addEventListener("orientationchange", () => setTimeout(sizeGame, 200));
-const ROUND_LEN = r => 330 + r*120;          // meters per zone: each lasts longer in 2.0
-// each zone of the sea has its own water: floaty water gives big slow jumps, heavy water drops you fast
-const ZONES = [
-  {name:"Coral Reef", g:1.0}, {name:"Kelp Forest", g:.85}, {name:"Sunny Shallows", g:.72}, {name:"Shipwreck Bay", g:1.12},
-  {name:"Open Ocean", g:.92}, {name:"Jellyfish Fields", g:.65}, {name:"Volcano Vents", g:1.25}, {name:"Deep Trench", g:1.35}, {name:"The Abyss", g:1.2}];
-const zoneFor = r => { const z = ZONES[(r - 1) % ZONES.length], lap = Math.floor((r - 1)/ZONES.length); return {name: z.name + (lap ? " " + (lap + 1) : ""), g: z.g}; };
-const waterWord = g => g < .7 ? "Floaty water" : g < .95 ? "Light water" : g <= 1.05 ? "Normal water" : g < 1.25 ? "Heavy water" : "Crushing pressure";
-const WARP_JUMP = 1000, BOOST_LEN = 500, ZAPS = 3, COIN_VALUE = 5;
-// Miami night skies, one per round: [top, middle, horizon glow]
-const ROUND_SKIES = [["#0d0b2a","#2c1450","#7a3266"],["#090a24","#211a55","#4e3a8a"],["#07102a","#0f2c48","#1f5f6e"],["#140a2a","#381445","#7a4438"],["#0a0820","#250f42","#73264f"]];
-// City skyline (two layers) and palms, generated once
-const rnd = (a => () => (a = (a * 16807) % 2147483647) / 2147483647)(42);
-const SKY_FAR = Array.from({length:22}, (_, i) => ({w: 22 + Math.floor(rnd()*26), h: 40 + Math.floor(rnd()*70), seed: i}));
-const SKY_NEAR = Array.from({length:16}, (_, i) => ({w: 26 + Math.floor(rnd()*30), h: 26 + Math.floor(rnd()*50), seed: i*7+3, neon: ["#ff4fa3","#2de2e6","#ffd34d","#8a5cff"][i%4]}));
-const game = {
-  state:"ready", t:0, speed:0, dist:0, round:1, roundDist:0, runCoins:0,
-  py:0, vy:0, onGround:true, jumpHeld:false, g:1, zap:0, boost:null, inv:0, whirl:null, warp:null, revives:0, zapFx:null,
-  obs:[], coins:[], parts:[], smoke:[], nextObs:0, nextCoin:0, banner:null, flash:0, paused:false,
-};
-const stars = Array.from({length:70},()=>({x:Math.random()*1000, y:Math.random()*140, s:Math.random()<.2?2:1, p:Math.random()*6}));
-function resetRun(){
-  Object.assign(game, {t:0, speed:320, dist:0, round:1, roundDist:0, runCoins:0, py:0, vy:0, onGround:true, obs:[], coins:[], parts:[], smoke:[], nextObs:420, nextCoin:260, banner:{text:zoneFor(1).name, sub: TEST.on ? "Test swim" : "Normal water · Go!", t:1.8}, flash:0, paused:false, monsterEnd:false, mt:0,
-    g:1, zap:0, boost:null, inv:0, whirl:null, warp:null, revives:0, zapFx:null, crashed:false, cause:""});
+
+/* ---------- the trip ---------- */
+const PLANETS = [
+  {name:"Coral Reef",       g:1.0,  sub:"Dive in!",                     sky:["#2ab8d8","#1a8ab8","#0e5a8a"], surf:["#e8d098","#b89a62"], land:"#ff7a8a", glow:"#c8f4ff"},
+  {name:"Kelp Forest",      g:0.85, sub:"Tall kelp all around",         sky:["#2a9ab0","#167a8a","#0a4a5a"], surf:["#a8b878","#6a7a48"], land:"#3a9a5a", glow:"#c8ffe0"},
+  {name:"Sunny Shallows",   g:0.7,  sub:"Warm, bright water",           sky:["#5ad8e8","#2ab0d0","#1a80b0"], surf:["#f4e0a8","#d0b47a"], land:"#ffd34d", glow:"#ffffff"},
+  {name:"Shipwreck Bay",    g:1.12, sub:"Old ships rest down here",     sky:["#1a7a98","#0e5a78","#083a52"], surf:["#9a8a6a","#6a5a40"], land:"#6a4a2a", glow:"#a8e0f0"},
+  {name:"Open Ocean",       g:0.92, sub:"Blue as far as you can see",   sky:["#1a7ad0","#0e5ab0","#063a80"], surf:["#8a9ab8","#5a6a8a"], land:"#4a8ad8", glow:"#a8d8ff"},
+  {name:"Jellyfish Fields", g:0.65, sub:"So floaty!",                   sky:["#4a5ac8","#2a3a98","#141e60"], surf:["#9a8ac8","#6a5a98"], land:"#ff8ad8", glow:"#e8c8ff"},
+  {name:"Volcano Vents",    g:1.25, sub:"The water is heating up",      sky:["#3a2a3a","#2a1424","#1a0810"], surf:["#4a2a20","#2a1410"], land:"#ff6a1a", glow:"#ffb070"},
+  {name:"Deep Trench",      g:1.35, sub:"The pressure is crushing",     sky:["#0a2a48","#061a30","#020a18"], surf:["#2a3040","#141820"], land:"#3a4a6a", glow:"#6aa0d0"},
+  {name:"The Abyss",        g:1.2,  sub:"Only glowing things live here",sky:["#06101e","#040a14","#01040a"], surf:["#1a1a26","#0a0a10"], land:"#2de2e6", glow:"#2de2e6"},
+];
+// past the Abyss the sea never ends: the zones repeat, a little deeper each time
+const BEYOND = PLANETS.map((p, i) => Object.assign({}, p, {style:i}));
+function planetFor(r){
+  if (r <= PLANETS.length) return Object.assign({style: r - 1}, PLANETS[r - 1]);
+  const k = r - PLANETS.length - 1, lap = Math.floor(k/BEYOND.length), b = BEYOND[k % BEYOND.length];
+  return Object.assign({}, b, {name: b.name + " " + (lap + 2), sub:"Deeper than ever"});
 }
-// The kraken shows up in about 1 of every 100 runs, somewhere between 120 m and 900 m.
-const KRAKEN_CHANCE = 1/20;                    // about 1 run in 20 meets the kraken (it ends the run)
-const WHIRL_CHANCE = 1/20;                     // about 1 run in 20 a whirlpool opens (swim into it: +1,000 m)
+const ROUND_LEN = r => 420 + r*120;            // how far (km) until the next world: each planet lasts longer in 2.0
+const HOLE_CHANCE = 1/20;                     // about 1 run in 20 meets the kraken (it ends the run)
+const WORM_CHANCE = 1/20;                     // about 1 run in 20 a whirlpool opens (swim into it: +1,000 m)
+const WARP_JUMP = 1000, BOOST_LEN = 500, ZAPS = 3;
+// how heavy each world feels: 1 is Earth. Thrusters push harder where gravity is stronger, so every world can be flown,
+// but low gravity floats and high gravity drops fast.
+const gravWord = g => g < .75 ? "Floaty water" : g < .95 ? "Light water" : g <= 1.05 ? "Normal water" : g < 1.25 ? "Heavy water" : "Crushing pressure";
+const FLAP = -360, GRAV = 1050, MAXFALL = 500;
+const game = {state:"ready", t:0, speed:0, dist:0, round:1, roundDist:0, runCoins:0, py:180, vy:0, tilt:0, obs:[], coins:[], parts:[], trail:[], texts:[], banner:null, paused:false, scroll:0, nextObs:0, mt:0, fadeT:9};
+function resetRun(){
+  Object.assign(game, {laser:null, flip:null, flipCD:0, g:1, zap:0, boost:null, inv:0, worm:null, warp:null, revives:0, t:0, speed:190, dist:0, round:1, roundDist:0, runCoins:0, py:GH*.42, vy:0, tilt:0, obs:[], coins:[], parts:[], trail:[], texts:[], banner:{text:"Coral Reef", sub: TEST.on ? "Test swim" : "Tap to swim up. Don't sink!", t:2.2},
+    paused:false, nextObs:340, trailT:0, monsterEnd:false, mt:0, fadeT:9, crashed:false, lastWall:0});
+}
 function startRun(){
-  UI.screen = "home"; closeSheet(); resetRun(); game.state = "running";
-  game.monsterAt = (!TEST.on && Math.random() < KRAKEN_CHANCE) ? 150 + Math.random()*1500 : (TEST.kraken ? 40 : Infinity); TEST.kraken = false;
-  game.whirlAt = (!TEST.on && Math.random() < WHIRL_CHANCE) ? 150 + Math.random()*1500 : (TEST.whirl ? 30 : Infinity); TEST.whirl = false; $("overCta").hidden = true; Sound.musicStart(curCar());
+  UI.screen = "home"; closeSheet();
+  resetRun(); game.state = "running"; game.vy = FLAP*.8; game.holding = false;
+  game.monsterAt = (TEST.hole || (!TEST.on && Math.random() < HOLE_CHANCE)) ? (TEST.hole ? 40 : 250 + Math.random()*1800) : Infinity; TEST.hole = false;
+  game.wormAt = (TEST.worm || (!TEST.on && Math.random() < WORM_CHANCE)) ? (TEST.worm ? 30 : 200 + Math.random()*1600) : Infinity; TEST.worm = false;
+  $("overCta").hidden = true; Sound.start();
+  if (!isFS()){ const r = document.querySelector(".cabinet").getBoundingClientRect(); if (r.top < 0 || r.bottom > window.innerHeight) document.querySelector(".cabinet").scrollIntoView({behavior:"smooth", block: r.height > window.innerHeight ? "start" : "center"}); }
 }
 function endRun(){
-  Sound.musicStop();
   game.state = "over"; game.overT = game.t;
   const d = Math.floor(game.dist);
   if (TEST.on){ game.newBest = false; return; }
   state.runs++;
-  const newBest = d > state.best;
-  if (newBest) state.best = d;
+  const newBest = d > state.best; if (newBest) state.best = d;
   if (game.round > state.bestRound) state.bestRound = game.round;
   game.newBest = newBest;
   Saves.save(true); renderHUD(); renderCode();
   submitScore(d);
-  if (Saves.mode !== "fire" && Saves.auth){
-    $("ocSum").textContent = `${fmt(d)} m · +${game.runCoins} coins`;
-    $("overCta").hidden = false;
+  if (Saves.mode !== "fire" && Saves.auth){ $("ocSum").textContent = `${fmt(d)} m · ${planetFor(game.round).name} · +${game.runCoins} coins`; $("overCta").hidden = false; }
+}
+function addCoins(n){ game.runCoins += n; if (!TEST.on){ state.coins += n; state.lifetimeCoins += n; renderHUD(); } }
+const holdShip = () => curCar().ex.includes("h");
+// the Starlight GT's kickflip: when something is about to hit it, it flips over it on its own, then needs time to recharge
+const FLIP_CD = 15, FLIP_DUR = .8;
+const hasFlip = () => curCar().body === "flycar";
+function startFlip(){ game.flip = {t:0}; game.flipCD = FLIP_CD; Sound.flip(); game.texts.push({txt:"KICKFLIP!", x:PX, y:game.py - 26, t:0, col:"#7fd7ff"}); }
+function flap(){
+  if (game.state !== "running" || game.paused) return;
+  if (holdShip()){ game.holding = true; Sound.thrust(); return; }
+  game.vy = FLAP*Math.pow(game.g, .35); Sound.thrust(); puff(10);
+}
+
+/* ---------- things in space ---------- */
+const ROCK_COLS = ["#6a6e7a","#5a6a66","#7a6a5a","#6a5a72"];
+const rockShape = n => Array.from({length:n}, (_, i) => .72 + Math.random()*.32);
+function addRock(x, y, r, o){ game.obs.push(Object.assign({k:"rock", x, y, r, vx:0, vy:(Math.random() - .5)*14, rot:Math.random()*6, spin:(Math.random() - .5)*1.6, shape:rockShape(9), col: ROCK_COLS[Math.floor(Math.random()*4)]}, o || {})); }
+// obstacles come closer together the farther you fly (down to about half the starting gap)
+const dens = () => Math.max(.5, 1 - game.dist*.00012) * (1 + Math.max(0, .35 - game.dist*.0005));
+function spawnObstacle(){
+  const r = game.round, X = GW + 40, top = 40, bot = GROUND - 30, roll = Math.random();
+  const gap = Math.max(118, 182 - r*7);
+  if (game.dist - (game.lastOdd || 0) > 110 && Math.random() < .3){
+    game.lastOdd = game.dist; const y = top + 20 + Math.random()*(bot - top - 40), pick = Math.random();
+    if (pick < .38) game.obs.push({k:"alien", x:X, y, y0:y, r:13, vx:-10, vy:0, ph:Math.random()*6, rot:0});
+    else if (pick < .68) game.obs.push({k:"spaceman", x:X, y, r:13, vx:-15, vy:(Math.random() - .5)*16, rot:Math.random()*6, spin:(Math.random() < .5 ? -1 : 1)*(.5 + Math.random()*.6)});
+    else game.obs.push({k:"monkey", x:X + 20, y, y0:y, r:14, vx:-110, vy:0, ph:Math.random()*6, rot:0});
+    game.nextObs = game.speed*(.9 + Math.random()*.4)*dens(); return;
   }
+  if (roll < .3 + Math.min(.15, r*.02) && game.dist - game.lastWall > 40){
+    // a loose asteroid field: rocks of all sizes scattered above and below one clear path through
+    const gy = top + gap/2 + Math.random()*(bot - top - gap), placed = [];
+    const zones = [[6, gy - gap/2 - 6], [gy + gap/2 + 6, GROUND - 4]];
+    for (const [z0, z1] of zones){ const room = z1 - z0; if (room < 16) continue;
+      const n = Math.max(1, Math.round(room/58));
+      for (let i = 0; i < n*4 && placed.filter(p => p.z === z0).length < n; i++){
+        const r = 10 + Math.random()*13, y = z0 + r*.6 + Math.random()*Math.max(1, room - r*1.2), x = X + Math.random()*150;
+        if (placed.some(p => Math.hypot(p.x - x, p.y - y) < p.r + r + 22)) continue;
+        placed.push({x, y, r, z:z0}); addRock(x, y, r, {vy:(Math.random() - .5)*6, band:[z0, z1]}); } }
+    coinLine(X + 30, gy, 5, 0); game.lastWall = game.dist;
+    game.nextObs = game.speed*(1.35 + Math.random()*.35)*Math.max(.75, dens());
+    return;
+  }
+  const M0 = .66, M1 = M0 + .13 + Math.min(.05, game.dist/15000), C1 = M1 + .06;
+  if (roll < M0 || (roll >= C1 && r < 3)){
+    // every now and then, one huge asteroid with room to get around it above or below
+    if (Math.random() < .16){
+      const R = 38 + Math.random()*22 + Math.min(10, r*1.5), room = 135, lo = 4 + R, hi = GROUND - 4 - R;
+      let y = lo + Math.random()*(hi - lo);
+      if (y - R < room && GROUND - (y + R) < room) y = Math.random() < .5 ? lo : hi;
+      addRock(X + R, y, R, {vy:(Math.random() - .5)*8, spin:(Math.random() - .5)*.5, shape:rockShape(13)});
+      if (Math.random() < .7){ const cy = y - R > GROUND - (y + R) ? (y - R)/2 : (y + R + GROUND)/2; coinLine(X + R - 48, cy, 5, 0); }
+      game.nextObs = game.speed*(1.1 + Math.random()*.35)*Math.max(.7, dens()) + R; return;
+    }
+    // a few loose asteroids drifting through
+    const n = 1 + (Math.random() < .25 + r*.07 ? 1 : 0) + (r >= 3 && Math.random() < .35 + Math.min(.4, game.dist/8000) ? 1 : 0) + (game.dist > 2500 && Math.random() < Math.min(.5, game.dist/10000) ? 1 : 0);
+    for (let i = 0; i < n; i++) addRock(X + i*90 + Math.random()*30, top + Math.random()*(bot - top), 12 + Math.random()*14 + Math.min(10, r*1.2));
+    if (Math.random() < .85) coinWave(X + 40);
+  } else if (roll < M1){
+    // a meteor. It dives from above (about half the time), flies in flat from the right, or climbs up from below,
+    // and crosses your path at a random height, so no part of the screen is safe from them
+    const sr = Math.random(), side = sr < .45 ? 0 : sr < .75 ? 2 : 1, vx = -(25 + Math.random()*60), x0 = X + Math.random()*140;
+    const ty = top + Math.random()*(bot - top), T = (x0 - PX)/(game.speed - vx);
+    let vy;
+    if (side === 0) vy = 60 + Math.random()*90;                 // diving down from above
+    else if (side === 1) vy = -(60 + Math.random()*90);         // climbing up from below
+    else vy = (Math.random() - .5)*50;                          // flying in flat from the right
+    game.obs.push({k:"meteor", x:x0, y: ty - vy*T, r:9, vx, vy, rot:0});
+    if (Math.random() < .7) coinWave(X + 60);
+  } else if (roll < C1){
+    // a comet: it races in from the right, and a warning arrow shows where first
+    const y = top + Math.random()*(bot - top);
+    game.obs.push({k:"comet", x:GW + 400, y, r:10, vx:-(game.speed*1.7 + 120), vy:0, warn:1.2});
+  } else {
+    // old space junk, tumbling (from Mars on)
+    game.obs.push({k:"junk", x:X, y:top + Math.random()*(bot - top), r:14, vx:-20, vy:(Math.random() - .5)*30, rot:Math.random()*6, spin:(Math.random() - .5)*2});
+  }
+  game.nextObs = game.speed*(Math.max(.55, .95 - r*.05) + Math.random()*.38)*dens();
 }
-function jumpPress(){
-  if (game.state === "monster" || game.state === "warp" || game.state === "revive") return;
-  enterFS();
-  if (game.state !== "running"){ if (game.state==="over" && game.t - game.overT < .6) return; startRun(); return; }
-  if (game.paused){ game.paused = false; Sound.duck(false); return; }
-  game.jumpHeld = true;
-  if (game.boost) return;          // the booster swims for you
-  if (game.onGround){ game.vy = -640*Math.pow(game.g, .35); game.onGround = false; Sound.jump(); }
-}
+function coinLine(x0, y, n, dy){ for (let i = 0; i < n; i++) game.coins.push({x:x0 + i*24, y: y + (dy || 0)*i, spin:i*.6}); }
+function coinWave(x0){ const y = 60 + Math.random()*(GROUND - 140); for (let i = 0; i < 5; i++) game.coins.push({x:x0 + i*24, y: y + Math.sin(i*.8)*22, spin:i*.6}); }
+const shipCircles = () => { const c = Math.cos(game.tilt), s = Math.sin(game.tilt); return [[-9, 0, 8], [9, 0, 7]].map(([x, y, r]) => [PX + (x*c - y*s)*SS, game.py + (x*s + y*c)*SS, r*SS*.8]); };
+function hitsShip(o){ for (const [x, y, r] of shipCircles()){ const dx = o.x - x, dy = o.y - y, rr = r + o.r*.8; if (dx*dx + dy*dy < rr*rr) return true; } return false; }
+function burst(x, y, cols, n, sp){ for (let i = 0; i < n; i++){ const a = Math.random()*Math.PI*2, v = (sp || 160)*(.3 + Math.random()); game.parts.push({x, y, vx:Math.cos(a)*v, vy:Math.sin(a)*v, life:.5 + Math.random()*.4, col: cols[i % cols.length]}); } }
 function crash(){
-  if (game.crashed) return; game.crashed = true; game.jumpHeld = false;
+  if (game.crashed) return; game.crashed = true;
+  burst(PX, game.py, ["#ffd34d","#ff6a1a","#ffffff", curCar().main], 40, 220); Sound.crash();
+  // got an Extra Life? offer it before the run ends
   if (!TEST.on && (state.items.life || 0) > 0){ game.state = "revive"; game.rt = 0; return; }
   endRun();
 }
@@ -1430,522 +1544,434 @@ const REVIVE_WAIT = 6;
 function useLife(){
   if (game.state !== "revive" || !(state.items.life > 0)) return;
   state.items.life--; Saves.save(true); game.revives++;
-  game.state = "running"; game.crashed = false; game.paused = false;
-  game.obs = game.obs.filter(o => o.x < PX - 40 || o.x > PX + 320);
-  game.py = 0; game.vy = 0; game.onGround = true; game.inv = 2.5; Sound.revive();
-  game.parts.push({x:PX, y:GROUND - 50, vx:0, vy:-30, life:1.2, col:"#ff8ab0", txt:"EXTRA LIFE!"});
+  game.state = "running"; game.crashed = false; game.paused = false; game.cause = "";
+  game.obs = game.obs.filter(o => o.x < PX - 40 || o.x > PX + 320);              // clear the way ahead
+  game.py = GROUND*.42; game.vy = FLAP*.6; game.tilt = 0; game.inv = 2.5; puff(20); Sound.revive();
+  game.texts.push({txt:"EXTRA LIFE!", x:PX, y:game.py - 30, t:0, col:"#ff6a9a"});
 }
 function skipLife(){ if (game.state !== "revive") return; game.state = "running"; endRun(); }
-function useZap(){ if (game.state !== "running" || game.paused || game.zap > 0 || !(state.items.zap > 0)) return; state.items.zap--; game.zap = ZAPS; Saves.save(true); Sound.equip();
-  game.parts.push({x:PX, y:GROUND + game.py - 44, vx:0, vy:-30, life:1, col:"#7ff3ff", txt:"ZAPPER ON"}); }
-function useBoost(){ if (game.state !== "running" || game.paused || game.boost || !(state.items.boost > 0)) return; state.items.boost--; game.boost = {left:BOOST_LEN}; Saves.save(true); Sound.boost();
-  game.parts.push({x:PX, y:GROUND + game.py - 44, vx:0, vy:-30, life:1, col:"#ffd34d", txt:"BOOST!"}); }
-/* the whirlpool (about 1 run in 20): swim into it and it spins you 1,000 m ahead */
-function startWarp(){ game.state = "warp"; game.warp = {t:0}; game.whirl = null; game.obs = []; game.coins = []; game.jumpHeld = false; Sound.warp(); }
+// power-ups you bought in the Shop, used during a flight
+function useZap(){ if (game.state !== "running" || game.paused || game.zap > 0 || !(state.items.zap > 0)) return; state.items.zap--; game.zap = ZAPS; Saves.save(true); Sound.equip(); game.texts.push({txt:"ZAPPER ON", x:PX, y:game.py - 26, t:0, col:"#7ff3ff"}); }
+function useBoost(){ if (game.state !== "running" || game.paused || game.boost || !(state.items.boost > 0)) return; state.items.boost--; game.boost = {left:BOOST_LEN}; Saves.save(true); Sound.boost(); puff(30); game.texts.push({txt:"BOOST!", x:PX, y:game.py - 26, t:0, col:"#ffd34d"}); }
+
+/* ---------- the whirlpool (about 1 run in 20): swim into it and it throws you 1,000 m ahead ---------- */
+function startWarp(){ game.state = "warp"; game.warp = {t:0, from:planetFor(game.round).name}; game.worm = null; game.obs = []; game.coins = []; Sound.warp(); }
 function updateWarp(dt){
-  const w = game.warp; w.t += dt;
+  const w = game.warp; w.t += dt; game.tilt += dt*6;
   if (w.t >= 1.3 && !w.jumped){ w.jumped = true;
     game.dist += WARP_JUMP; game.roundDist += WARP_JUMP; let bonus = 0;
-    while (game.roundDist >= ROUND_LEN(game.round)){ game.roundDist -= ROUND_LEN(game.round); bonus += 10*game.round; game.round++; }
-    if (bonus){ if (!TEST.on){ state.coins += bonus; state.lifetimeCoins += bonus; } game.runCoins += bonus; renderHUD(); }
-    game.g = zoneFor(game.round).g; Sound.setRound(game.round); }
-  if (w.t >= 2.6){ const z = zoneFor(game.round); game.state = "running"; game.warp = null; game.py = 0; game.vy = 0; game.onGround = true; game.inv = 1.5; game.nextObs = 420;
-    game.banner = {text:"Whirled +1,000 m!", sub:"Now in " + z.name + " · " + waterWord(z.g), t:2.8}; Sound.round(); Saves.save(); }
+    while (game.roundDist >= ROUND_LEN(game.round)){ game.roundDist -= ROUND_LEN(game.round); bonus += 3*game.round; game.round++; }
+    if (bonus) addCoins(bonus); game.g = planetFor(game.round).g; game.fadeT = 9; }
+  if (w.t >= 2.6){ const p = planetFor(game.round); game.state = "running"; game.warp = null; game.py = GROUND*.42; game.vy = 0; game.tilt = 0; game.inv = 1.5;
+    game.nextObs = 260; game.banner = {text:"Whirled +1,000 m!", sub:"Now at " + p.name + " · " + gravWord(p.g), t:2.8}; Sound.planet(); Saves.save(); }
 }
-function drawWhirl(){
-  const w = game.whirl; if (!w) return; const open = Math.min(1, w.t/1), R = Math.max(.1, w.r*open);
+function drawWorm(){
+  const w = game.worm; if (!w) return; const open = Math.min(1, w.t/1), R = w.r*open;
   ctx.save(); ctx.translate(w.x, w.y);
-  const g = ctx.createRadialGradient(0, 0, 0, 0, 0, R*1.7); g.addColorStop(0, "rgba(255,255,255,.9)"); g.addColorStop(.3, "rgba(150,240,255,.75)"); g.addColorStop(.7, "rgba(40,140,200,.45)"); g.addColorStop(1, "rgba(10,60,120,0)");
-  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, R*1.7, 0, Math.PI*2); ctx.fill();
-  ctx.rotate(w.t*2.6);
-  for (let a = 0; a < 4; a++){ ctx.strokeStyle = a % 2 ? "rgba(255,255,255,.8)" : "rgba(150,240,255,.9)"; ctx.lineWidth = 2.2; ctx.beginPath();
+  const g = ctx.createRadialGradient(0, 0, 0, 0, 0, R*1.8); g.addColorStop(0, "rgba(255,255,255,.95)"); g.addColorStop(.25, "rgba(150,240,255,.8)"); g.addColorStop(.6, "rgba(40,140,210,.5)"); g.addColorStop(1, "rgba(10,60,120,0)");
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, Math.max(.1, R*1.8), 0, Math.PI*2); ctx.fill();
+  ctx.rotate(w.t*2.4);
+  for (let a = 0; a < 4; a++){ ctx.strokeStyle = a % 2 ? "rgba(255,255,255,.75)" : "rgba(127,240,255,.85)"; ctx.lineWidth = 2.4; ctx.beginPath();
     for (let i = 0; i <= 40; i++){ const k = i/40, ang = a*Math.PI/2 + k*Math.PI*2.2, rr = R*1.3*k; ctx.lineTo(Math.cos(ang)*rr, Math.sin(ang)*rr); } ctx.stroke(); }
   ctx.restore();
 }
-// the trip: a spinning tunnel of water and bubbles, your fish twirling in the middle
+// the trip through: a spinning tunnel of light, the ship twirling in the middle
 function drawWarp(){
   const w = game.warp; if (!w) return; const t = w.t, a = Math.max(0, Math.min(1, t/.4, (2.6 - t)/.4));
-  const cx = GW/2, cy = GH/2, Rm = Math.hypot(GW, GH);
-  ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = "#03203a"; ctx.fillRect(0, 0, GW, GH);
-  ctx.translate(cx, cy); ctx.rotate(-t*1.8);
+  ctx.save(); ctx.globalAlpha = a;
+  const cx = GW/2, cy = (VT + VB)/2, Rm = Math.hypot(GW, VB - VT);
+  ctx.fillStyle = "#03203a"; ctx.fillRect(0, VT, GW, VB - VT);
+  ctx.translate(cx, cy); ctx.rotate(t*1.8);
   const cols = ["#7ff3ff","#2aa8e8","#ffffff","#5ad8c8"];
   for (let arm = 0; arm < 8; arm++){ ctx.strokeStyle = cols[arm % 4]; ctx.lineWidth = 3; ctx.globalAlpha = a*.8; ctx.beginPath();
-    for (let i = 0; i <= 60; i++){ const k = i/60, ang = arm*Math.PI/4 + k*Math.PI*3 + t*3, rr = Math.pow(k, 1.6)*Rm*.6; ctx.lineTo(Math.cos(ang)*rr, Math.sin(ang)*rr); } ctx.stroke(); }
-  for (let i = 0; i < 60; i++){ const ang = i*2.39996, sp = .35 + (i*37 % 100)/140, k = ((t*sp + (i*13 % 97)/97) % 1), rr = k*k*Rm*.55, sz = 1 + k*4;
-    ctx.globalAlpha = a*k; ctx.strokeStyle = "#e8fbff"; ctx.lineWidth = 1; ctx.strokeRect(Math.cos(ang)*rr, Math.sin(ang)*rr, sz, sz); }
+    for (let i = 0; i <= 60; i++){ const k = i/60, ang = arm*Math.PI/4 + k*Math.PI*3 - t*3, rr = Math.pow(k, 1.6)*Rm*.6; ctx.lineTo(Math.cos(ang)*rr, Math.sin(ang)*rr); } ctx.stroke(); }
+  for (let i = 0; i < 70; i++){ const h = hash(i, 77), ang = (h % 628)/100, sp = .3 + ((h >>> 10) % 100)/100, k = ((t*sp*.9 + (h % 97)/97) % 1), rr = k*k*Rm*.6;
+    ctx.globalAlpha = a*k; ctx.strokeStyle = "#e8fbff"; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(Math.cos(ang)*rr, Math.sin(ang)*rr, 1 + k*3, 0, Math.PI*2); ctx.stroke(); }
   ctx.restore();
-  ctx.save(); ctx.globalAlpha = a; ctx.translate(cx, cy + 10); ctx.rotate(t*5); drawChar(ctx, curCar(), {x:0, y:12, s:2.65*(1 - Math.abs(Math.sin(t*1.2))*.3), t:game.t, pose:"jump"}); ctx.restore();
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(cx, cy); ctx.rotate(t*5); const sc = SS*(1 - Math.abs(Math.sin(t*1.2))*.3); ctx.scale(sc, sc); paintShip(ctx, curCar(), {}); ctx.restore();
 }
-function jumpRelease(){ game.jumpHeld = false; if (game.vy < -300) game.vy = -300; }
 
-function spawnObstacle(){
-  const r = game.round, roll = Math.random(), X = GW + 20;
-  if (roll < Math.min(.38, .08 + r*.06)){
-    if (Math.random() < .45){
-      // Height-limit bar hanging over the road: stay on the ground and drive under it (jumping hits it).
-      game.obs.push({type:"bar", x:X, y:GROUND-58, w:44, h:10});
-      if (Math.random() < .35) coinLine(X + 22 - 22, GROUND-14, 3);
-    } else {
-      // Loose tire rolling toward you, a bit faster than the road
-      game.obs.push({type:"tire", x:X, y:GROUND-18, w:18, h:18, ph:0, extra:70});
-      if (Math.random() < .25) coinArc(X + 9, 18);
-    }
-  } else if (roll < .45){
-    const n = 1 + (Math.random() < Math.min(.7, .3 + r*.1) ? 1 : 0) + (r >= 2 && Math.random() < Math.min(.45, .15 + r*.06) ? 1 : 0);
-    for (let i=0;i<n;i++) game.obs.push({type:"cone", x:X + i*15, y:GROUND-22, w:14, h:22});
-    if (Math.random() < .2) coinArc(X + (n*15-1)/2, 22);
-  } else if (roll < .65){
-    const h = Math.random() < .5 ? 24 : 36;
-    game.obs.push({type:"tires", x:X, y:GROUND-h, w:20, h});
-    if (Math.random() < .2) coinArc(X + 10, h);
-  } else if (roll < .83){
-    const two = Math.random() < Math.min(.6, .2 + r*.08);
-    game.obs.push({type:"barrel", x:X, y:GROUND-26, w:18, h:26});
-    if (two) game.obs.push({type:"barrel", x:X + 18, y:GROUND-26, w:18, h:26});
-    if (Math.random() < .2) coinArc(X + (two ? 18 : 9), 26);
-  } else {
-    game.obs.push({type:"barrier", x:X, y:GROUND-20, w:32, h:20});
-    if (Math.random() < .2) coinArc(X + 16, 20);
+/* ---------- each ship's exhaust stream ---------- */
+const RAIN = ["#ff3a3a","#ff8a3d","#ffd34d","#7dff5a","#2de2e6","#3a8aff","#b77bff"];
+function puff(n){ for (let i = 0; i < n; i++) emitTrail(true); }
+function emitTrail(big){
+  const c = curCar(), k = c.trail, cs = Math.cos(game.tilt), sn = Math.sin(game.tilt), bx = -23*SS, n = game.trail.length;
+  const x = PX + bx*cs, y = game.py + bx*sn, base = -game.speed*.15 - (big ? 140 : 70);
+  const P = o => game.trail.push(Object.assign({x, y: y + (Math.random() - .5)*4, vx: base + (Math.random() - .5)*30, vy:(Math.random() - .5)*(big ? 70 : 24), life:.7, max:.7, r:3, col:c.t1, k}, o));
+  const two = n % 2 ? c.t1 : c.t2;
+  switch (k){
+    case "smoke": P({col:two, r:3.5, life:.8, max:.8}); break;
+    case "puff":  P({col:two, r:4, life:.8, max:.8}); break;
+    case "flame": P({r:4, life:.35, max:.35}); break;
+    case "plasma":P({col:two, r:3, life:.45, max:.45, vy:0}); break;
+    case "spark": P({col:two, r:1.6, life:.5, max:.5, vy:(Math.random() - .5)*120}); break;
+    case "rainbow": P({col:RAIN[Math.floor(game.t*14 + n) % 7], r:4, vy:0, life:.8, max:.8}); break;
+    case "star":  P({col:two, r:3.6, life:.8, max:.8, rot:Math.random()*6}); break;
+    case "heart": P({col:two, r:3.4, life:.9, max:.9}); break;
+    case "bubble":P({col:two, r:2 + Math.random()*3, life:.9, max:.9}); break;
+    case "pixel": P({col:two, r:3, life:.7, max:.7, vy:(Math.random() - .5)*60}); break;
+    case "bolt":  P({col:two, r:5, life:.3, max:.3, rot:Math.random()*6}); break;
+    case "ghost": P({col:c.t1, r:6, life:1, max:1, vy:-10}); break;
+    case "gold":  P({col:two, r:1.8, life:.9, max:.9, vy:(Math.random() - .5)*60}); break;
+    case "comet": P({col:two, r:5, vy:0, life:1, max:1}); break;
+    case "twin":  P({y: y - 4, r:3.6, life:.35, max:.35, vy:0}); P({y: y + 4, r:3.6, life:.35, max:.35, vy:0}); break;
+    case "helix": P({col:c.t1, r:2.6, life:.8, max:.8, vy:0, ph:game.t*9, amp:6}); P({col:c.t2, r:2.6, life:.8, max:.8, vy:0, ph:game.t*9 + Math.PI, amp:6}); break;
+    case "neon":  P({col:two, r:3, vy:0, life:.6, max:.6}); break;
+    case "jets": for (const tx of [-14, 15]){ const jx = PX + (tx*cs - 14*sn)*SS, jy = game.py + (tx*sn + 14*cs)*SS;
+        game.trail.push({x:jx + (Math.random() - .5)*3, y:jy, vx:-game.speed*.1 + (Math.random() - .5)*14, vy:(big ? 260 : 120) + Math.random()*60, life: big ? .32 : .2, max: big ? .32 : .2, r: big ? 3.4 : 2.2, col: Math.random() < .5 ? c.t1 : c.t2, k:"jet"});
+        // smoke billows straight down out of each thruster
+        if (Math.random() < (big ? .7 : .12)) game.trail.push({x:jx + (Math.random() - .5)*4, y:jy + 4 + Math.random()*6, vx:-game.speed*.08 + (Math.random() - .5)*24, vy:(big ? 95 : 45) + Math.random()*45, life:1, max:1, r:3 + Math.random()*3, col: Math.random() < .75 ? "#e8ecf4" : "#f0b0b8", k:"smoke"}); }
+      break;
   }
-  const minGap = game.speed * .56, maxGap = game.speed * 1.15;
-  game.nextObs = minGap + Math.random()*(maxGap-minGap);
-  // a straight line of coins at driving height in the open gap before the next obstacle
-  if (game.nextObs > 230 && Math.random() < .15) coinLine(X + game.nextObs/2 - 22 + 20, GROUND-14, 3);
 }
-// Coins follow the arc of a jump over an obstacle, or sit in a line in open space.
-function coinArc(cx, obstacleH){
-  const peak = obstacleH + 34;
-  for (let i=0;i<3;i++) game.coins.push({x:cx + (i-1)*24, y:GROUND-30 - Math.sin(i/2*Math.PI)*peak, r:6, spin:i*.6});
+function drawTrail(){
+  for (const p of game.trail){ const a = Math.max(0, p.life/p.max), age = 1 - a; ctx.globalAlpha = a;
+    switch (p.k){
+      case "smoke": case "puff": circ(p.x, p.y, p.r + age*7, p.col); break;
+      case "ghost": ctx.globalAlpha = a*.45; circ(p.x, p.y, p.r + age*8, p.col); break;
+      case "flame": case "twin": circ(p.x, p.y, Math.max(.6, p.r*(1 - age*.6)), age < .3 ? "#fff3b0" : age < .6 ? curCar().t1 : curCar().t2); break;
+      case "plasma": case "neon": case "comet": case "rainbow": ctx.fillStyle = p.col; ctx.fillRect(p.x - p.r, p.y - p.r*.6, p.r*2.4, p.r*1.2); if (p.k === "plasma" || p.k === "comet"){ ctx.globalAlpha = a*.35; circ(p.x, p.y, p.r*1.8, p.col); } break;
+      case "star": ctx.fillStyle = p.col; starP(p.x, p.y, p.r, p.rot); break;
+      case "heart": ctx.fillStyle = p.col; heartP(p.x, p.y, p.r); break;
+      case "bubble": ctx.strokeStyle = p.col; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.stroke(); break;
+      case "pixel": ctx.fillStyle = p.col; ctx.fillRect(Math.round(p.x - p.r/2), Math.round(p.y - p.r/2), p.r, p.r); break;
+      case "bolt": ctx.strokeStyle = p.col; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(p.x - 3, p.y - p.r); ctx.lineTo(p.x + 2, p.y - 1); ctx.lineTo(p.x - 2, p.y + 1); ctx.lineTo(p.x + 3, p.y + p.r); ctx.stroke(); break;
+      case "helix": circ(p.x, p.y + Math.sin(p.ph)*p.amp*a, p.r, p.col); break;
+      case "jet": ctx.fillStyle = p.col; ctx.fillRect(p.x - p.r*.6, p.y - p.r*1.4, p.r*1.2, p.r*2.8); ctx.globalAlpha = a*.35; circ(p.x, p.y, p.r*1.6, "#5ab8ff"); break;
+      default: circ(p.x, p.y, p.r, p.col);
+    } }
+  ctx.globalAlpha = 1;
 }
-function coinLine(x0, y, n){ for (let i=0;i<n;i++) game.coins.push({x:x0 + i*22, y, r:6, spin:i*.6}); }
-function hit(a,b){ return a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y; }
-function burst(x,y,col,n){ for(let i=0;i<n;i++) game.parts.push({x,y,vx:(Math.random()-.5)*160,vy:-Math.random()*160,life:.5+Math.random()*.3,col}); }
 
+/* ---------- update ---------- */
 function update(dt){
   game.t += dt;
   if (game.banner){ game.banner.t -= dt; if (game.banner.t <= 0) game.banner = null; }
-  if (game.flash > 0) game.flash -= dt;
-  const c = curCar();
-  if (game.state === "monster"){
-    game.mt += dt; updateSmoke(dt);
-    if (game.mt >= 3.6){ document.body.classList.remove("kraken"); game.monsterEnd = true; endRun(); }
-    return;
+  game.texts.forEach(x => x.t += dt); game.texts = game.texts.filter(x => x.t < 1.1);
+  const moving = game.state === "running" && !game.paused, sp = moving ? game.speed : (game.state === "ready" ? 90 : game.state === "monster" ? game.speed : game.state === "warp" ? 1400 : 0);
+  if (!game.paused) game.scroll += sp*dt;
+  if (!game.paused){
+    game.parts.forEach(p => { p.x += p.vx*dt; p.y += p.vy*dt; p.vx *= .985; p.vy *= .985; p.life -= dt; }); game.parts = game.parts.filter(p => p.life > 0);
+    game.trail.forEach(p => { p.x += p.vx*dt; p.y += p.vy*dt; if (p.ph !== undefined) p.ph += dt*6; p.life -= dt; }); game.trail = game.trail.filter(p => p.life > 0 && p.x > -20);
   }
+  game.fadeT += dt;
+  if (game.state === "monster"){ updateHole(dt); return; }
   if (game.state === "warp"){ updateWarp(dt); return; }
-  if (game.state === "revive"){ game.rt += dt; game.parts.forEach(p=>{p.life-=dt; p.x += p.vx*dt; p.y += p.vy*dt;}); game.parts = game.parts.filter(p=>p.life>0); if (game.rt >= REVIVE_WAIT) skipLife(); return; }
-  if (game.state === "running" && !game.paused && game.dist >= game.monsterAt && !game.boost && game.inv <= 0){
-    game.state = "monster"; game.mt = 0; game.jumpHeld = false; Sound.monster(); document.body.classList.add("kraken"); return;
-  }
-  if (game.state !== "running" || game.paused){ game.parts.forEach(p=>{p.life-=dt}); game.parts = game.parts.filter(p=>p.life>0); if (!game.paused && game.state === "ready") emitSmoke(c, dt, false); updateSmoke(dt); return; }
-  // speed & distance
-  const base = 320 + (game.round-1)*32 + Math.min(90, game.roundDist*0.12);
+  if (game.state === "revive"){ game.rt += dt; if (game.rt >= REVIVE_WAIT) skipLife(); return; }
+  if (game.state === "ready"){ game.py = GH*.42 + Math.sin(game.t*2.2)*8; game.tilt = 0; game.trailT += dt*16; while (game.trailT >= 1){ game.trailT--; emitTrail(false); } return; }
+  if (!moving) return;
+  if (game.dist >= game.monsterAt && !game.boost && game.inv <= 0){ startHole(); return; }
+  // speed and distance (the race speeds up more slowly in 2.0, since each world is longer)
+  const base = Math.min(560, 175 + game.dist*.05 + (game.round - 1)*5);
   game.speed = game.boost ? Math.min(900, game.speed + (base*2 - game.speed)*Math.min(1, dt*3)) : game.speed > base ? Math.max(base, game.speed - 500*dt) : base;
-  const dx = game.speed*dt;
-  game.dist += dx/10; game.roundDist += dx/10;
+  const dx = game.speed*dt; game.dist += dx/10; game.roundDist += dx/10;
   if (game.inv > 0) game.inv -= dt;
-  if (game.zapFx){ game.zapFx.t += dt; if (game.zapFx.t > .25) game.zapFx = null; }
-  if (game.boost){ game.boost.left -= dx/10; if (Math.random() < .8) game.parts.push({x:PX-30, y:GROUND+game.py-8-Math.random()*10, vx:-260-Math.random()*120, vy:(Math.random()-.5)*40, life:.4, col:"#e8fbff", sz:2});
-    if (game.boost.left <= 0){ game.boost = null; game.inv = 1.2; game.parts.push({x:PX, y:GROUND+game.py-30, vx:0, vy:-30, life:1, col:"#ffd34d", txt:"BOOST DONE"}); } }
-  game.g += (zoneFor(game.round).g - game.g)*Math.min(1, dt*1.5);
-  // the whirlpool: opens ahead, swim into it
-  if (game.dist >= game.whirlAt && !game.whirl){ game.whirlAt = Infinity; game.whirl = {x:GW + 50, y:GROUND - 26, r:30, t:0}; game.obs = game.obs.filter(o => o.x < GW - 120); game.nextObs = Math.max(game.nextObs, 420);
-    Sound.worm(); game.banner = {text:"A whirlpool is opening!", sub:"Swim into it to jump 1,000 m ahead", t:2.4}; }
-  if (game.whirl){ const w = game.whirl; w.t += dt; w.x -= dx; game.obs = game.obs.filter(o => Math.abs(o.x - w.x) > 70);
-    if (Math.abs(w.x - PX) < w.r + 4 && Math.abs((GROUND + game.py - 12) - w.y) < w.r + 16){ startWarp(); return; }
-    if (w.x < -60) game.whirl = null; }
-  // round complete
+  if (game.boost){ game.boost.left -= dx/10; puff(2); if (game.boost.left <= 0){ game.boost = null; game.inv = 1.2; game.vy = 0; game.texts.push({txt:"BOOST DONE", x:PX, y:game.py - 26, t:0, col:"#ffd34d"}); } }
+  if (game.dist >= game.wormAt && !game.worm){ game.wormAt = Infinity; const y = 70 + Math.random()*(GROUND - 160); game.worm = {x:GW + 60, y, r:34, t:0}; Sound.worm(); game.banner = {text:"A whirlpool is opening!", sub:"Swim into it to jump 1,000 m ahead", t:2.4}; }
+  if (game.worm){ const w = game.worm; w.t += dt; w.x -= dx*.85;
+    if (Math.hypot(w.x - PX, w.y - game.py) < w.r){ startWarp(); return; }
+    if (w.x < -60) game.worm = null; }
   if (game.roundDist >= ROUND_LEN(game.round)){
-    const bonus = 10*game.round; Sound.round(); Sound.setRound(game.round + 1);
-    if (!TEST.on){ state.coins += bonus; state.lifetimeCoins += bonus; } game.runCoins += bonus;
-    game.round++; game.roundDist = 0;
-    const z = zoneFor(game.round); game.banner = {text:"Now entering: " + z.name, sub: waterWord(z.g) + " · +" + bonus + " coins", t:2.6};
-    game.flash = .25; Saves.save(); renderHUD();
+    const bonus = 3*game.round; addCoins(bonus); game.round++; game.roundDist = 0; game.fadeT = 0;
+    const p = planetFor(game.round);
+    game.banner = {text: "Now entering: " + p.name, sub: gravWord(p.g) + " · +" + bonus + " coins", t:2.8}; Sound.planet(); Saves.save();
   }
-  // physics
-  const g = (game.jumpHeld && game.vy < 0 ? 1700 : 2600)*game.g;
-  if (game.boost){ game.py += (-34 - game.py)*Math.min(1, dt*6); game.vy = 0; game.onGround = false; }        // the booster lifts you over the floor
-  else if (game.onGround && game.py < 0){ game.onGround = false; }
-  if (!game.boost && !game.onGround){ game.vy += g*dt; game.py += game.vy*dt; if (game.py >= 0){ game.py = 0; game.vy = 0; game.onGround = true; } }
-  // spawn
+  // flying
+  game.g += (planetFor(game.round).g - game.g)*Math.min(1, dt*1.5);           // gravity eases in as you reach a new world
+  const gk = game.g;
+  if (game.boost){ // the booster flies for you: straight through the middle, smashing anything in the way
+    const ty = GROUND*.45; game.vy = (ty - game.py)*4; }
+  else if (holdShip()){ game.vy += (game.holding ? (game.vy > 0 ? -5200 : -3400)*Math.pow(gk, .5) : (game.vy < 0 ? 2600 : 1500)*gk)*dt; game.vy = Math.max(-470, Math.min(560*Math.sqrt(gk), game.vy)); }
+  else game.vy = Math.min(MAXFALL*Math.sqrt(gk), game.vy + GRAV*gk*dt);
+  game.py += game.vy*dt;
+  if (game.py < 14){ game.py = 14; game.vy = Math.max(0, game.vy); }
+  game.tilt += (Math.max(-.45, Math.min(.6, game.vy/900)) - game.tilt)*Math.min(1, dt*10);
+  game.trailT += dt*(holdShip() && game.holding ? 40 : 22); while (game.trailT >= 1){ game.trailT--; emitTrail(holdShip() && game.holding); }
+  if (game.py + 9*SS >= GROUND){ game.py = GROUND - 9*SS; if (game.boost || game.inv > 0){ game.vy = FLAP*.8; } else { game.cause = "ground"; return crash(); } }
+  if (game.flip){ game.flip.t += dt; if (game.flip.t >= FLIP_DUR) game.flip = null; }
+  else if (game.flipCD > 0) game.flipCD = Math.max(0, game.flipCD - dt);
+  // obstacles
   game.nextObs -= dx; if (game.nextObs <= 0) spawnObstacle();
-  game.obs.forEach(o=>{ o.x -= dx + (o.extra||0)*dt; if (o.type==="tire") o.ph += dt*(game.speed+(o.extra||0))/9; });
-  game.coins.forEach(k=>{ k.x -= dx; k.spin += dt*6; });
-  game.obs = game.obs.filter(o=>o.x+o.w>-20);
-  // player box
-  const pbox = {x:PX-19, y:GROUND+game.py-19, w:38, h:16};   // same fair hit area for every fish
   for (const o of game.obs){
-    const ob = {x:o.x+3, y:o.y+3, w:o.w-6, h:o.h-5};
-    if (o.zapped) continue;
-    // the zapper: an electric bolt from your fish clears the next obstacles before you reach them
-    if (game.zap > 0 && o.x < PX + 120 && o.x + o.w > PX + 14){ o.zapped = true; game.zap--; game.zapFx = {t:0, x:o.x + o.w/2, y:o.y + o.h/2}; burst(o.x + o.w/2, o.y + o.h/2, "#7ff3ff", 16); burst(o.x + o.w/2, o.y + o.h/2, "#ffffff", 8); Sound.laser();
-      game.parts.push({x:o.x + o.w/2, y:o.y - 10, vx:0, vy:-30, life:1, col:"#7ff3ff", txt: game.zap ? "ZAP! " + game.zap + " left" : "ZAP! Zapper empty"}); continue; }
-    if (hit(pbox, ob)){
-      if (game.boost){ o.zapped = true; burst(o.x + o.w/2, o.y + o.h/2, "#ffd34d", 14); burst(o.x + o.w/2, o.y + o.h/2, "#ffffff", 8); Sound.smash(); continue; }
-      if (game.inv > 0) continue;
-      burst(PX+18, GROUND+game.py-10, "#ffd34d", 22); burst(PX, GROUND+game.py-10, "#ff4fa3", 10); game.flash = .3; Sound.crash(); crash(); return; }
+    if (o.k === "comet" && o.warn > 0){ o.warn -= dt; if (o.warn <= 0) Sound.comet(); continue; }
+    o.x += (o.vx - game.speed)*dt*(o.k === "comet" ? 0 : 1) + (o.k === "comet" ? o.vx*dt : 0); o.y += o.vy*dt;
+    if (o.rot !== undefined) o.rot += (o.spin || 0)*dt;
+    if (o.k === "alien" || o.k === "monkey"){ o.ph += dt*(o.k === "monkey" ? 5 : 2.2); o.y = o.y0 + Math.sin(o.ph)*(o.k === "monkey" ? 8 : 14); }
+    if (o.k === "monkey" && Math.random() < dt*30) game.trail.push({x:o.x + 18, y:o.y + 2, vx:60, vy:(Math.random() - .5)*10, life:.35, max:.35, r:2.6, col: Math.random() < .5 ? "#ffd34d" : "#ff8a2a", k:"m"});
+    if (o.k === "rock" && (o.y < 8 || o.y > GROUND - 8)) o.vy = -o.vy;
+    if (o.band && (o.y - o.r*.6 < o.band[0] || o.y + o.r*.6 > o.band[1])) o.vy = -o.vy;
+    if (o.k === "meteor" && Math.random() < dt*40) game.parts.push({x:o.x + 6, y:o.y - 6, vx:40, vy:-30, life:.35, col: Math.random() < .5 ? "#ffd34d" : "#ff6a1a"});
+    if (o.k === "comet" && Math.random() < dt*50) game.trail.push({x:o.x + 8, y:o.y + (Math.random() - .5)*6, vx:30, vy:(Math.random() - .5)*10, life:.6, max:.6, r:4, col: Math.random() < .5 ? "#bfefff" : "#ffffff", k:"comet"});
+    if (curCar().body === "flycar" && !o.laserRoll && !(o.warn > 0) && o.x > PX + 30 && o.x - o.r < PX + 190 && Math.abs(o.y - game.py) < o.r + 16){
+      o.laserRoll = true; if (Math.random() < .1){ o.zapped = true; game.laser = {t:0, x:o.x, y:o.y}; burst(o.x, o.y, ["#7ff3ff","#ffffff","#2aa8e8", o.col || "#8a7a6a"], 26, 200); Sound.laser(); game.texts.push({txt:"ZAP!", x:o.x, y:o.y - 18, t:0, col:"#7ff3ff"}); continue; } }
+    // the zapper: a laser on the nose shoots the next close calls before they reach you
+    if (game.zap > 0 && !o.zapped && !(o.warn > 0) && o.x > PX + 24 && o.x - o.r < PX + 150 && Math.abs(o.y - game.py) < o.r + 34){
+      o.zapped = true; game.zap--; game.laser = {t:0, x:o.x, y:o.y}; burst(o.x, o.y, ["#7ff3ff","#ffffff","#2aa8e8", o.col || "#8a7a6a"], 26, 200); Sound.laser();
+      game.texts.push({txt: game.zap ? "ZAP! " + game.zap + " left" : "ZAP! Zapper empty", x:o.x, y:o.y - 18, t:0, col:"#7ff3ff"}); continue; }
+    if ((game.boost || game.inv > 0) && hitsShip(o)){ if (game.boost){ o.zapped = true; burst(o.x, o.y, ["#ffd34d","#ff8a2a","#ffffff", o.col || "#8a7a6a"], 18, 220); Sound.smash(); } continue; }
+    if (hasFlip() && !game.flip && game.flipCD <= 0 && !(o.warn > 0) && o.x + o.r > PX - 20 && o.x - o.r < PX + 34 + game.speed*.12 && Math.abs(o.y - game.py) < o.r + 22){ startFlip(); o.cleared = true; }
+    if (game.flip){ if (hitsShip(o)) o.cleared = true; continue; }   // mid-flip, it sails right over whatever is there
+    if (o.cleared) continue;
+    if (hitsShip(o)){ game.cause = o.k + (o.vy === 0 && o.k === "rock" ? "-wall" : ""); return crash(); }
   }
-  game.obs = game.obs.filter(o => !o.zapped);
+  game.obs = game.obs.filter(o => !o.zapped && o.x > -80 && (o.k === "meteor" ? o.y < GH + 400 && o.y > -400 : o.y < GH + 60));
+  if (game.laser){ game.laser.t += dt; game.laser.x -= dx; if (game.laser.t > .45) game.laser = null; }
   // coins
-  game.coins = game.coins.filter(k=>{
-    if (k.x < -20) return false;
-    if (hit(game.boost ? {x:pbox.x - 20, y:pbox.y - 40, w:pbox.w + 40, h:pbox.h + 80} : pbox,{x:k.x-k.r,y:k.y-k.r,w:k.r*2,h:k.r*2})){
-      const v = COIN_VALUE;
-      if (!TEST.on){ state.coins += v; state.lifetimeCoins += v; } game.runCoins += v; Sound.coin(); game.parts.push({x:k.x, y:k.y - 8, vx:0, vy:-40, life:.6, col:"#ffe08a", txt:"+" + v});
-      burst(k.x,k.y, "#ffe08a", 5);
-      renderHUD(); return false;
-    }
-    return true;
-  });
-  // trail for legendary+
-  emitSmoke(c, dt, true); updateSmoke(dt);
-  if (c.tier === 4 && Math.random() < .7){
-    const col = TIERS[4].color;
-    game.parts.push({x:PX-34, y:GROUND+game.py-6-Math.random()*8, vx:-dx/dt*0.3-40, vy:(Math.random()-.5)*30, life:.4, col, sz:2});
-  }
-  game.parts.forEach(p=>{ p.x += p.vx*dt; p.y += p.vy*dt; if(!p.txt) p.vy += 300*dt; p.life -= dt; });
-  game.parts = game.parts.filter(p=>p.life>0);
+  const mag = 26;
+  game.coins.forEach(k => { k.x -= dx; k.spin += dt*6; const ddx = PX - k.x, ddy = game.py - k.y, m2 = game.boost ? 70 : mag; if (Math.abs(ddx) < m2 + 14 && Math.abs(ddy) < m2){ k.x += ddx*Math.min(1, dt*10); k.y += ddy*Math.min(1, dt*10); } });
+  game.coins = game.coins.filter(k => { if (k.x < -20) return false;
+    if (Math.abs(k.x - PX) < 18 && Math.abs(k.y - game.py) < 18){ addCoins(1); Sound.coin(); game.parts.push({x:k.x, y:k.y, vx:0, vy:-40, life:.4, col:"#ffe08a"}); return false; } return true; });
 }
 
-/* ============================== MYTHIC WORLDS ==============================
-   Each Mythic fish swaps the coral reef for its own world and leaves its own colored bubble trail. */
-const THEMES = {
-  "Ember Leviathan":      { world:"Volcanic Vents",        smoke:["#ff8a3d","#ffb000","#ff5a1a"], spark:"#ffd34d", bubbles:true },
-  "Lantern of the Abyss": { world:"Bioluminescent Abyss",  smoke:["#2de2e6","#7ff3ff","#ff4fa3"], spark:null, bubbles:true },
-  "Golden Emperor Koi":   { world:"Sunken Gold City",      smoke:["#ffd34d","#fff3b0","#f2a33a"], spark:"#ffffff", bubbles:true },
-  "Glacier Sailfish":     { world:"Under the Ice",         smoke:["#e8f6ff","#b8e4ff","#ffffff"], spark:"#ffffff", bubbles:true },
-  "THE CREATOR":          { world:"Champion's Arena",      smoke:["#4a8cff","#9fc4ff","#ffd34d"], spark:"#ffffff", bubbles:true },
-  "Verdant Sea Dragon":   { world:"Kelp Cathedral",        smoke:["#9fff7a","#5fe03a","#d8ffb0"], spark:null, bubbles:true },
-  "Ghost Manta":          { world:"Shipwreck Graveyard",   smoke:["#dfe8ff","#9aa8ff","#c8d0ff"], spark:null, bubbles:true },
-  "Lunar Moonfish":       { world:"Moonlit Lagoon",        smoke:["#e8e0ff","#c8c0ff","#ffffff"], spark:"#ffffff", bubbles:true },
-};
-const themeFor = c => THEMES[c.name] || null;
-
-function skyGrad(top, mid, low){ const g = ctx.createLinearGradient(0,0,0,GROUND); g.addColorStop(0,top); g.addColorStop(.6,mid); g.addColorStop(1,low); ctx.fillStyle = g; ctx.fillRect(0,0,GW,GH); }
-function roadBand(c1, c2){ const bot = Math.min(GH, GROUND + 40); const g = ctx.createLinearGradient(0,GROUND,0,bot); g.addColorStop(0,c1); g.addColorStop(1,c2); ctx.fillStyle = g; ctx.fillRect(0, GROUND, GW, bot-GROUND); return bot; }
-function loopX(scroll, speed, span){ return -((scroll*speed) % span); }
-// shared underwater pieces
-function rays(alpha, tint){ for (let i = 0; i < 4; i++){ const x = ((i*140 - game.dist*.3) % (GW + 140) + GW + 140) % (GW + 140) - 70, sw = Math.sin(game.t*.4 + i)*8;
-  ctx.fillStyle = `rgba(${tint || "200,245,255"},${alpha})`; ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + 34, 0); ctx.lineTo(x + 80 + sw, GROUND); ctx.lineTo(x + 26 + sw, GROUND); ctx.fill(); } }
-function bubblesBG(col){ stars.forEach(st => { const y = GROUND - ((st.y*5 + game.t*(12 + st.s*8)) % GROUND); ctx.strokeStyle = col || "rgba(210,245,255,.3)"; ctx.lineWidth = 1;
-  ctx.strokeRect(Math.floor((st.x - game.dist*.4 + Math.sin(game.t*1.5 + st.p)*4 + GW*10) % GW) + .5, Math.floor(y) + .5, st.s + 1, st.s + 1); }); }
-function weed(x, base, h, col, k){ ctx.fillStyle = col; for (let seg = 0; seg < h/5; seg++) ctx.fillRect(Math.floor(x + Math.sin(game.t*1.4 + seg*.55 + k)*(seg*.35)), base - seg*5 - 5, 3, 5); }
-function coral(x, base, col, k){ ctx.fillStyle = col; ctx.fillRect(x, base - 16, 4, 16); ctx.fillRect(x - 6, base - 12, 4, 8); ctx.fillRect(x - 6, base - 6, 8, 3); ctx.fillRect(x + 6, base - 20, 4, 12); ctx.fillRect(x + 2, base - 10, 8, 3); ctx.fillRect(x - 2, base - 22 - (k % 3)*2, 3, 7); }
-function school(col, n, y0){ for (let i = 0; i < n; i++){ const x = ((game.t*(10 + (i%3)*4) + i*61) % (GW + 60)) - 30, y = y0 + (i%4)*7 + Math.sin(game.t + i)*2;
-  ctx.fillStyle = col; ctx.fillRect(Math.floor(GW - x), Math.floor(y), 5, 2); ctx.fillRect(Math.floor(GW - x) + 5, Math.floor(y) - 1, 2, 4); } }
-function seabed(top, c1, c2, specks){ const g = ctx.createLinearGradient(0,top,0,GH); g.addColorStop(0,c1); g.addColorStop(1,c2); ctx.fillStyle = g; ctx.fillRect(0,top,GW,GH-top);
-  if (specks){ ctx.fillStyle = specks; for (let i = 0; i < 50; i++){ const x = ((i*67 - game.dist*10) % GW + GW) % GW, y = top + 6 + (i*29) % Math.max(10, GH-top-8); ctx.fillRect(Math.floor(x), y, 2, 1); } } }
-function sandFloor(c1, c2, pebble){ const bot = roadBand(c1, c2); ctx.fillStyle = pebble; for (let x = loopX(game.dist*10, 1, 37); x < GW; x += 37){ ctx.fillRect(Math.floor(x), GROUND + 8, 3, 2); ctx.fillRect(Math.floor(x) + 17, GROUND + 22, 2, 2); } ctx.fillStyle = "rgba(255,255,255,.08)"; ctx.fillRect(0, GROUND, GW, 1); return bot; }
-
-const WORLD_DRAW = {
-  "Volcanic Vents"(scroll){
-    skyGrad("#120406", "#2a0a0a", "#4a1a10");
-    stars.forEach(st => { const y = GROUND - ((st.y*4 + game.t*(10 + st.s*8)) % GROUND); ctx.fillStyle = "rgba(255,120,40,.35)"; ctx.fillRect(Math.floor((st.x - scroll*.04 + GW*10) % GW), Math.floor(y), st.s, st.s); });
-    const span = 200, off = loopX(scroll, .18, span);
-    for (let x = off - span; x < GW + span; x += span){
-      const cx = x + 80, h = 70 + ((Math.floor((x - off)/span) % 2) ? 20 : 0);
-      ctx.fillStyle = "#1e0c0a"; ctx.beginPath(); ctx.moveTo(cx - 22, GROUND); ctx.lineTo(cx - 8, GROUND - h); ctx.lineTo(cx + 8, GROUND - h); ctx.lineTo(cx + 22, GROUND); ctx.fill();
-      ctx.fillStyle = "rgba(255,110,40,.4)"; ctx.fillRect(cx - 6, GROUND - h, 12, 2);
-      for (let k = 0; k < 6; k++){ const ph = (game.t*.35 + k/6) % 1; ctx.fillStyle = `rgba(60,40,40,${.35*(1-ph)})`; ctx.beginPath(); ctx.arc(cx + Math.sin(k + game.t)*5 + ph*12, GROUND - h - 4 - ph*90, 5 + ph*16, 0, Math.PI*2); ctx.fill(); }
-    }
-    const bot = sandFloor("#2a1612", "#140a08", "rgba(255,120,40,.18)");
-    if (GH - bot > 8) seabed(bot, "#1a0a08", "#080202", "rgba(255,110,40,.15)");
-  },
-  "Bioluminescent Abyss"(scroll){
-    skyGrad("#010208", "#030a1c", "#06142a");
-    stars.forEach((st, i) => { ctx.fillStyle = i % 3 ? `rgba(45,226,230,${.15 + .1*Math.sin(game.t*.8 + st.p)})` : `rgba(255,79,163,${.12 + .08*Math.sin(game.t*.8 + st.p)})`; ctx.fillRect(Math.floor((st.x - scroll*.05 + GW*10) % GW), (st.y*1.5 + i*5) % (GROUND - 10), st.s, st.s); });
-    for (let i = 0; i < 4; i++){ const x = ((i*170 - scroll*.06) % (GW + 120) + GW + 120) % (GW + 120) - 60, y = 40 + i*28 + Math.sin(game.t*.6 + i)*8, col = i % 2 ? "255,79,163" : "45,226,230";
-      ctx.fillStyle = `rgba(${col},.22)`; ctx.beginPath(); ctx.arc(x, y, 12, Math.PI, 0); ctx.fill();
-      for (let k = 0; k < 4; k++) for (let seg = 0; seg < 6; seg++){ ctx.fillStyle = `rgba(${col},${.18 - seg*.025})`; ctx.fillRect(Math.floor(x - 8 + k*5 + Math.sin(game.t*2 + seg*.6 + k)*1.5), y + seg*4, 1, 4); } }
-    const rs = 130, ro = loopX(scroll, .3, rs);
-    for (let x = ro - rs; x < GW + rs; x += rs){ ctx.fillStyle = "#04101c"; ctx.beginPath(); ctx.ellipse(x + 50, GROUND, 46, 24, 0, Math.PI, 0); ctx.fill(); coral(Math.floor(x + 95), GROUND, "rgba(45,226,230,.35)", Math.floor(x)); coral(Math.floor(x + 20), GROUND, "rgba(255,79,163,.3)", 1); }
-    const bot = sandFloor("#081424", "#040a14", "rgba(45,226,230,.2)");
-    if (GH - bot > 8) seabed(bot, "#040a14", "#000004", "rgba(45,226,230,.18)");
-  },
-  "Sunken Gold City"(scroll){
-    skyGrad("#0a3a48", "#1a5a5a", "#4a6a4a");
-    rays(.07, "255,230,160");
-    const span = 220, off = loopX(scroll, .14, span);
-    for (let x = off - span; x < GW + span; x += span){
-      ctx.fillStyle = "#1e3a3a"; ctx.fillRect(x + 20, GROUND - 90, 120, 6); ctx.fillRect(x + 30, GROUND - 96, 100, 6);
-      ctx.beginPath(); ctx.moveTo(x + 30, GROUND - 96); ctx.lineTo(x + 80, GROUND - 120); ctx.lineTo(x + 130, GROUND - 96); ctx.fill();
-      for (let k = 0; k < 5; k++){ ctx.fillStyle = "#1e3a3a"; ctx.fillRect(x + 28 + k*24, GROUND - 84, 8, 84); ctx.fillStyle = "rgba(242,193,78,.35)"; ctx.fillRect(x + 28 + k*24, GROUND - 84, 8, 2); }
-      ctx.fillStyle = "rgba(242,193,78,.4)"; ctx.fillRect(x + 20, GROUND - 90, 120, 1);
-      ctx.fillStyle = "#18302e"; ctx.fillRect(x + 170, GROUND - 40, 10, 40); ctx.fillRect(x + 166, GROUND - 48, 18, 8);
-    }
-    bubblesBG("rgba(255,240,200,.25)");
-    const bot = sandFloor("#c8a85a", "#8a703a", "rgba(255,230,140,.45)");
-    if (GH - bot > 8) seabed(bot, "#6a5a3a", "#1a1a14", "rgba(255,214,120,.25)");
-  },
-  "Under the Ice"(scroll){
-    skyGrad("#a8d8f0", "#3a7ab0", "#14406a");
-    // ice ceiling
-    ctx.fillStyle = "#e8f6ff"; ctx.fillRect(0, 0, GW, 14);
-    for (let x = loopX(scroll, .2, 24); x < GW; x += 24){ ctx.fillStyle = "#cfeaff"; ctx.beginPath(); ctx.moveTo(x, 14); ctx.lineTo(x + 6, 22 + (Math.abs(Math.floor(x)) % 3)*6); ctx.lineTo(x + 12, 14); ctx.fill(); }
-    rays(.09, "230,248,255");
-    const span = 260, off = loopX(scroll, .1, span);
-    for (let x = off - span; x < GW + span; x += span){ ctx.fillStyle = "rgba(200,232,255,.35)"; ctx.beginPath(); ctx.moveTo(x + 40, 14); ctx.lineTo(x + 70, 70); ctx.lineTo(x + 120, 90); ctx.lineTo(x + 150, 14); ctx.fill(); }
-    bubblesBG("rgba(255,255,255,.3)");
-    const bot = sandFloor("#8aa4b8", "#4a6478", "rgba(255,255,255,.35)");
-    if (GH - bot > 8) seabed(bot, "#3a5468", "#0c1a28", "rgba(255,255,255,.18)");
-  },
-  "Champion's Arena"(scroll){
-    skyGrad("#04102a", "#0a2048", "#123060");
-    // spotlights from above (slow, steady sweep)
-    for (let i = 0; i < 3; i++){ const x = GW*(.2 + i*.3) + Math.sin(game.t*.4 + i*2)*30; ctx.fillStyle = "rgba(220,235,255,.06)"; ctx.beginPath(); ctx.moveTo(x - 6, 0); ctx.lineTo(x + 6, 0); ctx.lineTo(x + 60, GROUND); ctx.lineTo(x - 60, GROUND); ctx.fill(); }
-    // stands full of fish fans
-    const gs = GROUND - 66; ctx.fillStyle = "#0e1c3a"; ctx.fillRect(0, gs, GW, 60);
-    for (let r = 0; r < 7; r++){ ctx.fillStyle = "#16284c"; ctx.fillRect(0, gs + 3 + r*8, GW, 1);
-      for (let x = loopX(scroll, .32, 10) + (r%2)*5; x < GW; x += 10){ const k = Math.abs(Math.floor((x + scroll*.32)/10)*7 + r*3) % 4; ctx.fillStyle = ["#3a5a8a","#5a4a7a","#3a7a7a","#7a6a4a"][k]; ctx.fillRect(Math.floor(x), gs + 5 + r*8, 4, 2); ctx.fillRect(Math.floor(x) + 4, gs + 4 + r*8, 1, 4); } }
-    // banners
-    for (let x = loopX(scroll, .45, 140); x < GW; x += 140){ ctx.fillStyle = "#1f3f9e"; ctx.fillRect(Math.floor(x), GROUND - 10, 60, 5); ctx.fillStyle = "#ffd34d"; ctx.fillRect(Math.floor(x) + 70, GROUND - 10, 60, 5); }
-    const bot = roadBand("#2a3a5a", "#1a2440");
-    for (let x = loopX(scroll, 1, 30); x < GW; x += 30){ ctx.fillStyle = "rgba(255,255,255,.06)"; ctx.fillRect(Math.floor(x), GROUND, 1, 40); }
-    if (GH - bot > 8) seabed(bot, "#14203a", "#04081a", "rgba(255,211,77,.18)");
-  },
-  "Kelp Cathedral"(scroll){
-    skyGrad("#3a8a6a", "#1a5a48", "#0e3a30");
-    rays(.08, "220,255,200");
-    for (let layer = 0; layer < 2; layer++){ const g = 34 - layer*10, o = loopX(scroll, .15 + layer*.25, g);
-      for (let x = o - g; x < GW + g; x += g) weed(x, GROUND, 120 - layer*30 + ((Math.abs(Math.floor(x/g))*7) % 30), layer ? "#2a6a2a" : "rgba(20,60,30,.7)", x*.1); }
-    bubblesBG("rgba(220,255,220,.25)");
-    const bot = sandFloor("#8a8a5a", "#5a5a3a", "rgba(200,255,160,.25)");
-    if (GH - bot > 8) seabed(bot, "#3a4a2a", "#0a140a", "rgba(200,255,160,.15)");
-  },
-  "Shipwreck Graveyard"(scroll){
-    skyGrad("#1a2a2a", "#22362e", "#2a3a2a");
-    const span = 340, off = loopX(scroll, .12, span);
-    for (let x = off - span; x < GW + span; x += span){
-      ctx.fillStyle = "#121c18"; ctx.beginPath(); ctx.moveTo(x + 20, GROUND - 30); ctx.lineTo(x + 200, GROUND - 46); ctx.lineTo(x + 230, GROUND - 20); ctx.lineTo(x + 210, GROUND); ctx.lineTo(x + 40, GROUND); ctx.fill();
-      ctx.fillRect(x + 110, GROUND - 120, 4, 80); ctx.fillRect(x + 90, GROUND - 104, 44, 3); ctx.fillRect(x + 160, GROUND - 90, 3, 50);
-      ctx.fillStyle = "rgba(150,180,160,.12)"; for (let k = 0; k < 4; k++) ctx.fillRect(x + 60 + k*30, GROUND - 30, 6, 4);
-      ctx.fillStyle = "#18241f"; ctx.fillRect(x + 280, GROUND - 26, 4, 22); ctx.fillRect(x + 272, GROUND - 8, 20, 3); ctx.fillRect(x + 274, GROUND - 26, 16, 3);
-    }
-    bubblesBG("rgba(200,220,210,.2)");
-    const bot = sandFloor("#4a524a", "#2a302a", "rgba(200,220,200,.15)");
-    if (GH - bot > 8) seabed(bot, "#222a24", "#060a08", null);
-  },
-  "Moonlit Lagoon"(scroll){
-    // night sky above the surface line, then lagoon water
-    const surf = 46;
-    const sk = ctx.createLinearGradient(0,0,0,surf); sk.addColorStop(0,"#0a0a2a"); sk.addColorStop(1,"#2a2a5a"); ctx.fillStyle = sk; ctx.fillRect(0,0,GW,surf);
-    stars.forEach(st => { ctx.fillStyle = `rgba(255,255,255,${.25 + .15*Math.sin(game.t + st.p)})`; ctx.fillRect(Math.floor(st.x % GW), (st.y % (surf - 6)), 1, 1); });
-    ctx.fillStyle = "#f0eaff"; ctx.beginPath(); ctx.arc(GW*.7, 22, 11, 0, Math.PI*2); ctx.fill();
-    const w = ctx.createLinearGradient(0,surf,0,GROUND); w.addColorStop(0,"#2a3a7a"); w.addColorStop(1,"#121a4a"); ctx.fillStyle = w; ctx.fillRect(0,surf,GW,GH-surf);
-    ctx.fillStyle = "rgba(220,230,255,.35)"; for (let x = 0; x < GW; x += 2) ctx.fillRect(x, surf + Math.round(Math.sin(game.t*1.2 + (x + scroll*.2)*.06)), 2, 1);
-    ctx.fillStyle = "rgba(230,224,255,.06)"; ctx.beginPath(); ctx.moveTo(GW*.7 - 10, surf); ctx.lineTo(GW*.7 + 10, surf); ctx.lineTo(GW*.7 + 60, GROUND); ctx.lineTo(GW*.7 - 60, GROUND); ctx.fill();
-    const rs = 150, ro = loopX(scroll, .3, rs);
-    for (let x = ro - rs; x < GW + rs; x += rs){ coral(Math.floor(x + 30), GROUND, "rgba(200,190,255,.35)", 2); coral(Math.floor(x + 100), GROUND, "rgba(160,200,255,.3)", 0); weed(x + 70, GROUND, 40, "rgba(80,90,160,.6)", x); }
-    school("rgba(220,220,255,.35)", 10, 80);
-    const bot = sandFloor("#b8b0d8", "#6a6490", "rgba(255,255,255,.35)");
-    if (GH - bot > 8) seabed(bot, "#4a4470", "#0a0a20", "rgba(255,255,255,.18)");
-  },
-};
-
-/* bubble trail: colored bubbles streaming from a Mythic's tail */
-function emitSmoke(c, dt, moving){
-  const th = themeFor(c); if (!th) return;
-  const spec = BODIES[c.body], half = Math.floor(spec.rows[0].length/2) * 2.65 * 0.85;
-  game.smokeAcc = (game.smokeAcc || 0) + dt*(moving ? 34 : 8);
-  while (game.smokeAcc >= 1){
-    game.smokeAcc--;
-    const col = th.smoke[Math.floor(Math.random()*th.smoke.length)];
-    game.smoke.push({x: PX - half + 2, y: GROUND + game.py - 12 - Math.random()*8, vx: moving ? -(game.speed*.35) - Math.random()*40 : -20 - Math.random()*15,
-      vy: -30 - Math.random()*30, life: .8 + Math.random()*.4, max: 1.2, r: 1 + Math.random()*2, col, bubble: true});
-    if (th.spark && Math.random() < .2) game.smoke.push({x: PX - half, y: GROUND + game.py - 12, vx: -(moving ? game.speed*.5 : 30) - Math.random()*60, vy: -20 - Math.random()*30, life: .5, max: .5, r: 1, col: th.spark, spark: true});
-  }
+/* ---------- the kraken (about 1 run in 20): it rises up ahead and pulls you in ---------- */
+function startHole(){ game.state = "monster"; game.mt = 0; game.hx = GW*.7; game.hy = Math.max(80, Math.min(GROUND - 90, game.py)); game.sx = PX; game.sy = game.py; Sound.blackHole(); }
+function updateHole(dt){
+  game.mt += dt; const t = game.mt, pull = Math.min(1, t/2.6);
+  game.speed = Math.max(40, game.speed - 120*dt);
+  // the ship spirals in
+  const a0 = Math.atan2(game.sy - game.hy, game.sx - game.hx), d0 = Math.hypot(game.sx - game.hx, game.sy - game.hy);
+  const k = Math.max(0, Math.min(1, (t - .6)/2.4)), ang = a0 + k*k*6, dist = d0*(1 - k);
+  game.shipX = game.hx + Math.cos(ang)*dist; game.shipY = game.hy + Math.sin(ang)*dist; game.shipScale = 1 - k*.9; game.tilt = ang + Math.PI/2;
+  // rocks and coins get sucked in too
+  for (const o of [...game.obs, ...game.coins]){ const dx = game.hx - o.x, dy = game.hy - o.y, d = Math.hypot(dx, dy) || 1; const f = 260*pull*dt; o.x += dx/d*f + -dy/d*f*.6; o.y += dy/d*f + dx/d*f*.6; if (d < 14) o.gone = true; }
+  game.obs = game.obs.filter(o => !o.gone); game.coins = game.coins.filter(o => !o.gone);
+  if (t >= 3.8){ game.monsterEnd = true; endRun(); }
 }
-function updateSmoke(dt){ game.smoke.forEach(p => { p.x += p.vx*dt; p.y += p.vy*dt; p.life -= dt; if (!p.spark) p.r += dt*2; }); game.smoke = game.smoke.filter(p => p.life > 0); }
-function drawSmoke(){
-  game.smoke.forEach(p => { ctx.globalAlpha = Math.max(0, p.life / p.max) * (p.spark ? .9 : .8); const s = Math.round(p.r*2);
-    if (p.bubble){ ctx.strokeStyle = p.col; ctx.lineWidth = 1; ctx.strokeRect(Math.round(p.x - s/2) + .5, Math.round(p.y - s/2) + .5, s + 1, s + 1); }
-    else { ctx.fillStyle = p.col; ctx.fillRect(Math.round(p.x - s/2), Math.round(p.y - s/2), s, s); } });
-  ctx.globalAlpha = 1;
-}
-
-/* the default world: a sunlit coral reef (water deepens a little each round) */
-const ROUND_WATER = [["#3ab8c8","#1a7a9a","#16607a"],["#2aa0c0","#14688e","#10506e"],["#1a88b0","#0f5a82","#0c4466"],["#1a78a8","#104a7a","#0a3a5e"],["#2a90a8","#145a7a","#0e4258"]];
-function drawReefBG(){
-  const w = ROUND_WATER[(game.round-1) % ROUND_WATER.length], scroll = game.dist*10;
-  skyGrad(w[0], w[1], w[2]);
-  rays(.08);
-  // distant reef wall
-  ctx.fillStyle = "rgba(10,60,80,.45)"; ctx.beginPath(); ctx.moveTo(0, GROUND);
-  for (let x = 0; x <= GW; x += 10) ctx.lineTo(x, GROUND - 40 - Math.sin((x + scroll*.08)/50)*10 - Math.sin((x + scroll*.08)/17)*4); ctx.lineTo(GW, GROUND); ctx.fill();
-  school("rgba(10,50,70,.45)", 12, 50);
-  // mid-ground coral and seaweed
-  const rs = 120, ro = loopX(scroll, .35, rs);
-  for (let x = ro - rs; x < GW + rs; x += rs){
-    const k = Math.abs(Math.floor((x - ro)/rs));
-    coral(Math.floor(x + 20), GROUND, ["rgba(255,120,140,.55)","rgba(255,160,80,.5)","rgba(190,120,255,.5)"][k % 3], k);
-    weed(x + 55, GROUND, 46, "rgba(40,140,90,.65)", x*.1); weed(x + 62, GROUND, 34, "rgba(40,140,90,.55)", x*.1 + 1);
-    ctx.fillStyle = "rgba(20,70,80,.6)"; ctx.beginPath(); ctx.ellipse(x + 95, GROUND, 18, 10, 0, Math.PI, 0); ctx.fill();
-  }
-  bubblesBG();
-  const bot = sandFloor("#e0c890", "#b89a62", "rgba(255,255,255,.35)");
-  if (GH - bot > 8) seabed(bot, "#a08a5a", "#2a2418", "rgba(255,240,200,.18)");
-}
-function drawBG(){
-  const th = themeFor(curCar());
-  if (th) WORLD_DRAW[th.world](game.dist*10); else drawReefBG();
-}
-
-/* ---- sea obstacles: bright colors, dark outline and a soft glow so they stand out against the water ---- */
-function drawObs(o){
-  const P=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(Math.floor(x),Math.floor(y),w,h)};
-  const x = Math.floor(o.x), y = Math.floor(o.y);
-  const glow = {cone:"#ff5a7a", barrel:"#ff4fa3", tires:"#cfe0ff", barrier:"#c890ff", tire:"#d070ff", bar:"#ffe6a0"}[o.type];
-  ctx.save(); ctx.shadowColor = glow; ctx.shadowBlur = 9;
-  if (o.type === "cone"){            // branching coral
-    const C = "#ff4a6a", H = "#ffd0d8", O = "#5a0a1a";
-    P(x+4, y+3, 6, o.h-3, O); P(x-1, y+7, 6, 10, O); P(x+9, y-1, 6, 14, O);
-    P(x+5, y+4, 4, o.h-4, C); P(x, y+8, 4, 8, C); P(x, y+14, 7, 3, C); P(x+10, y, 4, 12, C); P(x+7, y+9, 5, 3, C);
-    P(x+6, y+4, 1, o.h-6, H); P(x+11, y, 1, 10, H); P(x+1, y+8, 1, 6, H); P(x-1, y+o.h-3, o.w+2, 3, "#ff8a3d");
-  } else if (o.type === "barrel"){   // sea anemone
-    P(x, y+o.h-11, o.w, 11, "#4a0a2a"); P(x+1, y+o.h-10, o.w-2, 10, "#ff3d8a"); P(x, y+o.h-4, o.w, 4, "#c81a6a"); P(x+2, y+o.h-9, o.w-4, 1, "#ff9ac8");
-    for (let k = 0; k < 6; k++){ const tx = x + 1 + k*3; for (let seg = 0; seg < 5; seg++) P(tx + Math.round(Math.sin(game.t*3 + seg*.7 + k)*1.2), y + o.h - 12 - seg*3, 2, 3, seg > 3 ? "#ffffff" : (seg > 1 ? "#ffb0e0" : "#ff6ab8")); }
-  } else if (o.type === "tires"){    // stacked rocks
-    for (let ry = y + o.h - 12, i = 0; ry >= y; ry -= 12, i++){ const w = o.w - (i%2)*4, rx = x + (i%2)*2;
-      P(rx+1, ry-1, w-2, 14, "#1a2230"); P(rx+2, ry, w-4, 12, "#9aaac0"); P(rx, ry+2, w, 8, "#9aaac0"); P(rx+2, ry+1, w-6, 2, "#e0eaf6"); P(rx+w-5, ry+3, 3, 7, "#6a7a90"); }
-    P(x+2, y-2, 6, 3, "#5fe03a"); P(x+12, y+o.h-14, 4, 2, "#5fe03a");
-  } else if (o.type === "barrier"){  // giant clam
-    const open = Math.sin(game.t*2) > .4 ? 2 : 0;
-    P(x-1, y+o.h-9, o.w+2, 10, "#2a1050"); P(x+2, y+o.h-8, o.w-4, 8, "#a070ff"); P(x, y+o.h-5, o.w, 5, "#8a5aea");
-    P(x+1, y+3-open, o.w-2, 8, "#2a1050"); P(x+2, y+4-open, o.w-4, 6, "#b88aff"); P(x+4, y+2-open, o.w-8, 2, "#b88aff");
-    for (let i = 0; i < o.w; i += 6) P(x+i+2, y+5-open, 2, 4, "#e0c8ff");
-    P(x+o.w/2-3, y+9, 6, 6, "#ffffff"); P(x+o.w/2-2, y+10, 2, 2, "#fff6e0");
-  } else if (o.type === "tire"){     // rolling sea urchin
-    const cx = x + o.w/2, cy = y + o.h/2;
-    ctx.translate(cx, cy); ctx.rotate(-o.ph);
-    for (let a = 0; a < 8; a++){ ctx.save(); ctx.rotate(a*Math.PI/4); P(-1, -11, 2, 6, "#e090ff"); ctx.restore(); }
-    P(-7,-7,14,14,"#2a0a3a"); P(-6,-6,12,12,"#8a3ab8"); P(-7,-4,14,8,"#8a3ab8"); P(-4,-7,8,14,"#8a3ab8"); P(-3,-4,4,3,"#d8a0ff");
-  } else if (o.type === "bar"){      // fishing net hanging on lines
-    ctx.shadowBlur = 0;
-    for (let cy = 0; cy < y; cy += 6){ P(x+4, cy, 1, 4, "rgba(255,255,255,.7)"); P(x+o.w-5, cy, 1, 4, "rgba(255,255,255,.7)"); }
-    ctx.shadowBlur = 9;
-    P(x-1, y-1, o.w+2, o.h+2, "rgba(60,30,10,.5)");
-    P(x, y, o.w, 2, "#ffcf6a"); P(x, y+o.h-2, o.w, 2, "#ffcf6a");
-    for (let i = 0; i <= o.w; i += 6) P(x+i, y, 1, o.h, "#ffe6a0");
-    for (let j = 0; j < o.h; j += 4) P(x, y+j, o.w, 1, "#ffe6a0");
-    P(x+o.w/2-3, y+o.h, 6, 4, "#ff3a3a"); P(x+o.w/2-1, y+o.h+4, 2, 2, "#ffffff");
-  }
+function drawHole(){
+  const t = game.mt, rise = Math.min(1, t/1.4), x = game.hx, y = game.hy, R = Math.min(GW, GH)*.2*rise;
+  if (R <= 1) return;
+  ctx.save(); ctx.globalAlpha = Math.min(1, t*1.5);
+  // the dark water around it
+  const dg = ctx.createRadialGradient(x, y, R*.5, x, y, R*4); dg.addColorStop(0, "rgba(10,4,20,.55)"); dg.addColorStop(1, "rgba(10,4,20,0)"); ctx.fillStyle = dg; ctx.fillRect(x - R*4, y - R*4, R*8, R*8);
+  // tentacles curling around it
+  for (let i = 0; i < 8; i++){ const a0 = i*Math.PI/4 + t*.4, len = R*2.4;
+    ctx.strokeStyle = i % 2 ? "#5a2a6a" : "#6a3a7a"; ctx.lineCap = "round";
+    for (let seg = 0; seg < 12; seg++){ const f = seg/12, a = a0 + Math.sin(t*2 + i + f*3)*.6*f, rr = R*.8 + len*f;
+      ctx.lineWidth = Math.max(2, R*.32*(1 - f)); ctx.beginPath(); const a1 = a0 + Math.sin(t*2 + i + (f + 1/12)*3)*.6*(f + 1/12), r1 = R*.8 + len*(f + 1/12);
+      ctx.moveTo(x + Math.cos(a)*rr, y + Math.sin(a)*rr); ctx.lineTo(x + Math.cos(a1)*r1, y + Math.sin(a1)*r1); ctx.stroke(); } }
+  ctx.lineCap = "butt";
+  // its head, two big eyes, and the open mouth in the middle
+  circ(x, y, R*1.05, "#4a1a5a");
+  const eo = Math.min(1, Math.max(0, (t - .6)/.6));
+  for (const sx of [-1, 1]){ ctx.fillStyle = "#f2c14e"; ctx.beginPath(); ctx.ellipse(x + sx*R*.52, y - R*.42, R*.24, Math.max(.5, R*.18*eo), 0, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = "#050505"; ctx.fillRect(x + sx*R*.52 - R*.04, y - R*.42 - R*.16*eo, R*.08, R*.32*eo); }
+  const mg = ctx.createRadialGradient(x, y + R*.15, 0, x, y + R*.15, R*.6); mg.addColorStop(0, "#000"); mg.addColorStop(.8, "#1a0410"); mg.addColorStop(1, "#4a1a5a");
+  ctx.fillStyle = mg; ctx.beginPath(); ctx.arc(x, y + R*.15, R*.6, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#f4f0e6"; for (let i = 0; i < 10; i++){ const a = i*Math.PI/5, ax = x + Math.cos(a)*R*.6, ay = y + R*.15 + Math.sin(a)*R*.6; ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(x + Math.cos(a + .15)*R*.45, y + R*.15 + Math.sin(a + .15)*R*.45); ctx.lineTo(x + Math.cos(a - .15)*R*.45, y + R*.15 + Math.sin(a - .15)*R*.45); ctx.closePath(); ctx.fill(); }
   ctx.restore();
 }
-/* the kraken takes over the screen: darkness and rumbling, a giant eye, tentacles, then the jaws snap shut */
-function drawKraken(mt){
-  const W = GW, H = GH, cx = W*.62, cy = GROUND*.45;
-  const P = (x,y,w,h,c) => { ctx.fillStyle = c; ctx.fillRect(Math.floor(x), Math.floor(y), w, h); };
-  ctx.fillStyle = `rgba(2,6,14,${Math.min(.75, mt*.6)})`; ctx.fillRect(0, 0, W, H);
-  // giant eye
-  if (mt > .5){
-    const open = Math.min(1, (mt - .5)/.7), ew = 70, eh = 30*open;
-    ctx.fillStyle = "#1a2a1a"; ctx.beginPath(); ctx.ellipse(cx, cy, ew + 10, eh + 10, 0, 0, Math.PI*2); ctx.fill();
-    ctx.save(); ctx.shadowColor = "#ffd34d"; ctx.shadowBlur = 20; ctx.fillStyle = "#f2c14e"; ctx.beginPath(); ctx.ellipse(cx, cy, ew, Math.max(1, eh), 0, 0, Math.PI*2); ctx.fill(); ctx.restore();
-    ctx.fillStyle = "#e08a1a"; ctx.beginPath(); ctx.ellipse(cx, cy, ew*.55, Math.max(1, eh*.9), 0, 0, Math.PI*2); ctx.fill();
-    const look = Math.max(-18, -mt*12);
-    ctx.fillStyle = "#050505"; ctx.beginPath(); ctx.ellipse(cx + look, cy, 6, Math.max(1, eh*.85), 0, 0, Math.PI*2); ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,.6)"; ctx.fillRect(cx + look + 10, cy - eh*.5, 5, 4);
-  }
-  // tentacles rising and sweeping toward the fish
-  if (mt > 1.1){
-    const k = Math.min(1, (mt - 1.1)/1.2);
-    [[W*.15, 1.0], [W*.45, .8], [W*.8, 1.2], [W*.98, .7]].forEach(([bx, sc], i) => {
-      const len = 26*k*sc + 4;
-      for (let seg = 0; seg < len; seg++){
-        const f = seg/len, x = bx + Math.sin(mt*3 + seg*.25 + i)*14*f - (bx - PX)*f*k*.55, y = H + 10 - seg*7*sc, r = 17*(1 - f*.65)*sc;
-        ctx.fillStyle = i % 2 ? "#3a5a3a" : "#4a3a5a"; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2); ctx.fill();
-        if (seg % 3 === 0){ ctx.fillStyle = "#c8a0b0"; ctx.beginPath(); ctx.arc(x + r*.5, y, r*.3, 0, Math.PI*2); ctx.fill(); }
-      }
-    });
-  }
-  // jaws snap shut over the whole screen
-  if (mt > 2.5){
-    const k = Math.min(1, (mt - 2.5)/.7), half = H/2*k;
-    ctx.fillStyle = "#1a0a0a"; ctx.fillRect(0, 0, W, half); ctx.fillRect(0, H - half, W, half);
-    ctx.fillStyle = "#3a0a10"; ctx.fillRect(0, half - 6, W, 6); ctx.fillRect(0, H - half, W, 6);
-    for (let x = 0; x < W; x += 22){ ctx.fillStyle = "#f4f0e6";
-      ctx.beginPath(); ctx.moveTo(x, half); ctx.lineTo(x + 22, half); ctx.lineTo(x + 11, half + 26); ctx.fill();
-      ctx.beginPath(); ctx.moveTo(x + 11, H - half); ctx.lineTo(x + 33, H - half); ctx.lineTo(x + 22, H - half - 26); ctx.fill(); }
-  }
-  if (mt > 3.2){ ctx.fillStyle = `rgba(0,0,0,${Math.min(1, (mt - 3.2)*3)})`; ctx.fillRect(0, 0, W, H); }
+
+/* ---------- drawing ---------- */
+const circ = (x, y, r, c) => { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, Math.max(.1, r), 0, Math.PI*2); ctx.fill(); };
+function heartP(x, y, k){ ctx.beginPath(); ctx.moveTo(x, y + k*.9); ctx.bezierCurveTo(x - k*1.4, y, x - k*.8, y - k*.9, x, y - k*.3); ctx.bezierCurveTo(x + k*.8, y - k*.9, x + k*1.4, y, x, y + k*.9); ctx.fill(); }
+function starP(x, y, r, rot){ ctx.beginPath(); for (let i = 0; i < 10; i++){ const a = (rot || 0) + i*Math.PI/5 - Math.PI/2, rr = i % 2 ? r*.45 : r; ctx.lineTo(x + Math.cos(a)*rr, y + Math.sin(a)*rr); } ctx.closePath(); ctx.fill(); }
+const hash = (k, s) => { let h = Math.imul(k | 0, 374761393) + Math.imul(s | 0, 668265263); h = Math.imul(h ^ (h >>> 13), 1274126177); return (h ^ (h >>> 16)) >>> 0; };
+// star layers that drift by at different speeds
+function starField(speed, seg, per, size, alpha){ const sc = game.scroll*speed, k0 = Math.floor(sc/seg) - 1, k1 = Math.floor((sc + GW)/seg) + 1;
+  for (let k = k0; k <= k1; k++) for (let i = 0; i < per*(VT < 0 ? 2 : 1); i++){ const h = hash(k, i + per*31), x = k*seg + (h % seg) - sc, y = VT + (h >>> 9) % Math.max(1, Math.round(GROUND - VT));
+    ctx.fillStyle = h % 5 === 0 ? `rgba(180,210,255,${alpha})` : h % 7 === 0 ? `rgba(255,230,190,${alpha})` : `rgba(255,255,255,${alpha})`; ctx.fillRect(x, y, size, size); } }
+let VT = 0, VB = 340;                          // the top and bottom of what's on screen (bigger than the play box on phones)
+function drawPlanet(p, idx){
+  // water, lighter toward the surface
+  const g = ctx.createLinearGradient(0, Math.min(0, VT), 0, GROUND); g.addColorStop(0, p.sky[0]); g.addColorStop(.55, p.sky[1]); g.addColorStop(1, p.sky[2]);
+  ctx.fillStyle = g; ctx.fillRect(0, VT, GW, VB - VT);
+  // soft beams of sunlight from above (none in the deep zones)
+  const deep = idx >= 6;
+  if (!deep){ for (let i = 0; i < 5; i++){ const x = ((i*170 - game.scroll*.12) % (GW + 200) + GW + 200) % (GW + 200) - 100, sw = Math.sin(game.t*.4 + i)*10;
+    ctx.fillStyle = rgba(p.glow, .07); ctx.beginPath(); ctx.moveTo(x, VT); ctx.lineTo(x + 40, VT); ctx.lineTo(x + 110 + sw, GROUND); ctx.lineTo(x + 40 + sw, GROUND); ctx.closePath(); ctx.fill(); } }
+  // tiny drifting specks, and bubbles rising slowly
+  const sc = game.scroll*.08;
+  for (let i = 0; i < 46; i++){ const h = hash(i, idx + 9), x = ((h % 1000) - sc*(.5 + (h % 7)/10)) % (GW + 40), xx = (x + GW + 40) % (GW + 40) - 20, y = VT + ((h >>> 10) % Math.max(1, Math.round(GROUND - VT)));
+    ctx.fillStyle = deep && i % 3 === 0 ? rgba(p.land, .55) : "rgba(220,245,255,.35)"; ctx.fillRect(xx, y, i % 5 ? 1.5 : 2.5, i % 5 ? 1.5 : 2.5); }
+  ctx.strokeStyle = "rgba(230,250,255,.35)"; ctx.lineWidth = 1;
+  for (let i = 0; i < 14; i++){ const h = hash(i, 51), x = ((h % 997) - game.scroll*.2) % (GW + 30), xx = (x + GW + 30) % (GW + 30) - 15, span = GROUND - VT, y = GROUND - ((game.t*(14 + h % 12) + (h >>> 8) % span) % span);
+    ctx.beginPath(); ctx.arc(xx + Math.sin(game.t*1.5 + i)*4, y, 1.5 + (h % 3), 0, Math.PI*2); ctx.stroke(); }
+  // a far-off reef wall and things growing on it
+  ctx.fillStyle = rgba(p.sky[2], .75); ctx.beginPath(); ctx.moveTo(0, GROUND);
+  for (let x = 0; x <= GW + 10; x += 10) ctx.lineTo(x, GROUND - 46 - Math.sin((x + game.scroll*.15)/60)*14 - Math.sin((x + game.scroll*.15)/23)*6); ctx.lineTo(GW, GROUND); ctx.closePath(); ctx.fill();
+  // the sea floor, with rows of sand ripples that get bigger closer to you
+  const sg = ctx.createLinearGradient(0, GROUND, 0, Math.max(GH, VB)); sg.addColorStop(0, p.surf[0]); sg.addColorStop(1, p.surf[1]); ctx.fillStyle = sg; ctx.fillRect(0, GROUND, GW, Math.max(GH, VB) - GROUND);
+  ctx.fillStyle = "rgba(255,255,255,.18)"; ctx.fillRect(0, GROUND, GW, 2);
+  for (let d = 0; d < 14; d++){ const yb = GROUND + 8 + (d ? 22*Math.pow(d, 1.35) : 0), k = 1 + d*.5, sp = .9 + d*.35; if (yb - 20 > VB) break;
+    const span = 120*k, off = (game.scroll*sp) % span; ctx.fillStyle = rgba(p.surf[1], .55);
+    for (let x = -off - span; x < GW + span; x += span){ const kk = Math.floor((x + game.scroll*sp)/span), h = hash(kk, idx + d*17);
+      ctx.beginPath(); ctx.ellipse(x + (h % 60)*k, yb, (16 + h % 20)*k, 2*k, 0, 0, Math.PI*2); ctx.fill(); } }
+  // coral, kelp and rocks along the floor, sliding by
+  const span = 150, off = (game.scroll*.9) % span;
+  for (let x = -off - span; x < GW + span; x += span){ const kk = Math.floor((x + game.scroll*.9)/span), h = hash(kk, idx + 77), bx = x + (h % 90);
+    if (idx === 1 || h % 3 === 0){ ctx.fillStyle = idx === 1 ? "#2a8a4a" : rgba("#3a9a5a", .9); const H = idx === 1 ? 110 + (h % 90) : 30 + (h % 30);
+      for (let seg = 0; seg < H/6; seg++) ctx.fillRect(bx + Math.sin(game.t*1.3 + seg*.5 + kk)*(seg*.3), GROUND - seg*6 - 6, 4, 6); }
+    else if (h % 3 === 1){ ctx.fillStyle = p.land; ctx.fillRect(bx, GROUND - 18, 5, 18); ctx.fillRect(bx - 7, GROUND - 13, 5, 9); ctx.fillRect(bx - 7, GROUND - 6, 9, 3); ctx.fillRect(bx + 7, GROUND - 24, 5, 14); ctx.fillRect(bx + 3, GROUND - 11, 9, 3); }
+    else { ctx.fillStyle = shade(p.surf[1], -.3); ctx.beginPath(); ctx.ellipse(bx, GROUND + 2, 22, 12, 0, Math.PI, 0); ctx.fill(); }
+    if (idx === 3 && h % 5 === 0){ ctx.fillStyle = "#4a3420"; ctx.beginPath(); ctx.moveTo(bx - 40, GROUND); ctx.lineTo(bx - 30, GROUND - 26); ctx.lineTo(bx + 40, GROUND - 30); ctx.lineTo(bx + 52, GROUND); ctx.closePath(); ctx.fill(); ctx.fillStyle = "#3a2818"; ctx.fillRect(bx, GROUND - 70, 4, 42); }
+    if (idx === 6 && h % 2 === 0){ ctx.fillStyle = "#2a1410"; ctx.beginPath(); ctx.moveTo(bx - 16, GROUND); ctx.lineTo(bx - 5, GROUND - 34); ctx.lineTo(bx + 5, GROUND - 34); ctx.lineTo(bx + 16, GROUND); ctx.fill();
+      for (let q = 0; q < 4; q++){ const ph = (game.t*.4 + q/4 + (h % 10)/10) % 1; ctx.fillStyle = `rgba(60,50,50,${.35*(1 - ph)})`; ctx.beginPath(); ctx.arc(bx + ph*10, GROUND - 38 - ph*80, 4 + ph*10, 0, Math.PI*2); ctx.fill(); } }
+    if (idx === 8 && h % 2 === 0){ circ(bx, GROUND - 30 - (h % 40), 2.5, rgba(p.land, .8)); } }
 }
-function drawCoin(k){
-  const w = Math.max(1, Math.abs(Math.cos(k.spin))*k.r);
-  ctx.fillStyle = "#a8701c"; ctx.beginPath(); ctx.ellipse(k.x, k.y, w+1, k.r+1, 0, 0, Math.PI*2); ctx.fill();
-  ctx.fillStyle = "#f2b33d"; ctx.beginPath(); ctx.ellipse(k.x, k.y, w, k.r, 0, 0, Math.PI*2); ctx.fill();
-  if (w > 3){ ctx.fillStyle = "#fff3b0"; ctx.fillRect(k.x-1, k.y-k.r+2, 2, 3); }
+function drawBG(){
+  const now = planetFor(game.round);
+  if (game.fadeT < 2 && game.round > 1){ const prev = planetFor(game.round - 1); drawPlanet(prev, prev.style); ctx.globalAlpha = game.fadeT/2; drawPlanet(now, now.style); ctx.globalAlpha = 1; }
+  else drawPlanet(now, now.style);
 }
-// kind "num" uses the blocky arcade font for scores and counters; everything else keeps Pixelify Sans
-function textFont(size){ return UFONT(size + 2); }
+function drawRock(o){
+  ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(o.rot);
+  const n = o.shape.length, pts = o.shape.map((m, i) => [Math.cos(i/n*Math.PI*2)*o.r*m, Math.sin(i/n*Math.PI*2)*o.r*m]);
+  ctx.fillStyle = "rgba(0,0,0,.25)"; ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x + 2, y + 3) : ctx.moveTo(x + 2, y + 3)); ctx.fill();
+  ctx.fillStyle = o.col; ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = shade(o.col, -.35); ctx.lineWidth = 1.5; ctx.stroke();
+  ctx.fillStyle = shade(o.col, .2); ctx.beginPath(); ctx.ellipse(-o.r*.25, -o.r*.3, o.r*.35, o.r*.22, -.4, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "rgba(70,150,90,.55)"; [[.3, .2, .22], [-.25, .35, .15], [.1, -.1, .12]].forEach(([a, b, r]) => { ctx.beginPath(); ctx.arc(a*o.r, b*o.r, r*o.r, 0, Math.PI*2); ctx.fill(); });
+  ctx.fillStyle = "#e8e0d0"; [[-.4, -.5], [.45, -.3], [-.1, .55]].forEach(([a, b]) => { ctx.beginPath(); ctx.arc(a*o.r, b*o.r, Math.max(1.2, o.r*.08), 0, Math.PI*2); ctx.fill(); });
+  ctx.fillStyle = "rgba(60,170,90,.85)"; ctx.fillRect(-o.r*.15, -o.r*.95, 2.5, o.r*.35); ctx.fillRect(o.r*.1, -o.r*.9, 2.5, o.r*.25);
+  ctx.restore();
+}
+function drawMeteor(o){   // a jellyfish
+  const a = Math.atan2(o.vy, o.vx - (game.speed || 0)), w = Math.sin(game.t*6 + o.x*.05);
+  ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(a + Math.PI/2*0 - Math.PI);
+  ctx.strokeStyle = "rgba(255,170,230,.75)"; ctx.lineWidth = 1.6;
+  for (let i = -2; i <= 2; i++){ ctx.beginPath(); ctx.moveTo(-2, i*3); for (let k = 1; k <= 6; k++) ctx.lineTo(-2 - k*5, i*3 + Math.sin(game.t*8 + k + i)*2.5); ctx.stroke(); }
+  ctx.restore();
+  ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(a - Math.PI/2 + Math.PI);
+  ctx.fillStyle = "rgba(255,140,220,.85)"; ctx.beginPath(); ctx.ellipse(0, 0, o.r + 2 + w, o.r*.9, 0, Math.PI, 0); ctx.lineTo(o.r + 2, 2); ctx.lineTo(-o.r - 2, 2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = "rgba(255,230,250,.7)"; ctx.beginPath(); ctx.ellipse(-o.r*.3, -o.r*.4, o.r*.35, o.r*.2, -.3, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+function drawComet(o){
+  if (o.warn > 0){ // a steady warning arrow on the right edge
+    ctx.fillStyle = "rgba(191,239,255,.85)"; ctx.beginPath(); ctx.moveTo(GW - 8, o.y); ctx.lineTo(GW - 24, o.y - 9); ctx.lineTo(GW - 24, o.y + 9); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#0a1a2a"; ctx.fillRect(GW - 19, o.y - 5, 3, 7); ctx.fillRect(GW - 19, o.y + 3, 3, 2); return; }
+  // a shark, nose first, with streaks of water behind it
+  ctx.strokeStyle = "rgba(220,245,255,.35)"; ctx.lineWidth = 1.5; for (let i = -1; i <= 1; i++){ ctx.beginPath(); ctx.moveTo(o.x + 30, o.y + i*7); ctx.lineTo(o.x + 80, o.y + i*7); ctx.stroke(); }
+  ctx.save(); ctx.translate(o.x, o.y); const tw = Math.sin(game.t*20)*3;
+  ctx.fillStyle = "#6a7a8a"; ctx.beginPath(); ctx.moveTo(-14, 0); ctx.quadraticCurveTo(-6, -9, 12, -6); ctx.lineTo(24, -2); ctx.lineTo(32, -10 + tw); ctx.lineTo(29, 0); ctx.lineTo(32, 9 + tw); ctx.lineTo(24, 3); ctx.lineTo(12, 7); ctx.quadraticCurveTo(-6, 8, -14, 0); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(2, -7); ctx.lineTo(8, -16); ctx.lineTo(12, -6); ctx.fill();
+  ctx.fillStyle = "#dfe6ee"; ctx.beginPath(); ctx.moveTo(-12, 1); ctx.quadraticCurveTo(0, 7, 14, 5); ctx.lineTo(14, 2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = "#0c1420"; ctx.fillRect(-8, -3, 2.2, 2.2); ctx.fillStyle = "#ffffff"; ctx.fillRect(-10, 2, 6, 1.4);
+  ctx.restore();
+}
+function drawJunk(o){   // an old barrel from a shipwreck
+  ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(o.rot);
+  ctx.fillStyle = "#7a4a22"; ctx.beginPath(); ctx.roundRect(-10, -13, 20, 26, 5); ctx.fill();
+  ctx.fillStyle = "#5a3416"; ctx.fillRect(-10, -3, 20, 2); ctx.fillRect(-10, 3, 20, 2);
+  ctx.fillStyle = "#8a8e98"; ctx.fillRect(-10, -10, 20, 2.5); ctx.fillRect(-10, 8, 20, 2.5);
+  ctx.fillStyle = "rgba(60,170,90,.85)"; ctx.fillRect(-6, -15, 2, 4); ctx.fillRect(3, -16, 2, 5);
+  ctx.restore();
+}
+// an octopus bobbing along, waving its arms
+function drawAlien(o){
+  ctx.save(); ctx.translate(o.x, o.y); const w = Math.sin(o.ph*2);
+  const C = "#e85a8a", D = "#b83a6a";
+  ctx.strokeStyle = C; ctx.lineWidth = 3; ctx.lineCap = "round";
+  for (let i = 0; i < 5; i++){ const bx = -8 + i*4; ctx.beginPath(); ctx.moveTo(bx, 4); ctx.quadraticCurveTo(bx + w*4*(i % 2 ? 1 : -1), 12, bx + (i - 2)*3, 19); ctx.stroke(); }
+  ctx.lineCap = "butt";
+  ctx.fillStyle = C; ctx.beginPath(); ctx.ellipse(0, -3, 11, 10, 0, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = D; circ(-4, -8, 1.6, D); circ(5, -9, 1.2, D);
+  ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.ellipse(-4, -1, 3, 3.4, 0, 0, Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.ellipse(4, -1, 3, 3.4, 0, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#1c1c22"; ctx.fillRect(-4.5, -1, 2, 2.4); ctx.fillRect(3.5, -1, 2, 2.4);
+  ctx.restore();
+}
+// a scuba diver drifting and slowly turning
+function drawSpaceman(o){
+  ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(o.rot);
+  ctx.fillStyle = "#ffd34d"; ctx.beginPath(); ctx.roundRect(-10, -7, 6, 14, 3); ctx.fill();                          // air tank
+  ctx.fillStyle = "#1c2a3e"; ctx.beginPath(); ctx.roundRect(-5, -4, 11, 13, 3); ctx.fill();                          // wetsuit
+  ctx.fillStyle = "#2ab8d8"; ctx.fillRect(-5, 1, 11, 2);
+  ctx.strokeStyle = "#1c2a3e"; ctx.lineWidth = 3.4; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(5, -1); ctx.lineTo(11, -6); ctx.moveTo(-3, 0); ctx.lineTo(-8, 5);
+  ctx.moveTo(-2, 9); ctx.lineTo(-4, 16); ctx.moveTo(4, 9); ctx.lineTo(6, 16); ctx.stroke(); ctx.lineCap = "butt";
+  ctx.fillStyle = "#ff8a2a"; ctx.fillRect(-7, 15, 6, 3); ctx.fillRect(3, 15, 6, 3);                                // flippers
+  circ(1, -9, 5.5, "#f0c8a0"); ctx.fillStyle = "rgba(140,220,255,.85)"; ctx.fillRect(-2, -12, 8, 4); ctx.fillStyle = "#1c2a3e"; ctx.fillRect(-3, -13, 10, 1.4);   // face and mask
+  ctx.restore();
+  for (let i = 0; i < 3; i++){ const ph = (game.t*.8 + i/3) % 1; ctx.strokeStyle = `rgba(230,250,255,${.6*(1 - ph)})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(o.x + 2, o.y - 14 - ph*30, 1.5 + ph*2, 0, Math.PI*2); ctx.stroke(); }
+}
+// a little yellow submarine zooming by
+function drawMonkey(o){
+  ctx.save(); ctx.translate(o.x, o.y);
+  ctx.fillStyle = "#ffcf2a"; ctx.beginPath(); ctx.ellipse(0, 0, 18, 9, 0, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#e0a810"; ctx.fillRect(-4, -14, 9, 6); ctx.fillRect(0, -18, 2, 5); ctx.fillRect(0, -18, 6, 2);   // tower and periscope
+  ctx.fillStyle = "#e0a810"; ctx.beginPath(); ctx.moveTo(16, -2); ctx.lineTo(24, -7); ctx.lineTo(24, 7); ctx.lineTo(16, 2); ctx.closePath(); ctx.fill();
+  for (const px of [-8, 0, 8]){ circ(px, 0, 3, "#2a5a8a"); circ(px - 1, -1, 1, "#a8e0ff"); }
+  ctx.fillStyle = "#3a3e48"; const sp = Math.sin(game.t*40)*5; ctx.fillRect(24, -Math.abs(sp), 2, Math.abs(sp)*2);
+  ctx.restore();
+}
+function drawCoin(k){ const w = Math.max(1, Math.abs(Math.cos(k.spin || 0))*7); ctx.fillStyle = "#8a5a10"; ctx.beginPath(); ctx.ellipse(k.x, k.y, w + 1, 8, 0, 0, Math.PI*2); ctx.fill(); ctx.fillStyle = "#ffc83a"; ctx.beginPath(); ctx.ellipse(k.x, k.y, w, 7, 0, 0, Math.PI*2); ctx.fill(); if (w > 3){ ctx.fillStyle = "#fff3b0"; starP(k.x, k.y, 3.2, 0); } }
+function textFont(size, kind){ return kind === "num" ? `${size}px "Press Start 2P", "Pixelify Sans", monospace` : `700 ${size}px "Pixelify Sans", "Courier New", monospace`; }
 function text(str, x, y, size, col, align, kind){
-  ctx.font = textFont(size, kind); ctx.textAlign = align||"left";
-  ctx.lineJoin = "round"; ctx.lineWidth = kind === "num" ? 3 : 3.5; ctx.strokeStyle = "rgba(10,9,28,.9)"; ctx.strokeText(str, x, y);
+  ctx.font = textFont(size, kind); ctx.textAlign = align || "left";
+  ctx.lineJoin = "round"; ctx.lineWidth = kind === "num" ? 3 : 3.5; ctx.strokeStyle = "rgba(8,8,16,.9)"; ctx.strokeText(str, x, y);
   ctx.fillStyle = col; ctx.fillText(str, x, y);
 }
-function draw(dt){
-  ctx.setTransform(SCALE,0,0,SCALE,0,0);
-  if (game.state === "monster"){ const q = Math.min(4, game.mt*1.6) * (game.mt > 3.1 ? 2 : 1); ctx.translate((Math.random() - .5)*q, (Math.random() - .5)*q); }
+function draw(){
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  if (OFX){ ctx.fillStyle = "#05060e"; ctx.fillRect(0, 0, cv.width, cv.height); }
+  ctx.setTransform(SCALE, 0, 0, SCALE, OFX, OFY);
+  VT = -OFY/SCALE; VB = (cv.height - OFY)/SCALE;
+  ctx.save();
   drawBG();
-  game.obs.forEach(drawObs);
+  if (game.state === "monster") drawHole();
+  drawWorm();
   game.coins.forEach(drawCoin);
-  drawWhirl();
+  for (const o of game.obs){ if (o.k === "rock") drawRock(o); else if (o.k === "meteor") drawMeteor(o); else if (o.k === "comet") drawComet(o); else if (o.k === "alien") drawAlien(o); else if (o.k === "spaceman") drawSpaceman(o); else if (o.k === "monkey") drawMonkey(o); else drawJunk(o); }
+  drawTrail();
   const c = curCar();
-  const pose = game.state !== "running" ? "idle" : (!game.onGround ? "jump" : "run");
-  drawSmoke();
-  ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.fillRect(PX-30, GROUND, 60, 3);
-  if (game.state !== "revive" && game.state !== "warp"){
-    if (game.boost){ const L2 = 30 + Math.sin(game.t*30)*3, fy = GROUND + game.py - 12, gb = ctx.createLinearGradient(PX - 26, 0, PX - 26 - L2, 0);
-      gb.addColorStop(0, "rgba(255,255,255,.9)"); gb.addColorStop(.5, "rgba(150,240,255,.6)"); gb.addColorStop(1, "rgba(150,240,255,0)");
-      ctx.fillStyle = gb; ctx.beginPath(); ctx.moveTo(PX - 26, fy - 7); ctx.lineTo(PX - 26 - L2, fy); ctx.lineTo(PX - 26, fy + 7); ctx.closePath(); ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1; for (let i = 0; i < 5; i++){ const yy = fy - 28 + i*14, xx = PX - 40 - ((game.t*700 + i*57) % 200); ctx.beginPath(); ctx.moveTo(xx, yy); ctx.lineTo(xx - 34, yy); ctx.stroke(); } }
-    drawChar(ctx, c, {x:PX, y:GROUND+game.py, s:2.65, t:game.t, pose});
-    if (game.zap > 0){ ctx.fillStyle = "#7ff3ff"; ctx.fillRect(PX + 18, GROUND + game.py - 30, 2, 8); ctx.fillStyle = "#ffffff"; ctx.fillRect(PX + 16, GROUND + game.py - 33, 6, 4); }   // a little antenna, like an anglerfish
-    if (game.inv > 0){ ctx.strokeStyle = "rgba(180,240,255,.8)"; ctx.lineWidth = 2; ctx.fillStyle = "rgba(150,230,255,.15)"; ctx.beginPath(); ctx.arc(PX, GROUND + game.py - 12, 30, 0, Math.PI*2); ctx.fill(); ctx.stroke(); }
+  if (!(game.state === "over" && (game.crashed || game.monsterEnd)) && game.state !== "revive" && game.state !== "warp"){
+    const hole = game.state === "monster", x = hole ? game.shipX : PX, y = hole ? game.shipY : game.py, s = hole ? game.shipScale : 1;
+    // a kickflip: the car hops up and rolls all the way over along its length
+    const fp = game.flip && !hole ? game.flip.t/FLIP_DUR : 0, hop = fp ? Math.sin(fp*Math.PI)*16 : 0, roll = fp ? Math.cos(fp*Math.PI*2) : 1;
+    ctx.save(); ctx.translate(x, y - hop); ctx.rotate(game.tilt); ctx.scale(SS*s, SS*s*(fp ? (Math.abs(roll) < .12 ? .12*Math.sign(roll || 1) : roll) : 1)); paintShip(ctx, c, {}); ctx.restore();
+    // a shield bubble while the Extra Life or a warp keeps you safe; a fire cone while boosting
+    if (game.inv > 0 && !hole){ ctx.strokeStyle = "rgba(150,230,255,.75)"; ctx.lineWidth = 2; ctx.fillStyle = "rgba(127,215,255,.14)"; ctx.beginPath(); ctx.arc(x, y, 30, 0, Math.PI*2); ctx.fill(); ctx.stroke(); }
+    if (game.boost && !hole){ ctx.save(); ctx.translate(x, y); ctx.rotate(game.tilt); const L2 = 38 + Math.sin(game.t*30)*4;
+      const gb = ctx.createLinearGradient(-20, 0, -20 - L2, 0); gb.addColorStop(0, "rgba(255,255,255,.95)"); gb.addColorStop(.4, "rgba(150,240,255,.7)"); gb.addColorStop(1, "rgba(150,240,255,0)");
+      ctx.fillStyle = gb; ctx.beginPath(); ctx.moveTo(-20, -9); ctx.lineTo(-20 - L2, 0); ctx.lineTo(-20, 9); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.2; for (let i = 0; i < 5; i++){ const yy = -24 + i*12, xx = -40 - ((game.t*900 + i*57) % 220); ctx.beginPath(); ctx.moveTo(xx, yy); ctx.lineTo(xx - 40, yy); ctx.stroke(); }
+      ctx.restore(); }
+    const zapOn = game.zap > 0 && !hole;
+    if ((game.laser || zapOn) && !hole){ const L = game.laser || {t:.2}, up = game.laser && !zapOn ? Math.min(1, L.t/.08)*Math.min(1, (.45 - L.t)/.1) : 1;
+      ctx.save(); ctx.translate(x, y); ctx.rotate(game.tilt); ctx.scale(SS, SS);
+      ctx.fillStyle = "#2a3a4a"; ctx.fillRect(14, -6 - 5*up, 1.6, 5*up + 2); circ(15, -7 - 5*up, 2.4, "#7ff3ff");   // a little glowing antenna, like an anglerfish
+      ctx.restore();
+      if (game.laser && L.t < .22){ const c2 = Math.cos(game.tilt), s2 = Math.sin(game.tilt), hx = x + (21*c2 - (-4 - 5*up)*s2)*SS, hy = y + (21*s2 + (-4 - 5*up)*c2)*SS, a2 = 1 - L.t/.22;
+        ctx.globalAlpha = a2; ctx.strokeStyle = "#2ad8ff"; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(L.x, L.y); ctx.stroke();
+        ctx.strokeStyle = "#e8fbff"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(L.x, L.y); ctx.stroke(); ctx.globalAlpha = 1; } }
   }
-  if (game.zapFx){ const z = game.zapFx, sx = PX + 19, sy = GROUND + game.py - 31; ctx.strokeStyle = "rgba(127,243,255,.9)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(sx, sy);
-    for (let i = 1; i <= 6; i++){ const k = i/6; ctx.lineTo(sx + (z.x - sx)*k + (i < 6 ? (Math.random() - .5)*10 : 0), sy + (z.y - sy)*k + (i < 6 ? (Math.random() - .5)*10 : 0)); } ctx.stroke(); }
-  game.parts.forEach(p=>{ ctx.globalAlpha = Math.max(0,Math.min(1,p.life*2)); if (p.txt) text(p.txt, p.x, p.y, 12, p.col, "center"); else { ctx.fillStyle=p.col; const s=p.sz||3; ctx.fillRect(p.x,p.y,s,s);} });
-  ctx.globalAlpha = 1;
-  if (game.flash > 0){ ctx.fillStyle = `rgba(255,255,255,${game.flash})`; ctx.fillRect(0,0,GW,GH); }
-  if (game.state === "monster") drawKraken(game.mt);
   if (game.state === "warp") drawWarp();
-  uiFrame(dt);
+  game.parts.forEach(p => { ctx.globalAlpha = Math.max(0, Math.min(1, p.life*2)); ctx.fillStyle = p.col; ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3); }); ctx.globalAlpha = 1;
+  game.texts.forEach(x => { ctx.globalAlpha = Math.max(0, Math.min(1, (1.1 - x.t)*3)); text(x.txt, x.x, x.y - x.t*22, 11, x.col, "center"); }); ctx.globalAlpha = 1;
+  ctx.restore();
+  uiFrame();
 }
 /* ---------- what the shared app interface needs to know about Fishy Swimmer 2.0 ---------- */
 const UI_CFG = {
-  title: [["FISHY 2.0", "#ffa25f", "#6a2a10"], ["SWIMMER", "#3fd0c9", "#0a3a4a"]],
-  unit: "M", accent: "#3fd0c9", accentEdge: "rgba(63,208,201,.45)", defaultName: "Swimmer", monsterState: "monster",
-  collectionTitle: "FISH TANK", collectionShort: "FISH", lockedMsg: "Open crates to find this fish",
-  cardCol: "#142a48", cardEdge: "#24507a",
+  title: [["FISHY 2.0", "#ffd34d", "#7a4a08"], ["SWIMMER", "#7ff3ff", "#0a4a6a"]],
+  unit: "M", accent: "#7ff3ff", accentEdge: "rgba(127,243,255,.45)", defaultName: "Swimmer", monsterState: "monster",
+  collectionTitle: "FISH TANK", collectionShort: "FISH", crateWord: "chest", lockedMsg: "Open chests to find this fish",
   score: () => Math.floor(game.dist),
-  place: () => ({name: zoneFor(game.round).name.toUpperCase(), progress: game.roundDist/ROUND_LEN(game.round)}),
+  place: () => ({name: planetFor(game.round).name.toUpperCase(), progress: game.roundDist/ROUND_LEN(game.round)}),
   bannerPre: t => t.startsWith("Now entering") ? "NOW ENTERING" : t.startsWith("Whirled") ? "WHIRLPOOL" : t.startsWith("A whirlpool") ? "LOOK!" : "",
   bannerMain: t => t.replace("Now entering: ", "").replace("A whirlpool is opening!", "WHIRLPOOL AHEAD").toUpperCase(),
   extra: (W, H) => uiExtras(W, H),
-  hint: () => isPhone() ? "Tap to swim up · hold to go higher" : "Press Space or click to swim up",
-  play: () => jumpPress(), pause: () => { game.paused = true; Sound.duck(true); }, resume: () => { game.paused = false; Sound.duck(false); },
+  hint: () => holdShip() ? (isPhone() ? "Hold to swim up · let go to sink" : "Hold the mouse or Space to swim up") : (isPhone() ? "Tap to swim up" : "Click or press Space to swim up"),
+  play: () => go(), pause: () => { game.paused = true; }, resume: () => { game.paused = false; },
   toReady: () => { resetRun(); game.state = "ready"; },
-  icon: c => { c.beginPath(); c.ellipse(1, 0, 10, 7, 0, 0, Math.PI*2); c.fill(); c.beginPath(); c.moveTo(-7, 0); c.lineTo(-14, -7); c.lineTo(-14, 7); c.closePath(); c.fill();
-    c.fillStyle = "#1a2a48"; c.fillRect(5, -3, 3, 3); },
+  icon: c => { c.beginPath(); c.ellipse(2, 0, 9, 6, 0, 0, Math.PI*2); c.fill(); c.beginPath(); c.moveTo(-6, 0); c.lineTo(-13, -6); c.lineTo(-13, 6); c.closePath(); c.fill(); c.fillStyle = "#06182a"; c.fillRect(5, -2, 2.5, 2.5); },
   icons: { shop: c => iconShop(c), life: c => iconLife(c), zap: c => iconZap(c), boost: c => iconBoost(c) },
-  // drawChar puts the fish's belly at (x, y), so drop it a little below the middle of the space
   preview: (c, f, x, y, size, sil, t) => drawChar(c, f, {x, y: y + size*.2, s: size/24, t: t || 0, sil, glow:false}),
-  perk: c => TIERS[c.tier].name + (themeFor(c) ? " · " + themeFor(c).world : ""),
+  perk: f => TIERS[f.tier].name + (themeFor(f) ? " · " + themeFor(f).world : ""),
   crates: () => [
-    {kind:"basic", name:"BASIC CRATE", cost:CHESTS.basic.cost, odds:`Mythic ${CHESTS.basic.w[5]}%  ·  Legendary ${CHESTS.basic.w[4]}%`, open: () => openCase("basic")},
-    {kind:"epic",  name:"EPIC CRATE",  cost:CHESTS.epic.cost,  odds:`Mythic ${CHESTS.epic.w[5]}%  ·  Legendary ${CHESTS.epic.w[4]}%`, open: () => openCase("epic")}],
-  drawCrate: (c, kind, t) => drawChest(false, t, c),
+    {kind:"basic", name:"BASIC CHEST", cost:CHESTS.basic.cost, odds:"Legendary 3%  ·  Mythic 3%", open: () => openCase("basic")},
+    {kind:"epic",  name:"EPIC CHEST",  cost:CHESTS.epic.cost,  odds:"Legendary 9%  ·  Mythic 7%", open: () => openCase("epic")}],
+  drawCrate: (c, kind, t) => drawChest(false, t, c, kind === "epic"),
   nav: () => [[UI_CFG.collectionShort, "#3a8ae8", "collection", () => goScreen("ships")],
-    ["CRATES", "#9a5ae0", "crate", () => goScreen("crates"), canCrate()],
+    ["CHESTS", "#9a5ae0", "crate", () => goScreen("crates"), canCrate()],
     ["SHOP", "#e8503a", "shop", () => goScreen("shop")],
     ["SCORES", "#e8a02a", "trophy", () => goScreen("scores")],
     [signedIn() ? "ME" : "SAVE", "#2ab8a8", "person", () => openSheet(signedIn() ? null : "signup"), !signedIn()]],
   overNav: () => [["#5a6ab8", "home", () => goScreen("home")], ["#9a5ae0", "crate", () => goScreen("crates"), canCrate()], ["#e8503a", "shop", () => goScreen("shop")]],
   screens: { case: () => uiCase(), shop: () => uiShop() },
-  records: () => [["Best swim", fmt(state.best) + " m"], ["Furthest zone", state.bestRound ? zoneFor(state.bestRound).name : "—"], ["Swims", fmt(state.runs)], ["Coins earned", fmt(state.lifetimeCoins)], ["Crates opened", fmt(state.chests)]],
-  overInfo: () => ({title: game.monsterEnd ? "THE KRAKEN!" : "OUCH!", col: game.monsterEnd ? "#ff4a4a" : "#ffa25f", deep: game.monsterEnd ? "#4a0a0a" : "#6a2a10", dark: game.monsterEnd,
-    place: game.monsterEnd ? "SWALLOWED WHOLE" : zoneFor(game.round).name.toUpperCase()}),
+  records: () => [["Best swim", fmt(state.best) + " m"], ["Furthest zone", state.bestRound ? planetFor(state.bestRound).name : "—"], ["Swims", fmt(state.runs)], ["Coins earned", fmt(state.lifetimeCoins)], ["Chests opened", fmt(state.chests)]],
+  overInfo: () => ({title: game.monsterEnd ? "THE KRAKEN!" : "OUCH!", col: game.monsterEnd ? "#c89aff" : "#ff6a4a", deep: game.monsterEnd ? "#3a1a6a" : "#6a1a0a", dark: game.monsterEnd, place: planetFor(game.round).name.toUpperCase()}),
 };
-const rgba = (hex, a) => { const [r, g, b] = hexRGB(hex); return `rgba(${r},${g},${b},${a})`; };
+
 /* ---------- icons ---------- */
 function iconLife(c){ c.save(); c.scale(1.1, 1.1); c.beginPath(); c.moveTo(0, 8); c.bezierCurveTo(-12, 0, -9, -10, 0, -4); c.bezierCurveTo(9, -10, 12, 0, 0, 8); c.fill(); c.fillStyle = "#ff3a6a"; c.fillRect(-1.5, -4, 3, 8); c.fillRect(-4, -1.5, 8, 3); c.restore(); }
 function iconZap(c){ c.beginPath(); c.moveTo(3, -11); c.lineTo(-7, 2); c.lineTo(-1, 2); c.lineTo(-4, 11); c.lineTo(7, -3); c.lineTo(1, -3); c.closePath(); c.fill(); }
@@ -1954,9 +1980,9 @@ function iconShop(c){ c.fillRect(-9, -3, 18, 12); c.beginPath(); c.moveTo(-11, -
 
 /* ---------- the Shop: power-ups bought with coins ---------- */
 const ITEMS = [
-  {key:"life",  name:"EXTRA LIFE", cost:1000, col:"#e83a6a", icon:"life",  desc:"When you crash, keep swimming instead", how:"Offered right after you crash"},
-  {key:"zap",   name:"ZAPPER",     cost:750,  col:"#e8503a", icon:"zap",   desc:"A shock zaps your next 3 obstacles", how:"Tap ZAP during a swim (or press Z)"},
-  {key:"boost", name:"BOOSTER",    cost:500,  col:"#e8a02a", icon:"boost", desc:"Turbo-swim 500 m through anything", how:"Tap BOOST during a swim (or press B)"},
+  {key:"life",  name:"EXTRA LIFE", cost:1000, col:"#e83a6a", icon:"life",  desc:"When you get hit, keep swimming instead", how:"Offered right after you get hit"},
+  {key:"zap",   name:"ZAPPER",     cost:750,  col:"#e8503a", icon:"zap",   desc:"A shock zaps your next 3 close calls", how:"Tap ZAP during a swim (or press Z)"},
+  {key:"boost", name:"BOOSTER",    cost:500,  col:"#e8a02a", icon:"boost", desc:"Jets you 500 m, smashing all in its way", how:"Tap BOOST during a swim (or press B)"},
 ];
 const MAX_ITEMS = 9;
 function buyItem(it){
@@ -1988,12 +2014,12 @@ function uiShop(){
   });
 }
 
-/* ---------- crate opening like a case spinner: a strip of ships races past and slows to a stop on your prize ---------- */
+/* ---------- crate opening like a case spinner: a strip of fish races past and slows to a stop on your prize ---------- */
 const CASE = {on:false};
 const CASE_CW = 92, CASE_GAP = 6, CASE_WIN = 46, CASE_DUR = 6.4;
 function openCase(kind){
   kind = kind === "epic" ? "epic" : "basic"; const cost = CHESTS[kind].cost;
-  if (TEST.on){ toast("Crates are paused in test mode"); return; }
+  if (TEST.on){ toast("Chests are paused in test mode"); return; }
   if (state.coins < cost){ toast(fmt(cost - state.coins) + " more coins needed"); return; }
   Sound.wake();
   state.coins -= cost; state.chests++;
@@ -2013,14 +2039,14 @@ function caseDone(){
 function uiCase(){
   const W = UI.W, H = UI.H, k = CASE, pitch = CASE_CW + CASE_GAP, CH = W >= 560 ? 116 : 124, y0 = W >= 560 ? 92 : 104;
   uiDim(.82);
-  uiText(k.kind === "epic" ? "EPIC CRATE" : "BASIC CRATE", W/2, 52, 26, k.kind === "epic" ? "#d8a8ff" : "#ffffff", "center");
+  uiText(k.kind === "epic" ? "EPIC CHEST" : "BASIC CHEST", W/2, 52, 26, k.kind === "epic" ? "#d8a8ff" : "#ffffff", "center");
   uiCoins(W - 12, 12);
   // where the strip is
   const p = Math.min(1, (UI.t - k.t0)/CASE_DUR);
   k.off = k.final*(1 - Math.pow(1 - p, 3.4));
   if (p >= 1) caseDone();
   const idx = Math.floor((k.off + CASE_CW/2)/pitch); if (idx !== k.lastIdx){ if (k.lastIdx >= 0 && !k.done) Sound.tick(); k.lastIdx = idx; }
-  // the strip of ships
+  // the strip of fish
   ctx.fillStyle = "rgba(4,6,18,.9)"; ctx.fillRect(0, y0 - 12, W, CH + 24);
   const x0 = W/2 - CASE_CW/2;
   k.reel.forEach((s, i) => {
@@ -2045,7 +2071,7 @@ function uiCase(){
   const c = k.c, t = TIERS[c.tier], wide = W >= 560, cw = wide ? Math.min(580, W - 24) : Math.min(340, W - 24), cx = W/2 - cw/2, cy = y0 + CH + 28, chh = wide ? 150 : 216;
   uiCard(cx, cy, cw, chh);
   const tx = wide ? cx + cw*.27 : W/2;
-  uiText(t.name.toUpperCase() + (c.tier >= 4 ? "!" : ""), tx, cy + 34, c.tier >= 5 ? 28 : 22, t.color, "center");
+  uiText(c.tier >= 6 ? "ULTRA MYTHIC!!" : t.name.toUpperCase() + (c.tier >= 4 ? "!" : ""), tx, cy + 34, c.tier >= 5 ? 28 : 22, t.color, "center");
   uiText(c.name, tx, cy + 58, 16, "#ffffff", "center");
   uiText(k.isNew ? "NEW FISH!  " + carNo(c) + " of " + CHARS.length : "Already owned · +" + fmt(k.refund) + " coins back", tx, cy + 78, 12, k.isNew ? "#7dff9a" : "#ffd27a", "center", null);
   uiText(UI_CFG.perk(c), tx, cy + 95, 11, "#9aa4cc", "center", null);
@@ -2061,13 +2087,19 @@ function uiCase(){
 
 /* ---------- on top of the game: power-up buttons, meters, and the Extra Life question ---------- */
 function uiExtras(W, H){
+  if (game.state === "monster" && game.mt > .3) uiText("THE KRAKEN!", W/2, H*.26, 36, "#c89aff", "center");
+  // the Starlight GT's kickflip meter: fills back up after each flip
   let my = 94;
+  if (game.state === "running" && hasFlip()){ const ready = game.flipCD <= 0 && !game.flip, k = game.flip ? 0 : 1 - game.flipCD/FLIP_CD, w = 116;
+    uiPill(12, my, w, 26, "rgba(10,14,40,.75)", ready ? "rgba(127,215,255,.7)" : "rgba(127,215,255,.3)");
+    uiRR(18, my + 17, w - 12, 4, 2, "rgba(255,255,255,.15)"); uiRR(18, my + 17, (w - 12)*k, 4, 2, ready ? "#7fd7ff" : "#4a7aa8");
+    uiText(ready ? "KICKFLIP READY" : "KICKFLIP " + Math.ceil(game.flipCD) + "s", 12 + w/2, my + 13, 11, ready ? "#ffffff" : "#9ab0d0", "center", null); my += 32; }
   if (game.state === "running" && (game.zap > 0 || game.boost)){
-    if (game.zap > 0){ uiPill(12, my, 116, 26, "rgba(10,14,40,.75)", "rgba(127,243,255,.6)"); uiText("ZAPPER · " + game.zap + " LEFT", 70, my + 17, 11, "#b0f6ff", "center", null); my += 32; }
+    if (game.zap > 0){ uiPill(12, my, 116, 26, "rgba(10,14,40,.75)", "rgba(255,90,90,.6)"); uiText("ZAPPER · " + game.zap + " LEFT", 70, my + 17, 11, "#ffb0a8", "center", null); my += 32; }
     if (game.boost){ const k = Math.max(0, game.boost.left/BOOST_LEN); uiPill(12, my, 116, 26, "rgba(10,14,40,.75)", "rgba(255,211,77,.7)");
-      uiRR(18, my + 17, 104, 4, 2, "rgba(255,255,255,.15)"); uiRR(18, my + 17, 104*k, 4, 2, "#ffd34d"); uiText("BOOST " + Math.ceil(game.boost.left) + " M", 70, my + 13, 11, "#ffe9a8", "center", null); }
+      uiRR(18, my + 17, 104, 4, 2, "rgba(255,255,255,.15)"); uiRR(18, my + 17, 104*k, 4, 2, "#ffd34d"); uiText("BOOST " + Math.ceil(game.boost.left) + " KM", 70, my + 13, 11, "#ffe9a8", "center", null); }
   }
-  // the power-up buttons, bottom right, while flying
+  // the power-up buttons, bottom right, while swimming
   if (game.state === "running" && !game.paused){
     const bw = 62, bh = 48; let x = W - 12 - bw; const y = H - bh - 22;
     for (const [key, icon, col, fn, label, busy] of [["boost", "boost", "#e8a02a", useBoost, "BOOST", !!game.boost], ["zap", "zap", "#e8503a", useZap, "ZAP", game.zap > 0]]){
@@ -2369,44 +2401,46 @@ function uiKey(e){
 $("sheetClose").addEventListener("click", closeSheet);
 let last = performance.now();
 function frame(now){
-  const dt = Math.max(0, Math.min(.033, (now-last)/1000)); last = now;
-  update(dt); draw(dt);
+  const dt = Math.max(0, Math.min(.033, (now - last)/1000)); last = now;
+  update(dt); draw();
+  { const hide = (game.state === "running" || game.state === "monster" || game.state === "warp") && !game.paused; if (hide !== frame.hid){ frame.hid = hide; cv.style.cursor = hide ? "none" : ""; } }
   drawChest(false, now/1000);
-  if (cfOpen){
-    cfDraw(dt);
-    drawChest(cfRevealed, now/1000, cfChestCtx);
-    cfCharCtx.clearRect(0,0,400,400);
-    if (cfRevealed && lastPull) drawChar(cfCharCtx, lastPull, {x:200, y:300, s:12, t:now/1000});
-  }
-  // animate the current-runner preview and legendary/mythic cards
-  if (Math.floor(now/50) !== frame.k){ frame.k = Math.floor(now/50); renderNow(); cardCanvases.forEach(({ctx:cx,c})=>{ cx.clearRect(0,0,168,96); drawChar(cx,c,{x:84,y:84,s:4.4,t:now/1000}); }); }
+  if (Math.floor(now/120) !== frame.k){ frame.k = Math.floor(now/120); renderNow(); }
   requestAnimationFrame(frame);
 }
 
-/* ---------- input ---------- */
-const typing = () => { const a = document.activeElement; return a && (a.tagName==="INPUT"||a.tagName==="TEXTAREA"||a.tagName==="SELECT"||a.tagName==="BUTTON"); };
+/* ---------- controls: tap, click or Space to fire the thrusters ---------- */
+const keys = {};
+const typing = () => { const a = document.activeElement; return a && (a.tagName === "INPUT" || a.tagName === "TEXTAREA" || a.tagName === "SELECT" || a.tagName === "BUTTON"); };
+function go(){
+  if (cfOpen) return;
+  enterFS();
+  if (game.state === "monster" || game.state === "warp" || game.state === "revive") return;
+  if (game.state !== "running"){ if (game.state === "over" && game.t - game.overT < .8) return; startRun(); return; }
+  if (game.paused){ game.paused = false; return; }
+  flap();
+}
 document.addEventListener("keydown", e => {
   if (cfOpen){ if (e.key === "Escape") closeChest(); return; }
   if (uiKey(e)){ e.preventDefault(); return; }
   if (typing()) return;
-  if (e.code==="Space"||e.code==="ArrowUp"||e.code==="KeyW"){ e.preventDefault(); if (!e.repeat && !(game.state === "over" && game.t - game.overT < .8)) jumpPress(); }
-  else if (e.code==="KeyP" && game.state==="running"){ game.paused = !game.paused; Sound.duck(game.paused); }
+  if (e.code === "Space" || e.code === "ArrowUp" || e.code === "KeyW" || e.code === "Enter"){ e.preventDefault(); if (!e.repeat && !(game.state === "over" && game.t - game.overT < .8)) go(); }
+  else if (e.code === "KeyP" && game.state === "running") game.paused = !game.paused;
   else if (e.code === "KeyZ") useZap();
   else if (e.code === "KeyB") useBoost();
   else if (game.state === "revive" && (e.code === "KeyY" || e.code === "KeyL")) useLife();
   else if (game.state === "revive" && (e.code === "KeyN" || e.key === "Escape")) skipLife();
 });
-document.addEventListener("keyup", e => {
-  if (e.code==="Space"||e.code==="ArrowUp"||e.code==="KeyW") jumpRelease();
-});
-cv.addEventListener("pointerdown", e => { e.preventDefault(); Sound.wake(); if (uiPointerDown(e)) return; jumpPress(); });
-cv.addEventListener("pointerup", jumpRelease);
-cv.addEventListener("pointercancel", jumpRelease);
-cv.addEventListener("pointerleave", jumpRelease);
+cv.addEventListener("pointerdown", e => { e.preventDefault(); Sound.wake(); if (uiPointerDown(e)) return; go(); });
+const letGo = () => { game.holding = false; };
+cv.addEventListener("pointerup", letGo); cv.addEventListener("pointercancel", letGo); cv.addEventListener("pointerleave", letGo);
+document.addEventListener("keyup", e => { if (e.code === "Space" || e.code === "ArrowUp" || e.code === "KeyW" || e.code === "Enter") letGo(); });
+cv.addEventListener("contextmenu", e => e.preventDefault());
 const sideways = matchMedia("(pointer:coarse) and (orientation:landscape) and (max-height:520px)");
 const onSideways = () => { if (sideways.matches && game.state === "running") game.paused = true; };
 sideways.addEventListener ? sideways.addEventListener("change", onSideways) : sideways.addListener(onSideways);
-document.addEventListener("visibilitychange", () => { if (document.hidden && game.state==="running") game.paused = true; });
+document.addEventListener("visibilitychange", () => { if (document.hidden && game.state === "running") game.paused = true; });
+sizeGame(); resetRun(); game.state = "ready";
 
 /* ============================== BOOT ============================== */
 function bootLocal(){
