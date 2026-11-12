@@ -1427,7 +1427,7 @@ const WARP_JUMP = 1000, BOOST_LEN = 500, ZAPS = 3;
 const FLAP = -360, GRAV = 1050, MAXFALL = 500;
 const game = {state:"ready", t:0, speed:0, dist:0, round:1, roundDist:0, runCoins:0, py:180, vy:0, tilt:0, obs:[], coins:[], parts:[], trail:[], texts:[], banner:null, paused:false, scroll:0, nextObs:0, mt:0, fadeT:9};
 function resetRun(){
-  Object.assign(game, {laser:null, flip:null, flipCD:0, g:1, zap:0, boost:null, inv:0, worm:null, warp:null, revives:0, t:0, speed:190, dist:0, round:1, roundDist:0, runCoins:0, py:GH*.42, vy:0, tilt:0, obs:[], coins:[], parts:[], trail:[], texts:[], banner:{text:"Coral Reef", sub: TEST.on ? "Test swim" : "Tap to swim up. Don't sink!", t:2.2},
+  Object.assign(game, {seamAt:null, laser:null, flip:null, flipCD:0, g:1, zap:0, boost:null, inv:0, worm:null, warp:null, revives:0, t:0, speed:190, dist:0, round:1, roundDist:0, runCoins:0, py:GH*.42, vy:0, tilt:0, obs:[], coins:[], parts:[], trail:[], texts:[], banner:{text:"Coral Reef", sub: TEST.on ? "Test swim" : "Tap to swim up. Don't sink!", t:2.2},
     paused:false, nextObs:340, trailT:0, monsterEnd:false, mt:0, fadeT:9, crashed:false, lastWall:0});
 }
 function startRun(){
@@ -1584,7 +1584,7 @@ function updateWarp(dt){
   if (w.t >= 1.3 && !w.jumped){ w.jumped = true;
     game.dist += WARP_JUMP; game.roundDist += WARP_JUMP; let bonus = 0;
     while (game.roundDist >= ROUND_LEN(game.round)){ game.roundDist -= ROUND_LEN(game.round); bonus += 3*game.round; game.round++; }
-    if (bonus) addCoins(bonus); game.g = planetFor(game.round).g; game.fadeT = 9; }
+    if (bonus) addCoins(bonus); game.g = planetFor(game.round).g; game.fadeT = 9; game.seamAt = null; }
   if (w.t >= 2.6){ const p = planetFor(game.round); game.state = "running"; game.warp = null; game.py = GROUND*.42; game.vy = 0; game.tilt = 0; game.inv = 1.5;
     game.nextObs = 260; game.banner = {text:"Whirled +1,000 m!", sub:"Now at " + p.name + " · " + p.sub, t:2.8}; Sound.planet(); Saves.save(); }
 }
@@ -1696,7 +1696,7 @@ function update(dt){
     if (Math.hypot(w.x - PX, w.y - game.py) < w.r){ startWarp(); return; }
     if (w.x < -60) game.worm = null; }
   if (game.roundDist >= ROUND_LEN(game.round)){
-    const bonus = 3*game.round; addCoins(bonus); game.round++; game.roundDist = 0; game.fadeT = 0;
+    const bonus = 3*game.round; addCoins(bonus); game.round++; game.roundDist = 0; game.fadeT = 0; game.seamAt = game.scroll;
     const p = planetFor(game.round);
     game.banner = {text: "Now entering: " + p.name, sub: p.sub + " · +" + bonus + " coins", t:2.8}; Sound.planet(); Saves.save();
   }
@@ -1875,10 +1875,25 @@ function drawWreck(bx, h){
   ctx.restore();
   if (h % 3 === 0){ ctx.fillStyle = "#c89a2a"; ctx.fillRect(bx - 96, y - 10, 18, 10); ctx.fillStyle = "#ffd34d"; ctx.fillRect(bx - 94, y - 13, 4, 3); ctx.fillRect(bx - 88, y - 14, 4, 4); }
 }
+// moving into a new sector: instead of fading, the new sector slides in from the right as you swim,
+// with a wide soft edge, so it feels like you're swimming from one place into the next
+let bgCv = null, bgCx = null;
 function drawBG(){
   const now = planetFor(game.round);
-  if (game.fadeT < 2 && game.round > 1){ const prev = planetFor(game.round - 1); drawPlanet(prev, prev.style); ctx.globalAlpha = game.fadeT/2; drawPlanet(now, now.style); ctx.globalAlpha = 1; }
-  else drawPlanet(now, now.style);
+  const seam = game.seamAt == null ? -1e9 : GW + 200 - (game.scroll - game.seamAt)*.9;
+  if (game.round > 1 && seam > -200){
+    const prev = planetFor(game.round - 1); drawPlanet(prev, prev.style);
+    if (!bgCv || bgCv.width !== cv.width || bgCv.height !== cv.height){ bgCv = document.createElement("canvas"); bgCv.width = cv.width; bgCv.height = cv.height; bgCx = bgCv.getContext("2d"); }
+    const main = ctx, T = main.getTransform();
+    bgCx.setTransform(1, 0, 0, 1, 0, 0); bgCx.clearRect(0, 0, bgCv.width, bgCv.height); bgCx.setTransform(T); bgCx.imageSmoothingEnabled = main.imageSmoothingEnabled;
+    ctx = bgCx;
+    try {
+      drawPlanet(now, now.style);
+      const g = ctx.createLinearGradient(seam - 180, 0, seam + 180, 0); g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(1, "#000");
+      ctx.globalCompositeOperation = "destination-in"; ctx.fillStyle = g; ctx.fillRect(-3000, VT - 20, GW + 6000, VB - VT + 40); ctx.globalCompositeOperation = "source-over";
+    } finally { ctx = main; }
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(bgCv, 0, 0); ctx.restore();
+  } else drawPlanet(now, now.style);
 }
 function drawJellyAt(x, y, r, col, rot){
   ctx.save(); ctx.translate(x, y); ctx.rotate(rot || 0);
