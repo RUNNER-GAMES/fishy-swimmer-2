@@ -1471,14 +1471,14 @@ const dens = () => Math.max(.5, 1 - game.dist*.00012) * (1 + Math.max(0, .35 - g
 function spawnObstacle(){ const n = game.obs.length; spawnBase(); for (let i = n; i < game.obs.length; i++) skinObstacle(game.obs[i]); }
 // which looks each sector uses for each kind of obstacle (how it moves stays the same; only the look changes)
 const SKINS = [
-  /* Coral Reef */       {rock:["coral","coral","rock"], meteor:["jelly"], comet:["shark"], junk:["puffer"], alien:["octopus"], spaceman:["turtle"], monkey:["sub"]},
+  /* Coral Reef */       {rock:["rock"], meteor:["jelly"], comet:["shark"], junk:["puffer"], alien:["octopus"], spaceman:["turtle"], monkey:["sub"]},
   /* Kelp Forest */      {rock:["urchin","urchin","rock"], meteor:["jelly"], comet:["shark"], junk:["urchin"], alien:["octopus"], spaceman:["diver"], monkey:["turtle"]},
-  /* Fishing Grounds */  {rock:["bobber","rock","bobber"], meteor:["hook"], comet:["shark"], junk:["boot","tire"], alien:["net"], spaceman:["lure"], monkey:["sub"]},
+  /* Fishing Grounds */  {rock:["rock"], meteor:["hook"], comet:["shark"], junk:["barrel"], alien:["octopus"], spaceman:["diver"], monkey:["turtle"]},
   /* Pirate Shipwreck */ {rock:["crate","barrel","crate"], meteor:["bottle"], comet:["cannonball"], junk:["barrel","bottle"], alien:["chest"], spaceman:["anchor"], monkey:["diver"]},
   /* Jellyfish Fields */ {rock:["bigjelly"], meteor:["jelly"], comet:["shark"], junk:["bigjelly"], alien:["bigjelly"], spaceman:["jelly"], monkey:["turtle"]},
   /* Midnight Sea */     {rock:["glowrock"], meteor:["glowjelly"], comet:["angler"], junk:["glowjelly"], alien:["lantern"], spaceman:["lantern"], monkey:["sub"]},
   /* Icy Waters */       {rock:["ice"], meteor:["penguin"], comet:["seal"], junk:["ice"], alien:["penguin"], spaceman:["seal"], monkey:["sub"]},
-  /* Volcano Vents */    {rock:["lava"], meteor:["ember"], comet:["shark"], junk:["lava"], alien:["crab"], spaceman:["crab"], monkey:["sub"]},
+  /* Volcano Vents */    {rock:["lava"], meteor:["jelly"], comet:["shark"], junk:["lava"], alien:["crab"], spaceman:["crab"], monkey:["sub"]},
   /* The Abyss */        {rock:["glowrock"], meteor:["glowjelly"], comet:["angler"], junk:["squid"], alien:["squid"], spaceman:["angler2"], monkey:["sub"]},
 ];
 const SKIN_COL = {coral:["#ff7a8a","#ff9a4a","#c86ad8","#ff5a7a"], ice:["#d8f0fa","#c0e4f4","#e8f8ff"], lava:["#3a2420","#2a1a18","#4a2a22"], glowrock:["#1e2438","#262a40","#1a1e30"],
@@ -1488,6 +1488,7 @@ function skinObstacle(o){
   o.skin = sk; const cols = SKIN_COL[sk]; if (cols) o.col = cols[Math.floor(Math.random()*cols.length)];
   if (sk === "jelly" || sk === "glowjelly") o.jcol = (SKIN_COL.jelly)[Math.floor(Math.random()*3)];
   if (sk === "rock" && st === 2) o.col = "#7a7a6a";
+  if (sk === "hook"){ o.vx = 0; o.vy = 0; o.x = GW + 40; o.y = 70 + Math.random()*(GROUND - 150); }   // hooks just hang on their lines
   if (!o.shape && (sk === "ice" || sk === "lava" || sk === "glowrock" || sk === "rock")) o.shape = rockShape(9);
 }
 function spawnBase(){
@@ -1840,11 +1841,10 @@ function drawPlanet(p, idx){
 function drawSurfaceBoat(p){
   // the water's surface along the top, with a fishing boat bobbing on it and its line dropping down
   const sy = 22; ctx.fillStyle = "#a8e4ff"; if (VT < sy) ctx.fillRect(0, VT, GW, sy - VT);
-  ctx.fillStyle = "rgba(255,255,255,.5)"; for (let x = 0; x < GW; x += 24) ctx.fillRect(x + ((game.t*10) % 24), sy - 1, 12, 2);
-  const span = 620, off = (game.scroll*.35) % span;
+  ctx.fillStyle = "rgba(255,255,255,.45)"; ctx.fillRect(0, sy - 1, GW, 2);
+  const span = 1400, off = (game.scroll*.35) % span;
   for (let x = -off; x < GW + span; x += span){ const bx = x + 420, bob = Math.sin(game.t*1.4)*2, by = sy + bob;
-    ctx.strokeStyle = "rgba(240,250,255,.55)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(bx + 46, by - 26); ctx.lineTo(bx + 70, by + 130); ctx.stroke();
-    ctx.fillStyle = "#c8ccd8"; ctx.beginPath(); ctx.moveTo(bx + 70, by + 130); ctx.arc(bx + 66, by + 130, 4, 0, Math.PI); ctx.stroke();
+
     ctx.fillStyle = "#e8e4dc"; ctx.fillRect(bx - 10, by - 28, 26, 18); ctx.fillStyle = "#2a5a8a"; ctx.fillRect(bx - 6, by - 24, 7, 6); ctx.fillRect(bx + 5, by - 24, 7, 6);
     ctx.fillStyle = "#c83a2a"; ctx.beginPath(); ctx.moveTo(bx - 50, by - 10); ctx.lineTo(bx + 54, by - 10); ctx.lineTo(bx + 40, by + 12); ctx.lineTo(bx - 40, by + 12); ctx.closePath(); ctx.fill();
     ctx.fillStyle = "#ffffff"; ctx.fillRect(bx - 48, by - 6, 100, 3);
