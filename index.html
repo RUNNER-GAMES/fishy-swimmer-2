@@ -1175,8 +1175,7 @@ const Sound = (() => {
     // a button press: a soft pop
     click(){ if (!ok()) return; tone(520, .05, {type:"sine", vol:.1, slide:780}); },
     // a coin: a little sparkle
-    coin(){ if (!ok() || !lim("coin", .05)) return; const n = [784, 880, 988, 1047][Math.floor(Math.random()*4)];
-      tone(n, .35, {type:"sine", vol:.035, attack:.015}); tone(n*1.5, .4, {type:"sine", vol:.018, attack:.02, at:.05}); },
+    coin(){ if (!ok() || !lim("coin", .07)) return; tone(620, .07, {type:"sine", vol:.022, slide:760, attack:.012}); },   // a tiny, quiet water "plip"
     // a new planet: a bright rising chime
     planet(){ if (!ok()) return; [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .28, {type:"triangle", vol:.08, at:i*.08})); tone(262, .9, {type:"sine", vol:.08, at:.1}); },
     // a comet coming: two quick soft beeps
@@ -1587,7 +1586,7 @@ function updateWarp(dt){
     while (game.roundDist >= ROUND_LEN(game.round)){ game.roundDist -= ROUND_LEN(game.round); bonus += 3*game.round; game.round++; }
     if (bonus) addCoins(bonus); game.g = planetFor(game.round).g; game.fadeT = 9; game.seamAt = null; }
   if (w.t >= 2.6){ const p = planetFor(game.round); game.state = "running"; game.warp = null; game.py = GROUND*.42; game.vy = 0; game.tilt = 0; game.inv = 1.5;
-    game.nextObs = 260; game.banner = {text:"Whirled +1,000 m!", sub:"Now at " + p.name + " · " + p.sub, t:2.8}; Sound.planet(); Saves.save(); }
+    game.nextObs = 260; game.banner = {text:"Whirled +1,000 m!", sub:"Now at " + p.name, t:1.5}; Sound.planet(); Saves.save(); }
 }
 function drawWorm(){
   const w = game.worm; if (!w) return; const open = Math.min(1, w.t/1), R = w.r*open;
@@ -1699,7 +1698,7 @@ function update(dt){
   if (game.roundDist >= ROUND_LEN(game.round)){
     const bonus = 3*game.round; addCoins(bonus); game.round++; game.roundDist = 0; game.fadeT = 0; game.seamAt = game.scroll;
     const p = planetFor(game.round);
-    game.banner = {text: "Now entering: " + p.name, sub: p.sub + " · +" + bonus + " coins", t:2.8}; Sound.planet(); Saves.save();
+    game.banner = {text: "Now entering: " + p.name, sub: "+" + bonus + " coins", t:1.5}; Sound.planet(); Saves.save();
   }
   // flying
   game.g += (1 - game.g)*Math.min(1, dt*1.5);
@@ -2146,7 +2145,7 @@ function draw(){
 /* ---------- what the shared app interface needs to know about Fishy Swimmer 2.0 ---------- */
 const UI_CFG = {
   title: [["FISHY 2.0", "#ffd34d", "#7a4a08"], ["SWIMMER", "#7ff3ff", "#0a4a6a"]],
-  unit: "M", phoneW: 330, accent: "#7ff3ff", accentEdge: "rgba(127,243,255,.45)", defaultName: "Swimmer", monsterState: "monster",
+  unit: "M", phoneW: 330, bannerY: .17, bannerScale: .7, bannerAlpha: .9, accent: "#7ff3ff", accentEdge: "rgba(127,243,255,.45)", defaultName: "Swimmer", monsterState: "monster",
   collectionTitle: "FISH TANK", collectionShort: "FISH", crateWord: "chest", lockedMsg: "Open chests to find this fish",
   score: () => Math.floor(game.dist),
   place: () => ({name: planetFor(game.round).name.toUpperCase(), progress: game.roundDist/ROUND_LEN(game.round)}),
@@ -2443,13 +2442,13 @@ function uiHUD(){
   if (game.state === "running" && !game.paused) uiButton(W - 54, 52, 42, 36, "#3a4478", "", () => UI_CFG.pause(), "pause");
 }
 function uiBanner(){
-  const b = game.banner, a = Math.min(1, b.t*2), W = UI.W, y = UI.H*.3;
+  const b = game.banner, a = Math.min(UI_CFG.bannerAlpha || 1, b.t*2), W = UI.W, y = UI.H*(UI_CFG.bannerY || .3), k = UI_CFG.bannerScale || 1;
   ctx.globalAlpha = a;
   const pre = UI_CFG.bannerPre && UI_CFG.bannerPre(b.text);
-  if (pre) uiText(pre, W/2, y - 34, 14, UI_CFG.accent, "center");
+  if (pre) uiText(pre, W/2, y - 34*k, Math.round(14*k), UI_CFG.accent, "center");
   const main = UI_CFG.bannerMain ? UI_CFG.bannerMain(b.text) : b.text.toUpperCase();
-  uiText(main, W/2, y, main.length > 18 ? 26 : 34, "#ffd27a", "center");
-  if (b.sub) uiText(b.sub, W/2, y + 28, 14, "#ffffff", "center");
+  uiText(main, W/2, y, Math.round((main.length > 18 ? 26 : 34)*k), "#ffd27a", "center");
+  if (b.sub) uiText(b.sub, W/2, y + 28*k, Math.round(14*Math.max(k, .86)), "#ffffff", "center");
   ctx.globalAlpha = 1;
 }
 // home, collection, crates, scores
