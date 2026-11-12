@@ -1153,10 +1153,10 @@ const Sound = (() => {
   const fx = {
     // launch: a low rumble that rises
     start(){ if (!ok()) return; noise(.7, {vol:.18, lp:400}); tone(60, .8, {type:"sawtooth", vol:.08, slide:180, cutoff:600, attack:.08}); },
-    // each tap of the thrusters: a short soft whoosh
-    thrust(){ if (!ok() || !lim("thrust", .05)) return; const t0 = ac.currentTime, s2 = ac.createBufferSource(); s2.buffer = noiseBuf; const f = ac.createBiquadFilter(); f.type = "bandpass"; f.Q.value = 1.2;
-      f.frequency.setValueAtTime(380, t0); f.frequency.exponentialRampToValueAtTime(900, t0 + .12); const g = ac.createGain(); g.gain.setValueAtTime(.001, t0); g.gain.linearRampToValueAtTime(.16, t0 + .02); g.gain.exponentialRampToValueAtTime(.001, t0 + .2);
-      s2.connect(f); f.connect(g); g.connect(sfxBus); s2.start(t0); s2.stop(t0 + .22); },
+    // each tap to swim: a soft little bubble "bloop"
+    thrust(){ if (!ok() || !lim("thrust", .08)) return; const f0 = 260 + Math.random()*90;
+      tone(f0, .1, {type:"sine", vol:.06, slide:f0*2.4, attack:.01});
+      if (Math.random() < .35) tone(f0*1.6, .07, {type:"sine", vol:.03, slide:f0*3.6, attack:.008, at:.05}); },
     // the crate spinner: a light click each time a ship passes the marker
     tick(){ if (!ok() || !lim("tick", .025)) return; tone(1500, .025, {type:"square", vol:.035, cutoff:3500}); },
     // the spinner stops: a chime that gets grander with rarity
@@ -1175,7 +1175,8 @@ const Sound = (() => {
     // a button press: a soft pop
     click(){ if (!ok()) return; tone(520, .05, {type:"sine", vol:.1, slide:780}); },
     // a coin: a little sparkle
-    coin(){ if (!ok() || !lim("coin", .03)) return; tone(1320 + Math.random()*80, .06, {type:"triangle", vol:.07}); tone(1980, .08, {type:"sine", vol:.05, at:.04}); },
+    coin(){ if (!ok() || !lim("coin", .05)) return; const n = [784, 880, 988, 1047][Math.floor(Math.random()*4)];
+      tone(n, .35, {type:"sine", vol:.035, attack:.015}); tone(n*1.5, .4, {type:"sine", vol:.018, attack:.02, at:.05}); },
     // a new planet: a bright rising chime
     planet(){ if (!ok()) return; [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .28, {type:"triangle", vol:.08, at:i*.08})); tone(262, .9, {type:"sine", vol:.08, at:.1}); },
     // a comet coming: two quick soft beeps
@@ -1381,7 +1382,7 @@ function sizeGame(){
   // the game always fills the whole window, like an app. Tall screens (phones) get a compact play box with the
   // scene stretching above and below it; wide screens get a wide play field.
   const w = cv.parentElement.clientWidth || innerWidth, h = cv.parentElement.clientHeight || innerHeight, dpr = Math.min(window.devicePixelRatio || 1, 2);
-  if (w/h < 1.05){ GW = 340; GH = Math.min(380, Math.max(320, Math.round(GW*h/w))); }
+  if (w/h < 1.05){ GW = 310; GH = Math.min(380, Math.max(320, Math.round(GW*h/w))); }   // phones: zoomed in a little
   else { GH = 360; GW = Math.max(560, Math.min(1000, Math.round(GH*w/h))); }
   cv.style.aspectRatio = "auto";
   const pw = Math.round(w*dpr), ph = Math.round(h*dpr);
@@ -1488,7 +1489,7 @@ function skinObstacle(o){
   o.skin = sk; const cols = SKIN_COL[sk]; if (cols) o.col = cols[Math.floor(Math.random()*cols.length)];
   if (sk === "jelly" || sk === "glowjelly") o.jcol = (SKIN_COL.jelly)[Math.floor(Math.random()*3)];
   if (sk === "rock" && st === 2) o.col = "#7a7a6a";
-  if (sk === "hook"){ o.vx = 0; o.vy = 0; o.x = GW + 40; o.y = 70 + Math.random()*(GROUND - 150); }   // hooks just hang on their lines
+  if (sk === "hook"){ o.r = 13; o.vx = 0; o.vy = 0; o.x = GW + 40; o.y = 70 + Math.random()*(GROUND - 150); }   // hooks just hang on their lines
   if (!o.shape && (sk === "ice" || sk === "lava" || sk === "glowrock" || sk === "rock")) o.shape = rockShape(9);
 }
 function spawnBase(){
@@ -1919,10 +1920,14 @@ const SKIN_DRAW = {
     ctx.fillStyle = "#e8e8e8"; ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI); ctx.fill(); ctx.fillStyle = "#e83a3a"; ctx.beginPath(); ctx.arc(0, 0, r, Math.PI, 0); ctx.fill();
     ctx.fillStyle = "#2a2a2a"; ctx.fillRect(-r, -1, r*2, 2); ctx.fillStyle = "rgba(255,255,255,.5)"; ctx.beginPath(); ctx.arc(-r*.35, -r*.45, r*.22, 0, Math.PI*2); ctx.fill();
     ctx.restore(); },
-  hook(o){ // a baited hook on a line from the boat above
-    ctx.strokeStyle = "rgba(240,250,255,.6)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(o.x, VT); ctx.lineTo(o.x, o.y - 8); ctx.stroke();
-    ctx.strokeStyle = "#c8ccd8"; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(o.x, o.y - 8); ctx.lineTo(o.x, o.y + 4); ctx.arc(o.x - 5, o.y + 4, 5, 0, Math.PI*.95); ctx.stroke();
-    ctx.strokeStyle = "#e86a8a"; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(o.x - 9, o.y + 3); ctx.quadraticCurveTo(o.x - 14 + Math.sin(game.t*6)*2, o.y + 10, o.x - 7, o.y + 13); ctx.stroke(); ctx.lineCap = "butt"; },
+  hook(o){ // a big baited hook on a line from the boat above, with a red-and-white lure just above it
+    const x = o.x, y = o.y;
+    ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(x, VT); ctx.lineTo(x, y - 14); ctx.stroke();
+    ctx.fillStyle = "#e83a3a"; ctx.beginPath(); ctx.ellipse(x, y - 22, 5, 8, 0, Math.PI, 0); ctx.fill(); ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.ellipse(x, y - 22, 5, 8, 0, 0, Math.PI); ctx.fill();
+    ctx.fillStyle = "#1c1c22"; ctx.fillRect(x - 5, y - 23, 10, 2);
+    ctx.strokeStyle = "#1c2a3e"; ctx.lineWidth = 5.5; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(x, y - 14); ctx.lineTo(x, y + 6); ctx.arc(x - 8, y + 6, 8, 0, Math.PI*.95); ctx.lineTo(x - 17, y - 1); ctx.stroke();
+    ctx.strokeStyle = "#e8eef6"; ctx.lineWidth = 3.4; ctx.beginPath(); ctx.moveTo(x, y - 14); ctx.lineTo(x, y + 6); ctx.arc(x - 8, y + 6, 8, 0, Math.PI*.95); ctx.lineTo(x - 17, y - 1); ctx.stroke();
+    ctx.strokeStyle = "#ff6a9a"; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(x - 15, y + 4); ctx.quadraticCurveTo(x - 24 + Math.sin(game.t*5)*3, y + 14, x - 12, y + 20); ctx.stroke(); ctx.lineCap = "butt"; },
   boot(o){ ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(o.rot*.4);
     ctx.fillStyle = "#5a3a22"; ctx.fillRect(-6, -13, 11, 18); ctx.beginPath(); ctx.roundRect(-6, 1, 20, 10, 4); ctx.fill(); ctx.fillStyle = "#3a2414"; ctx.fillRect(-6, 9, 20, 3); ctx.fillRect(-7, -14, 13, 3);
     ctx.fillStyle = "rgba(60,170,90,.85)"; ctx.fillRect(2, -18, 2, 5); ctx.restore(); },
@@ -2141,7 +2146,7 @@ function draw(){
 /* ---------- what the shared app interface needs to know about Fishy Swimmer 2.0 ---------- */
 const UI_CFG = {
   title: [["FISHY 2.0", "#ffd34d", "#7a4a08"], ["SWIMMER", "#7ff3ff", "#0a4a6a"]],
-  unit: "M", accent: "#7ff3ff", accentEdge: "rgba(127,243,255,.45)", defaultName: "Swimmer", monsterState: "monster",
+  unit: "M", phoneW: 330, accent: "#7ff3ff", accentEdge: "rgba(127,243,255,.45)", defaultName: "Swimmer", monsterState: "monster",
   collectionTitle: "FISH TANK", collectionShort: "FISH", crateWord: "chest", lockedMsg: "Open chests to find this fish",
   score: () => Math.floor(game.dist),
   place: () => ({name: planetFor(game.round).name.toUpperCase(), progress: game.roundDist/ROUND_LEN(game.round)}),
@@ -2407,13 +2412,15 @@ function openSheet(mode){ document.body.classList.add("sheet"); if (mode) setAut
 function closeSheet(){ document.body.classList.remove("sheet"); }
 const CRW = () => UI_CFG.crateWord || "crate";
 const canCrate = () => !TEST.on && UI_CFG.crates().some(k => state.coins >= k.cost);
-function goScreen(s){ if (game.state !== "ready") UI_CFG.toReady(); UI.screen = s; UI.scroll = 0; }
+function goScreen(s){ if (game.state !== "ready") UI_CFG.toReady(); UI.screen = s; UI.scroll = 0; UI.vel = 0; }
 
 /* ---------- drawing, once per frame, after the game has drawn its world ---------- */
 function uiFrame(dt){
   const [top, bot] = uiInsets(), w = cv.width, h = cv.height - top - bot; UI.top = top; UI.bot = bot;
-  if (w/h < 1.05){ UI.W = 360; UI.H = 360*h/w; } else { UI.H = 420; UI.W = 420*w/h; }
+  if (w/h < 1.05){ const pw = UI_CFG.phoneW || 360; UI.W = pw; UI.H = pw*h/w; } else { UI.H = 420; UI.W = 420*w/h; }
   UI.U = w/UI.W; UI.t += dt || 1/60;
+  if (UI.vel && !UI.drag){ const st = dt || 1/60; UI.scroll += UI.vel*st; UI.vel *= Math.exp(-st*2.6);
+    if (UI.scroll <= 0 || UI.scroll >= UI.maxScroll){ UI.scroll = Math.max(0, Math.min(UI.maxScroll, UI.scroll)); UI.vel = 0; } if (Math.abs(UI.vel) < 8) UI.vel = 0; }
   ctx.save(); ctx.setTransform(UI.U, 0, 0, UI.U, 0, top); UI.buttons = [];
   const st = game.state, W = UI.W, H = UI.H, playing = st === "running" || st === UI_CFG.monsterState;
   if (playing || game.paused) uiHUD();
@@ -2589,13 +2596,17 @@ function uiPointerDown(e){
   const b = uiHit(e);
   if (b){ UI.pressed = b.id; Sound.click && Sound.click(); setTimeout(() => { UI.pressed = null; b.act(); }, 90); return true; }
   if (game.state === "ready" && UI.screen !== "home"){ const [x, y] = uiPoint(e); const cell = UI.screen === "ships" && UI.cells.find(c => x >= c.x && x <= c.x + c.w && y >= c.y && y <= c.y + c.h);
-    UI.drag = {y, s0: UI.scroll, moved:false, tap: cell ? () => { if (cell.own){ Sound.click && Sound.click(); selectChar(cell.id); } else toast(UI_CFG.lockedMsg); } : null}; return true; }
+    const gliding = Math.abs(UI.vel || 0) > 60; UI.vel = 0;
+    UI.drag = {y, s0: UI.scroll, moved:false, ly:y, lt:performance.now(), v:0, tap: gliding ? null : cell ? () => { if (cell.own){ Sound.click && Sound.click(); selectChar(cell.id); } else toast(UI_CFG.lockedMsg); } : null}; return true; }
   if (game.state === "over") return true;            // after a crash, use the buttons
   if (game.paused) return true;
   return false;
 }
-cv.addEventListener("pointermove", e => { const d = UI.drag; if (!d) return; const [, y] = uiPoint(e); if (Math.abs(y - d.y) > 6) d.moved = true; if (d.moved) UI.scroll = Math.max(0, Math.min(UI.maxScroll, d.s0 - (y - d.y))); });
-cv.addEventListener("pointerup", () => { const d = UI.drag; UI.drag = null; if (d && !d.moved && d.tap) d.tap(); });
+cv.addEventListener("pointermove", e => { const d = UI.drag; if (!d) return; const [, y] = uiPoint(e); if (Math.abs(y - d.y) > 6) d.moved = true; if (d.moved) UI.scroll = Math.max(0, Math.min(UI.maxScroll, d.s0 - (y - d.y)));
+  const now = performance.now(), dt = Math.max(1, now - d.lt)/1000, v = -(y - d.ly)/dt; d.v = d.v*.6 + v*.4; d.ly = y; d.lt = now; });
+cv.addEventListener("pointerup", () => { const d = UI.drag; UI.drag = null; if (d && !d.moved && d.tap) d.tap();
+  // let go while flicking and the list keeps gliding, slowing down gently
+  if (d && d.moved && performance.now() - d.lt < 90) UI.vel = Math.max(-4000, Math.min(4000, d.v*1.15)); });
 cv.addEventListener("wheel", e => { if (game.state === "ready" && UI.screen === "ships"){ e.preventDefault(); UI.scroll = Math.max(0, Math.min(UI.maxScroll, UI.scroll + e.deltaY*.5)); } }, {passive:false});
 // keyboard: returns true when the interface used the key
 function uiKey(e){
