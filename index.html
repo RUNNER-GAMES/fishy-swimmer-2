@@ -1686,7 +1686,7 @@ function update(dt){
   if (!moving) return;
   if (game.dist >= game.monsterAt && !game.boost && game.inv <= 0){ startHole(); return; }
   // speed and distance (the race speeds up more slowly in 2.0, since each world is longer)
-  const base = Math.min(560, 175 + game.dist*.05 + (game.round - 1)*5);
+  const base = Math.min(440, 175 + game.dist*.04 + (game.round - 1)*4);
   game.speed = game.boost ? Math.min(900, game.speed + (base*2 - game.speed)*Math.min(1, dt*3)) : game.speed > base ? Math.max(base, game.speed - 500*dt) : base;
   const dx = game.speed*dt; game.dist += dx/10; game.roundDist += dx/10;
   if (game.inv > 0) game.inv -= dt;
@@ -1710,8 +1710,8 @@ function update(dt){
   game.py += game.vy*dt;
   const ceil = [2, 6].includes(planetFor(game.round).style) ? 34 : 14;
   if (game.py < ceil){ game.py = ceil; game.vy = Math.max(0, game.vy); }
-  game.tilt += (Math.max(-.22, Math.min(.28, game.vy/1500)) - game.tilt)*Math.min(1, dt*5);
-  game.trailT += dt*(holdShip() && game.holding ? 40 : 22); while (game.trailT >= 1){ game.trailT--; emitTrail(holdShip() && game.holding); }
+  game.tilt += (Math.max(-.1, Math.min(.12, game.vy/3000)) - game.tilt)*Math.min(1, dt*4);
+  game.trailT += dt*(holdShip() && game.holding ? 16 : 8); while (game.trailT >= 1){ game.trailT--; emitTrail(holdShip() && game.holding); }
   if (game.py + 9*SS >= GROUND){ game.py = GROUND - 9*SS; if (game.boost || game.inv > 0){ game.vy = FLAP*.8; } else { game.cause = "ground"; return crash(); } }
   if (game.flip){ game.flip.t += dt; if (game.flip.t >= FLIP_DUR) game.flip = null; }
   else if (game.flipCD > 0) game.flipCD = Math.max(0, game.flipCD - dt);
@@ -1802,27 +1802,27 @@ function drawPlanet(p, idx){
   ctx.fillStyle = g; ctx.fillRect(0, VT, GW, VB - VT);
   // soft beams of sunlight from above (none in the deep zones)
   const deep = idx >= 7 || idx === 5;
-  if (!deep){ for (let i = 0; i < 5; i++){ const x = ((i*170 - game.scroll*.03) % (GW + 200) + GW + 200) % (GW + 200) - 100, sw = 0;
+  if (!deep){ for (let i = 0; i < 5; i++){ const x = i*(GW + 200)/5 - 60, sw = 0;
     ctx.fillStyle = rgba(p.glow, .05); ctx.beginPath(); ctx.moveTo(x, VT); ctx.lineTo(x + 40, VT); ctx.lineTo(x + 110 + sw, GROUND); ctx.lineTo(x + 40 + sw, GROUND); ctx.closePath(); ctx.fill(); } }
   // tiny drifting specks, and bubbles rising slowly
-  const sc = game.scroll*.05;
+  const sc = 0;
   for (let i = 0; i < 18; i++){ const h = hash(i, idx + 9), x = ((h % 1000) - sc) % (GW + 40), xx = (x + GW + 40) % (GW + 40) - 20, y = VT + ((h >>> 10) % Math.max(1, Math.round(GROUND - VT)));
     ctx.fillStyle = deep && i % 3 === 0 ? rgba(p.land, .55) : "rgba(220,245,255,.35)"; ctx.fillRect(xx, y, i % 5 ? 1.5 : 2.5, i % 5 ? 1.5 : 2.5); }
   ctx.strokeStyle = "rgba(230,250,255,.35)"; ctx.lineWidth = 1;
-  for (let i = 0; i < 6; i++){ const h = hash(i, 51), x = ((h % 997) - game.scroll*.1) % (GW + 30), xx = (x + GW + 30) % (GW + 30) - 15, span = GROUND - VT, y = GROUND - ((game.t*(9 + h % 6) + (h >>> 8) % span) % span);
+  for (let i = 0; i < 6; i++){ const h = hash(i, 51), x = (h % 997) % (GW + 30), xx = (x + GW + 30) % (GW + 30) - 15, span = GROUND - VT, y = GROUND - ((game.t*(9 + h % 6) + (h >>> 8) % span) % span);
     ctx.beginPath(); ctx.arc(xx, y, 1.5 + (h % 3), 0, Math.PI*2); ctx.stroke(); }
   // a far-off reef wall and things growing on it
   ctx.fillStyle = rgba(p.sky[2], .75); ctx.beginPath(); ctx.moveTo(0, GROUND);
-  for (let x = 0; x <= GW + 10; x += 10) ctx.lineTo(x, GROUND - 40 - Math.sin((x + game.scroll*.08)/90)*10); ctx.lineTo(GW, GROUND); ctx.closePath(); ctx.fill();
+  for (let x = 0; x <= GW + 10; x += 10) ctx.lineTo(x, GROUND - 40 - Math.sin((x + idx*200)/90)*10); ctx.lineTo(GW, GROUND); ctx.closePath(); ctx.fill();
   if (idx === 2) drawSurfaceBoat(p);
   if (idx === 5) drawMoonlight();
   if (idx === 6) drawIceSheet();
-  if (idx === 4) for (let i = 0; i < 6; i++){ const h = hash(i, 404), x = ((h % 900) - game.scroll*.1) % (GW + 80), xx = (x + GW + 80) % (GW + 80) - 40, y = 40 + (h >>> 9) % Math.max(1, Math.round(GROUND - 120));
+  if (idx === 4) for (let i = 0; i < 6; i++){ const h = hash(i, 404), x = (h % 900) % (GW + 80), xx = (x + GW + 80) % (GW + 80) - 40, y = 40 + (h >>> 9) % Math.max(1, Math.round(GROUND - 120));
     ctx.globalAlpha = .25; drawJellyAt(xx, y, 8 + h % 8, ["#ff8ad8","#b88aff","#7ad8ff"][h % 3], 0); ctx.globalAlpha = 1; }
   // the sea floor, with rows of sand ripples that get bigger closer to you
   const sg = ctx.createLinearGradient(0, GROUND, 0, Math.max(GH, VB)); sg.addColorStop(0, p.surf[0]); sg.addColorStop(1, p.surf[1]); ctx.fillStyle = sg; ctx.fillRect(0, GROUND, GW, Math.max(GH, VB) - GROUND);
   ctx.fillStyle = "rgba(255,255,255,.18)"; ctx.fillRect(0, GROUND, GW, 2);
-  for (let d = 0; d < 3; d++){ const yb = GROUND + 10 + d*26, k = 1, sp = 1; if (yb - 20 > VB) break;
+  for (let d = 0; d < 0; d++){ const yb = GROUND + 10 + d*26, k = 1, sp = 1; if (yb - 20 > VB) break;
     const span = 180, off = (game.scroll*sp) % span; ctx.fillStyle = rgba(p.surf[1], .35);
     for (let x = -off - span; x < GW + span; x += span){ const kk = Math.floor((x + game.scroll*sp)/span), h = hash(kk, idx + d*17);
       ctx.beginPath(); ctx.ellipse(x + (h % 60)*k, yb, (16 + h % 20)*k, 2*k, 0, 0, Math.PI*2); ctx.fill(); } }
@@ -1830,7 +1830,7 @@ function drawPlanet(p, idx){
   const span = 150, off = (game.scroll) % span;
   for (let x = -off - span; x < GW + span; x += span){ const kk = Math.floor((x + game.scroll)/span), h = hash(kk, idx + 77), bx = x + (h % 90);
     if (idx === 1 || h % 3 === 0){ ctx.fillStyle = idx === 1 ? "#2a8a4a" : rgba("#3a9a5a", .9); const H = idx === 1 ? 110 + (h % 90) : 30 + (h % 30);
-      for (let seg = 0; seg < H/6; seg++) ctx.fillRect(bx + Math.sin(game.t*.7 + seg*.4 + kk)*(seg*.15), GROUND - seg*6 - 6, 4, 6); }
+      for (let seg = 0; seg < H/6; seg++) ctx.fillRect(bx + 0, GROUND - seg*6 - 6, 4, 6); }
     else if (h % 3 === 1){ ctx.fillStyle = p.land; ctx.fillRect(bx, GROUND - 18, 5, 18); ctx.fillRect(bx - 7, GROUND - 13, 5, 9); ctx.fillRect(bx - 7, GROUND - 6, 9, 3); ctx.fillRect(bx + 7, GROUND - 24, 5, 14); ctx.fillRect(bx + 3, GROUND - 11, 9, 3); }
     else { ctx.fillStyle = shade(p.surf[1], -.3); ctx.beginPath(); ctx.ellipse(bx, GROUND + 2, 22, 12, 0, Math.PI, 0); ctx.fill(); }
     if (idx === 3 && h % 4 === 0) drawWreck(bx, h);
