@@ -2145,7 +2145,7 @@ function draw(){
 /* ---------- what the shared app interface needs to know about Fishy Swimmer 2.0 ---------- */
 const UI_CFG = {
   title: [["FISHY 2.0", "#ffd34d", "#7a4a08"], ["SWIMMER", "#7ff3ff", "#0a4a6a"]],
-  unit: "M", phoneW: 330, bannerY: .17, bannerScale: .7, bannerAlpha: .9, accent: "#7ff3ff", accentEdge: "rgba(127,243,255,.45)", defaultName: "Swimmer", monsterState: "monster",
+  unit: "M", phoneW: 330, gridCols: W => W < 440 ? 4 : W < 700 ? 6 : 8, gridGap: 7, gridArt: .62, gridFish: .85, bannerY: .17, bannerScale: .7, bannerAlpha: .9, accent: "#7ff3ff", accentEdge: "rgba(127,243,255,.45)", defaultName: "Swimmer", monsterState: "monster",
   collectionTitle: "FISH TANK", collectionShort: "FISH", crateWord: "chest", lockedMsg: "Open chests to find this fish",
   score: () => Math.floor(game.dist),
   place: () => ({name: planetFor(game.round).name.toUpperCase(), progress: game.roundDist/ROUND_LEN(game.round)}),
@@ -2493,7 +2493,7 @@ function uiCollection(){
   uiText(c.name, tx, py0 + 38, W < 420 ? 17 : 22, "#ffffff", "left");
   uiText(TIERS[c.tier].name.toUpperCase(), tx, py0 + 62, 13, TIERS[c.tier].color, "left");
   uiText(UI_CFG.perk(c), tx, py0 + 84, 12, "#a8b2d8", "left", null);
-  const top = py0 + 120, bottom = H - 12, cols = W < 440 ? 3 : W < 700 ? 5 : 6, gap = 8, cw = (W - 24 - gap*(cols - 1))/cols, ch = cw*.8 + 30;
+  const top = py0 + 120, bottom = H - 12, cols = UI_CFG.gridCols ? UI_CFG.gridCols(W) : W < 440 ? 3 : W < 700 ? 5 : 6, gap = UI_CFG.gridGap || 8, cw = (W - 24 - gap*(cols - 1))/cols, ch = cw*(UI_CFG.gridArt || .8) + 30;
   const list = SORTED, rows = Math.ceil(list.length/cols);
   UI.maxScroll = Math.max(0, rows*(ch + gap) - (bottom - top) + 8); UI.scroll = Math.min(UI.scroll, UI.maxScroll);
   ctx.save(); ctx.beginPath(); ctx.rect(0, top, W, bottom - top); ctx.clip();
@@ -2503,8 +2503,8 @@ function uiCollection(){
     const own = TEST.on || !!state.owned[s.id], sel = s.id === c.id, tc = TIERS[s.tier].color;
     uiRR(x, y + 4, cw, ch, 10, "rgba(0,0,0,.35)"); uiRR(x, y, cw, ch, 10, own ? (UI_CFG.cardCol || "#1c2350") : "#141830");
     ctx.strokeStyle = sel ? "#ffffff" : own ? tc : "#2a3058"; ctx.lineWidth = sel ? 3 : 2; ctx.beginPath(); ctx.roundRect(x, y, cw, ch, 10); ctx.stroke();
-    UI_CFG.preview(ctx, s, x + cw/2, y + cw*.4, cw*.72, !own, 0);
-    const nm = own ? (s.name.length > 13 ? s.name.slice(0, 12) + "…" : s.name) : "???";
+    UI_CFG.preview(ctx, s, x + cw/2, y + cw*(UI_CFG.gridArt || .8)/2, cw*.72*(UI_CFG.gridFish || 1), !own, 0);
+    const ml = Math.max(8, Math.min(13, Math.floor(cw/6.4))), nm = own ? (s.name.length > ml ? s.name.slice(0, ml - 1) + "…" : s.name) : "???";
     uiText(nm, x + cw/2, y + ch - 20, Math.max(9, Math.min(12, cw/10)), "#ffffff", "center");
     uiText(TIERS[s.tier].name.toUpperCase(), x + cw/2, y + ch - 7, Math.max(8, Math.min(10, cw/12)), tc, "center", null);
     UI.cells.push({x, y, w:cw, h:ch, id:s.id, own}); });
