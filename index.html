@@ -829,7 +829,21 @@ function shade(hex, amt){
 /* Draws a fish with its belly at (x,y), facing right. o.s is the size; o.pose is "idle" | "run" | "jump".
    Letters in BODIES: B body, D belly, F fins, T tail, K dark, L lure light, P spikes, R bill, G gills, M mouth, W teeth.
    Extras: s stripes, p spots, g bioluminescent glow, k crown, x sparkles, n aura, f flame fins, c THE CREATOR (sunglasses + tie) */
+const CHAR_CACHE = new Map();
 function drawChar(ctx, c, o){
+  if (o.glow !== false || typeof document === "undefined") return drawCharRaw(ctx, c, o);
+  const spec = BODIES[c.body], H = spec.rows.length, Wd = spec.rows[0].length, PAD = 6, half = Math.floor(Wd/2);
+  const TAU = Math.PI*2, f = Math.floor((((o.t || 0) % TAU) + TAU) % TAU/TAU*48) % 48, pose = o.pose || "idle";
+  const key = c.id + "|" + f + "|" + (o.sil ? 1 : 0) + "|" + pose;
+  let img = CHAR_CACHE.get(key);
+  if (!img){ img = document.createElement("canvas"); img.width = Wd + PAD*2; img.height = H + PAD*2 + 4; const g = img.getContext("2d");
+    drawCharRaw(g, c, Object.assign({}, o, {x: half + PAD, y: H + PAD + 2, s: 1/0.85, t: f/48*TAU, pose: pose === "jump" ? "run" : pose}));
+    if (CHAR_CACHE.size > 6000) CHAR_CACHE.clear(); CHAR_CACHE.set(key, img); }
+  const k = o.s*0.85, sm = ctx.imageSmoothingEnabled; ctx.imageSmoothingEnabled = false;
+  ctx.save(); ctx.translate(o.x, o.y); if (pose === "jump") ctx.rotate(-0.14); ctx.drawImage(img, -(half + PAD)*k, -(H + PAD + 2)*k, img.width*k, img.height*k); ctx.restore();
+  ctx.imageSmoothingEnabled = sm;
+}
+function drawCharRaw(ctx, c, o){
   const t = o.t || 0, pose = o.pose || "idle", sil = !!o.sil;
   const spec = BODIES[c.body], rows = spec.rows, H = rows.length, Wd = rows[0].length, half = Math.floor(Wd/2);
   const ex = c.ex, SIL = "#06101c";
@@ -1414,7 +1428,7 @@ const isFS = () => document.body.classList.contains("fs");
 function sizeGame(){
   // the game always fills the whole window, like an app. Tall screens (phones) get a compact play box with the
   // scene stretching above and below it; wide screens get a wide play field.
-  const w = cv.parentElement.clientWidth || innerWidth, h = cv.parentElement.clientHeight || innerHeight, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const w = cv.parentElement.clientWidth || innerWidth, h = cv.parentElement.clientHeight || innerHeight, dpr = Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(2400000/Math.max(1, w*h)));
   if (w/h < 1.05){ GW = 340; GH = Math.min(380, Math.max(320, Math.round(GW*h/w))); }
   else { GH = 360; GW = Math.max(560, Math.min(1000, Math.round(GH*w/h))); }
   cv.style.aspectRatio = "auto";
@@ -1855,7 +1869,18 @@ function starField(speed, seg, per, size, alpha){ const sc = game.scroll*speed, 
   for (let k = k0; k <= k1; k++) for (let i = 0; i < per*(VT < 0 ? 2 : 1); i++){ const h = hash(k, i + per*31), x = k*seg + (h % seg) - sc, y = VT + (h >>> 9) % Math.max(1, Math.round(GROUND - VT));
     ctx.fillStyle = h % 5 === 0 ? `rgba(180,210,255,${alpha})` : h % 7 === 0 ? `rgba(255,230,190,${alpha})` : `rgba(255,255,255,${alpha})`; ctx.fillRect(x, y, size, size); } }
 let VT = 0, VB = 340;                          // the top and bottom of what's on screen (bigger than the play box on phones)
+const BG_CACHE = {};
 function drawPlanet(p, idx){
+  const key = idx + "|" + cv.width + "|" + cv.height + "|" + SCALE + "|" + OFX + "|" + OFY;
+  let bg = BG_CACHE[idx];
+  if (!bg || bg.key !== key){ const c2 = document.createElement("canvas"); c2.width = cv.width; c2.height = cv.height;
+    const main = ctx; ctx = c2.getContext("2d"); ctx.setTransform(SCALE, 0, 0, SCALE, OFX, OFY); ctx.imageSmoothingEnabled = false;
+    try { drawPlanetStill(p, idx); } finally { ctx = main; }
+    bg = BG_CACHE[idx] = {key, c: c2}; }
+  const T = ctx.getTransform(); ctx.save(); ctx.setTransform(T.a/SCALE, 0, 0, T.d/SCALE, T.e - OFX*T.a/SCALE, T.f - OFY*T.d/SCALE); ctx.drawImage(bg.c, 0, 0); ctx.restore();
+  drawPlanetMoving(p, idx);
+}
+function drawPlanetStill(p, idx){
   // water, lighter toward the surface
   const g = ctx.createLinearGradient(0, Math.min(0, VT), 0, GROUND); g.addColorStop(0, p.sky[0]); g.addColorStop(.55, p.sky[1]); g.addColorStop(1, p.sky[2]);
   ctx.fillStyle = g; ctx.fillRect(0, VT, GW, VB - VT);
@@ -1867,18 +1892,13 @@ function drawPlanet(p, idx){
   const sc = 0;
   for (let i = 0; i < 18; i++){ const h = hash(i, idx + 9), x = ((h % 1000) - sc) % (GW + 40), xx = (x + GW + 40) % (GW + 40) - 20, y = VT + ((h >>> 10) % Math.max(1, Math.round(GROUND - VT)));
     ctx.fillStyle = deep && i % 3 === 0 ? rgba(p.land, .55) : "rgba(220,245,255,.35)"; ctx.fillRect(xx, y, i % 5 ? 1.5 : 2.5, i % 5 ? 1.5 : 2.5); }
-  ctx.strokeStyle = "rgba(230,250,255,.35)"; ctx.lineWidth = 1;
-  for (let i = 0; i < 6; i++){ const h = hash(i, 51), x = (h % 997) % (GW + 30), xx = (x + GW + 30) % (GW + 30) - 15, span = GROUND - VT, y = GROUND - ((game.t*(9 + h % 6) + (h >>> 8) % span) % span);
-    ctx.beginPath(); ctx.arc(xx, y, 1.5 + (h % 3), 0, Math.PI*2); ctx.stroke(); }
   // a far-off reef wall and things growing on it
   ctx.fillStyle = rgba(p.sky[2], .75); ctx.beginPath(); ctx.moveTo(0, GROUND);
   for (let x = 0; x <= GW + 10; x += 10) ctx.lineTo(x, GROUND - 40 - Math.sin((x + idx*200)/90)*10); ctx.lineTo(GW, GROUND); ctx.closePath(); ctx.fill();
   if (idx !== 2 && idx !== 6 && VT < 8){ const night = idx === 5 || idx >= 7, sk = ctx.createLinearGradient(0, VT, 0, 8);
     sk.addColorStop(0, night ? "#0a1230" : "#bfe8ff"); sk.addColorStop(1, night ? "#1a2a50" : "#e8f8ff"); ctx.fillStyle = sk; ctx.fillRect(0, VT, GW, 8 - VT);
     ctx.fillStyle = "rgba(255,255,255,.5)"; ctx.fillRect(0, 7, GW, 2); }
-  if (idx === 2) drawSurfaceBoat(p);
   if (idx === 5) drawMoonlight();
-  if (idx === 6) drawIceSheet();
   if (idx === 4) for (let i = 0; i < 6; i++){ const h = hash(i, 404), x = (h % 900) % (GW + 80), xx = (x + GW + 80) % (GW + 80) - 40, y = 40 + (h >>> 9) % Math.max(1, Math.round(GROUND - 120));
     ctx.globalAlpha = .25; drawJellyAt(xx, y, 8 + h % 8, ["#ff8ad8","#b88aff","#7ad8ff"][h % 3], 0); ctx.globalAlpha = 1; }
   // the sea floor, with rows of sand ripples that get bigger closer to you
@@ -1888,6 +1908,13 @@ function drawPlanet(p, idx){
     const span = 180, off = (game.scroll*sp) % span; ctx.fillStyle = rgba(p.surf[1], .35);
     for (let x = -off - span; x < GW + span; x += span){ const kk = Math.floor((x + game.scroll*sp)/span), h = hash(kk, idx + d*17);
       ctx.beginPath(); ctx.ellipse(x + (h % 60)*k, yb, (16 + h % 20)*k, 2*k, 0, 0, Math.PI*2); ctx.fill(); } }
+}
+function drawPlanetMoving(p, idx){
+  ctx.strokeStyle = "rgba(230,250,255,.35)"; ctx.lineWidth = 1;
+  for (let i = 0; i < 6; i++){ const h = hash(i, 51), x = (h % 997) % (GW + 30), xx = (x + GW + 30) % (GW + 30) - 15, span = GROUND - VT, y = GROUND - ((game.t*(9 + h % 6) + (h >>> 8) % span) % span);
+    ctx.beginPath(); ctx.arc(xx, y, 1.5 + (h % 3), 0, Math.PI*2); ctx.stroke(); }
+  if (idx === 2) drawSurfaceBoat(p);
+  if (idx === 6) drawIceSheet();
   // coral, kelp and rocks along the floor, sliding by
   const span = 150, off = (game.scroll) % span;
   for (let x = -off - span; x < GW + span; x += span){ const kk = Math.floor((x + game.scroll)/span), h = hash(kk, idx + 77), bx = x + (h % 90);
@@ -2680,11 +2707,12 @@ function uiKey(e){
 $("sheetClose").addEventListener("click", closeSheet);
 let last = performance.now();
 function frame(now){
-  const dt = Math.max(0, Math.min(.033, (now - last)/1000)); last = now;
-  update(dt); draw();
+  let dt = Math.max(0, Math.min(.1, (now - last)/1000)); last = now;
+  const steps = Math.ceil(dt/.017); for (let i = 0; i < steps; i++) update(dt/steps);
+  draw();
   { const hide = (game.state === "running" || game.state === "monster" || game.state === "warp") && !game.paused; if (hide !== frame.hid){ frame.hid = hide; cv.style.cursor = hide ? "none" : ""; } }
-  drawChest(false, now/1000);
-  if (Math.floor(now/120) !== frame.k){ frame.k = Math.floor(now/120); renderNow(); }
+  const chestEl = document.getElementById("chestCv"); if (chestEl && chestEl.offsetParent) drawChest(false, now/1000);
+  const nowEl = document.getElementById("nowCv"); if (nowEl && nowEl.offsetParent && Math.floor(now/120) !== frame.k){ frame.k = Math.floor(now/120); renderNow(); }
   requestAnimationFrame(frame);
 }
 
