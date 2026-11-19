@@ -1458,7 +1458,7 @@ const WARP_JUMP = 1000, BOOST_LEN = 500, ZAPS = 3;
 // how heavy each world feels: 1 is Earth. Thrusters push harder where gravity is stronger, so every world can be flown,
 // but low gravity floats and high gravity drops fast.
 // every sector swims the same: no gravity changes in Fishy Swimmer 2.0
-const FLAP = -360, GRAV = 1050, MAXFALL = 500;
+const FLAP = -380, GRAV = 1400, MAXFALL = 560;   // snappier swimming: each tap lifts you less and you sink back sooner
 const game = {state:"ready", t:0, speed:0, dist:0, round:1, roundDist:0, runCoins:0, py:180, vy:0, tilt:0, obs:[], coins:[], parts:[], trail:[], texts:[], banner:null, paused:false, scroll:0, nextObs:0, mt:0, fadeT:9};
 function resetRun(){
   Object.assign(game, {air:null, leapCD:0, seamAt:null, laser:null, flip:null, flipCD:0, g:1, zap:0, boost:null, inv:0, worm:null, warp:null, revives:0, t:0, speed:190, dist:0, round:1, roundDist:0, runCoins:0, py:GH*.42, vy:0, tilt:0, obs:[], coins:[], parts:[], trail:[], texts:[], banner:{text:"Coral Reef", sub: TEST.on ? "Test swim" : "Tap to swim up. Don't sink!", t:2.2},
