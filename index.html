@@ -466,14 +466,36 @@ window.FIREBASE_CONFIG = {
 (() => {
 "use strict";
 const TIERS = [
-  {key:"common",    name:"Common",    color:"#b9bcc9", weight:48,  refund:50},
-  {key:"uncommon",  name:"Uncommon",  color:"#6fd36a", weight:25,  refund:75},
-  {key:"rare",      name:"Rare",      color:"#4aa8ff", weight:14,  refund:125},
-  {key:"epic",      name:"Epic",      color:"#b77bff", weight:7,   refund:200},
-  {key:"legendary", name:"Legendary", color:"#ffb23f", weight:3,   refund:300},
-  {key:"mythic",    name:"Mythic",    color:"#ff5ea8", weight:3,   refund:500},
+  {key:"common",    name:"Common",    color:"#b9bcc9", weight:40,  refund:50},
+  {key:"uncommon",  name:"Uncommon",  color:"#6fd36a", weight:26,  refund:75},
+  {key:"rare",      name:"Rare",      color:"#4aa8ff", weight:17,  refund:125},
+  {key:"epic",      name:"Epic",      color:"#b77bff", weight:9,   refund:200},
+  {key:"legendary", name:"Legendary", color:"#ffb23f", weight:4.5, refund:300},
+  {key:"mythic",    name:"Mythic",    color:"#ff5ea8", weight:3.5, refund:500},
 ];
 const BODIES = {
+  mega:{eye:[27, 5], rows:[
+    "...............F................",
+    "..............FF................",
+    ".............FFF................",
+    "T..........BBBBBBBB.............",
+    "TT......BBBBBBBBBBBBBBBB........",
+    ".TT..BBBBBBBBBBBBBBBBBBBBBBBBB..",
+    "..TTBBBBBBBBBBBBBBBBBBGBGBBBBBBB",
+    "..TTBBBBBBBBBBBBBBBBBBGBGBMWMWMM",
+    "..TTDDDDDDDDDDDDDDDDDDGDGDWMWMWM",
+    ".TT..DDDDDDDDDDDDDDDDDDDDDDDDDD.",
+    "TT.......DDDDDDDDFFDDDDDD.......",
+    ".................FF............."]},
+  mosa:{eye:[35, 2], rows:[
+    "T.......................................",
+    "TT..........BBBBBBBBBBBBB...............",
+    ".TT.....BBBBBBBBBBBBBBBBBBBBB.....BBBB..",
+    "..TTBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "..TTDDDDDDDDDDDDDDDDDDDDDDDDDDDDDWMWMWMW",
+    ".TT....DDDDDDDDDDDDDDDDDDDDDDD...MWMWMMM",
+    "TT.......FFF.........FFF................",
+    "..........FF..........FF................"]},
   shrimp:{eye:[19, 3], rows:[
     "...................RRRRRR",
     "..........BBBBBB..R......",
@@ -778,13 +800,14 @@ const CAR_LIST = [ // [tier, name, body, main color, accent, extras]. Real sea a
 [4, "Gray Whale", "whale", "#6a707a", "#c8ccd0", "p"],
 [4, "Golden Hammerhead", "hammer", "#c8a040", "#8a6a20", ""],
 // Mythic: the rarest of all
-[5, "Blue Whale", "whale", "#3a5a8a", "#9ab8d8", ""],
-[5, "Megalodon", "shark", "#3a4048", "#c8c0b0", ""],
-[5, "Colossal Squid", "squid", "#8a1a3a", "#ff6a8a", "g"],
-[5, "Albino Orca", "orca", "#e8ecf0", "#c8d0d8", ""],
-[5, "THE CREATOR", "shark", "#2f5bd1", "#ffd34d", "c"]
+[5, "Megalodon", "mega", "#2e343c", "#ff3a3a", "ng", 1.35],
+[5, "Blue Whale", "whale", "#3a5a8a", "#9ad8ff", "ng", 1.35],
+[5, "Colossal Squid", "squid", "#a8102e", "#ff5a8a", "ng", 1.3],
+[5, "Mosasaurus", "mosa", "#3a5a4a", "#9aff7a", "ng", 1.25],
+[5, "Golden Orca", "orca", "#e0a828", "#fff3b0", "ng", 1.25],
+[5, "Crystal Narwhal", "narwhal", "#a8e4ff", "#e8fbff", "ng", 1.25]
 ];
-CAR_LIST.forEach(([t,n,b,c,a,x]) => add(t,n,b,c,a,x));
+CAR_LIST.forEach(([t,n,b,c,a,x,big]) => { add(t,n,b,c,a,x); CHARS[CHARS.length - 1].big = big || 1; });
 const SORTED = [...CHARS].sort((a, b) => a.tier - b.tier || a.id - b.id);
 const DISPLAY_NO = {}; SORTED.forEach((c, i) => DISPLAY_NO[c.id] = i + 1);
 const carNo = c => "#" + String(DISPLAY_NO[c.id]).padStart(3, "0");
@@ -816,9 +839,11 @@ function drawChar(ctx, c, o){
   const bob = pose === "idle" ? Math.round(Math.sin(t*3)) : 0;
   if (pose === "jump") ctx.rotate(-0.14);
   // aura behind the fish
-  if (!sil && ex.includes("n")){ ctx.save(); ctx.globalAlpha = .12; ctx.fillStyle = acc; ctx.shadowColor = acc; ctx.shadowBlur = 14;
-    ctx.beginPath(); ctx.ellipse(0, -H/2 - 2, Wd/2 - 2, H/2, 0, 0, Math.PI*2); ctx.fill(); ctx.restore(); }
-  if (!sil && (ex.includes("g") || (c.tier >= 3 && o.glow !== false))){ const gc = ex.includes("g") ? acc : TIERS[c.tier].color; ctx.shadowColor = gc + (ex.includes("g") ? "cc" : (c.tier === 3 ? "66" : "99")); ctx.shadowBlur = ex.includes("g") ? 10 : (c.tier >= 4 ? 9 : 5); }
+  // mythics: a soft, steady glow of their own color behind them (no pulsing)
+  if (!sil && ex.includes("n")){ ctx.save(); const R0 = Wd*.62, gy = -H/2 - 2, gr = ctx.createRadialGradient(0, gy, 0, 0, gy, R0);
+    gr.addColorStop(0, rgba(acc, .38)); gr.addColorStop(.55, rgba(acc, .16)); gr.addColorStop(1, rgba(acc, 0));
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.ellipse(0, gy, R0, R0*.62, 0, 0, Math.PI*2); ctx.fill(); ctx.restore(); }
+  if (!sil && o.glow !== false && (ex.includes("g") || c.tier >= 3)){ const gc = ex.includes("g") ? acc : TIERS[c.tier].color; ctx.shadowColor = gc + (ex.includes("g") ? "cc" : (c.tier === 3 ? "66" : "99")); ctx.shadowBlur = ex.includes("g") ? 10 : (c.tier >= 4 ? 9 : 5); }
   const y0 = -2 - H + bob;
   const wave = col => c.body === "eel" && swim ? Math.round(Math.sin(t*4 - col*.3)*.8) : 0;
   for (let r = 0; r < H; r++){
@@ -865,15 +890,15 @@ const THEMES = {
 const themeFor = c => THEMES[c.name] || null;
 
 /* ---------- what the 2.0 swim engine needs from the fish ---------- */
-const CHESTS = { basic:{name:"Basic Crate", cost:500, w:[48,25,14,7,3,3]}, epic:{name:"Epic Crate", cost:1000, w:[7,27,32,18,9,7]} };
+const CHESTS = { basic:{name:"Basic Crate", cost:500, w:[40,26,17,9,4.5,3.5]}, epic:{name:"Epic Crate", cost:1000, w:[5,24,32,20,11,8]} };
 const rgba = (hex, a) => { const [r, g, b] = hexRGB(hex); return `rgba(${r},${g},${b},${a})`; };
 // every fish leaves a trail of bubbles; Mythic fish blow bubbles in their own world's colors
 CHARS.forEach(c => { const th = themeFor(c); c.trail = "bubble"; c.t1 = th ? th.smoke[0] : "#e8fbff"; c.t2 = th ? th.smoke[1] : shade(c.main, .5); });
 const TRAIL_NAME = {bubble: "Bubble trail"};
 // the fish, centered on (0,0) and facing right, about as long as a ship was
 function paintShip(ctx, c, o){
-  const spec = BODIES[c.body], H = spec.rows.length, k = 2.3*0.85;
-  drawChar(ctx, c, {x:0, y:(H/2 + 2)*k, s:2.3, t: (o && o.t != null) ? o.t : (typeof game !== "undefined" ? game.t : 0), pose:"run", sil: o && o.sil, glow: false});
+  const spec = BODIES[c.body], H = spec.rows.length, B = (o && o.small) ? 1 : (c.big || 1), k = 2.3*0.85*B;   // mythics swim a size bigger (looks only; same hitbox)
+  drawChar(ctx, c, {x:0, y:(H/2 + 2)*k, s:2.3*B, t: (o && o.t != null) ? o.t : (typeof game !== "undefined" ? game.t : 0), pose:"run", sil: o && o.sil, glow: false});
 }
 
 /* ============================== STATE & SAVES ============================== */
@@ -2154,8 +2179,8 @@ const UI_CFG = {
   preview: (c, f, x, y, size, sil, t) => drawChar(c, f, {x, y: y + size*.2, s: size/24, t: t || 0, sil, glow:false}),
   perk: f => ({shrimp:"Crustacean", squid:"Cephalopod", octopus:"Cephalopod", turtle:"Sea turtle", dolphin:"Marine mammal", orca:"Marine mammal", whale:"Marine mammal", narwhal:"Marine mammal", hammer:"Shark", shark:"Shark", ray:"Ray"})[f.body] || (isCreator(f) ? "The one and only" : "Fish"),
   crates: () => [
-    {kind:"basic", name:"BASIC CHEST", cost:CHESTS.basic.cost, odds:"Legendary 3%  ·  Mythic 3%", open: () => openCase("basic")},
-    {kind:"epic",  name:"EPIC CHEST",  cost:CHESTS.epic.cost,  odds:"Legendary 9%  ·  Mythic 7%", open: () => openCase("epic")}],
+    {kind:"basic", name:"BASIC CHEST", cost:CHESTS.basic.cost, odds:"Legendary 4.5%  ·  Mythic 3.5%", open: () => openCase("basic")},
+    {kind:"epic",  name:"EPIC CHEST",  cost:CHESTS.epic.cost,  odds:"Legendary 11%  ·  Mythic 8%", open: () => openCase("epic")}],
   drawCrate: (c, kind, t) => drawChest(false, t, c, kind === "epic"),
   nav: () => [[UI_CFG.collectionShort, "#3a8ae8", "collection", () => goScreen("ships")],
     ["CHESTS", "#9a5ae0", "crate", () => goScreen("crates"), canCrate()],
