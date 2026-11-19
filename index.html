@@ -808,7 +808,7 @@ const CAR_LIST = [ // [tier, name, body, main color, accent, extras]. Real sea a
 [5, "Golden Orca", "orca", "#e0a828", "#fff3b0", "", 1.25],
 [5, "Crystal Narwhal", "narwhal", "#a8e4ff", "#e8fbff", "", 1.25],
 // Ultra Mythic: only one, and it's the only animal that can leap out of the water
-[6, "Leviathan", "mosa", "#2a1a5a", "#7ff3ff", "", 1.45]
+[6, "Leviathan", "mosa", "#2a1a5a", "#7ff3ff", "", 1.1]
 ];
 CAR_LIST.forEach(([t,n,b,c,a,x,big]) => { add(t,n,b,c,a,x); CHARS[CHARS.length - 1].big = big || 1; });
 const SORTED = [...CHARS].sort((a, b) => a.tier - b.tier || a.id - b.id);
@@ -1491,7 +1491,7 @@ const FLIP_CD = 15, FLIP_DUR = .8;
 const hasFlip = () => curCar().body === "flycar";
 // the Leviathan (Ultra Mythic) leaps out of the water: swim hard at the surface and it breaches,
 // flying through the air over everything, then splashes back down. It needs a few seconds to recharge.
-const LEAP_CD = 8;
+const LEAP_CD = 0;   // unlimited leaps
 const hasLeap = () => curCar().name === "Leviathan" && curCar().tier === 6;
 const surfaceY = () => planetFor(game.round).style === 2 ? 22 : 8;
 function splash(y){ for (let i = 0; i < 16; i++) game.parts.push({x:PX + (Math.random() - .5)*30, y, vx:(Math.random() - .5)*120 - game.speed*.2, vy:-80 - Math.random()*160, life:.6, col: i % 2 ? "#ffffff" : "#bff3ff"}); Sound.splash(); }
@@ -2367,11 +2367,6 @@ function uiExtras(W, H){
     uiPill(12, my, w, 26, "rgba(10,14,40,.75)", ready ? "rgba(127,215,255,.7)" : "rgba(127,215,255,.3)");
     uiRR(18, my + 17, w - 12, 4, 2, "rgba(255,255,255,.15)"); uiRR(18, my + 17, (w - 12)*k, 4, 2, ready ? "#7fd7ff" : "#4a7aa8");
     uiText(ready ? "KICKFLIP READY" : "KICKFLIP " + Math.ceil(game.flipCD) + "s", 12 + w/2, my + 13, 11, ready ? "#ffffff" : "#9ab0d0", "center", null); my += 32; }
-  // the Leviathan's leap meter
-  if (game.state === "running" && hasLeap()){ const ready = game.leapCD <= 0 && !game.air, k = game.air ? 0 : 1 - game.leapCD/LEAP_CD, w = 116;
-    uiPill(12, my, w, 26, "rgba(10,14,40,.75)", ready ? "rgba(127,243,255,.7)" : "rgba(127,243,255,.3)");
-    uiRR(18, my + 17, w - 12, 4, 2, "rgba(255,255,255,.15)"); uiRR(18, my + 17, (w - 12)*k, 4, 2, ready ? "#7ff3ff" : "#4a8aa8");
-    uiText(ready ? "LEAP READY" : game.air ? "LEAPING!" : "LEAP " + Math.ceil(game.leapCD) + "s", 12 + w/2, my + 13, 11, ready ? "#ffffff" : "#9ab0d0", "center", null); my += 32; }
   if (game.state === "running" && (game.zap > 0 || game.boost)){
     if (game.zap > 0){ uiPill(12, my, 116, 26, "rgba(10,14,40,.75)", "rgba(255,90,90,.6)"); uiText("ZAPPER · " + game.zap + " LEFT", 70, my + 17, 11, "#ffb0a8", "center", null); my += 32; }
     if (game.boost){ const k = Math.max(0, game.boost.left/BOOST_LEN); uiPill(12, my, 116, 26, "rgba(10,14,40,.75)", "rgba(255,211,77,.7)");
